@@ -35,7 +35,7 @@ const Restaurantes = db.define( 'restaurante',{
     },
 
     logo: {
-        type: Sequelize.BLOB
+        type: Sequelize.STRING
     },
 
     ultimaModificacion: {

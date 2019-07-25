@@ -31,7 +31,7 @@ const Platillo = db.define( 'platillo',{
     },
 
     imagen: {
-        type: Sequelize.BLOB
+        type: Sequelize.STRING
     },
 
     idRestaurante: {

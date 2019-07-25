@@ -27,7 +27,7 @@ const Categoria = db.define( 'categoria',{
     },
 
     imagen: {
-        type: Sequelize.BLOB
+        type: Sequelize.STRING
     },
 
     estado: {
