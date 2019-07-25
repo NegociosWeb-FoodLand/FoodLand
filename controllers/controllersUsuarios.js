@@ -23,10 +23,10 @@ exports.formularioGuardar = async (req, res) => {
 exports.guardarDatos = async (req,res)=>{
     //verificando
 
-    let {id, usuarioNombre, correo, estado, rol}= req.body;
+    let {id, usuarioNombre, correo, estado, rol, url}= req.body;
     let errores = [];
 
-    if (!usuarioNombre || !correo || !estado || !rol) {
+    if (!usuarioNombre || !correo || !estado || !rol || !url) {
         errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
     }
     
@@ -45,7 +45,8 @@ exports.guardarDatos = async (req,res)=>{
             usuarioNombre, 
             correo, 
             estado, 
-            rol
+            rol,
+            url
         }),
 
         res.redirect('/');
@@ -84,11 +85,11 @@ exports.actualizarUsuario = async (req, res) => {
     // se valida que el input del formulario traiga un valor
     // destructuring
 
-    const {id, usuarioNombre, correo, estado, rol}= req.body;
+    const {id, usuarioNombre, correo, estado, rol, url}= req.body;
     let errores = [];
 
     // Verificar si el nombre del proyecto tiene un valor
-    if (!usuarioNombre || !correo || !estado || !rol) {
+    if (!usuarioNombre || !correo || !estado || !rol || !url) {
         errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
     }
 
@@ -107,7 +108,8 @@ exports.actualizarUsuario = async (req, res) => {
             usuarioNombre, 
             correo, 
             estado, 
-            rol
+            rol,
+            url
             },
             { where : {
                 id : req.params.id
