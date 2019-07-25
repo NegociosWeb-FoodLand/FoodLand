@@ -1,0 +1,37 @@
+extends ./layoutAdmin
+
+block contenido
+  #dashboard.tab-pane.fade.in.active
+    .dashboard-wrapper.brd-rd5
+      // Datos Cuenta
+      .welcome-note.yellow-bg.brd-rd5
+        h4(itemprop='headline') BIENVENIDO A TU CUENTA
+        p(itemprop='description') Como administrador pordras realizar diversas acciones en el sitio web.
+        img(src='assets/images/resource/welcome-note-img.png', alt='welcome-note-img.png', itemprop='image')
+        a.remove-noti(href='#', title='', itemprop='url')
+          img(src='assets/images/close-icon.png', alt='close-icon.png', itemprop='image')
+      // RESTAURANTES
+      .dashboard-title
+        h4(itemprop='headline') LISTA DE RESTAURANTES
+        .rite-meta
+          a.view-more(href='dashRestaurante.html', title='') Agregar
+      // LISTA DE RESTAURANTE
+      .restaurants-list
+        ul
+          if (losRestaurantes)
+            each restaurante in losRestaurantes
+              li
+                // Listado de los restaurantes
+                .featured-restaurant-box.style3.brd-rd5.wow.fadeInUp(data-wow-delay='0.2s')
+                  // Logo
+                  .featured-restaurant-thumb
+                    a(title='', itemprop='url')
+                      img(src='assets/imagenesRestaurante/#{restaurante.logo}', alt='restaurant-logo1-1.png', itemprop='image')
+                  .featured-restaurant-info
+                    span.red-clr #{restaurante.direccion}
+                    h4(itemprop='headline')
+                      a(href='#', title='', itemprop='url') #{restaurante.nombre}
+                  .view-menu-liks
+                    a.brd-rd3(href='#', title='', itemprop='url') Modificar
+                    a.brd-rd3(href='#', title='', itemprop='url') Eliminar 
+      // Lista de Restaurantes   
