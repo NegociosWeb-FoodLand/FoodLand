@@ -86,7 +86,6 @@ exports.actualizarPedido = async (req, res) => {
     // destructuring
 
     const {
-        id, 
         idUsuario, 
         fecha, 
         total, 

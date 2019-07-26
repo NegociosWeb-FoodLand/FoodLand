@@ -1,10 +1,4 @@
 // importar los modelos a utilizar
-const Proyecto = require('../models/Proyecto');
-const Categoria = require('./models/Categorias');
-const Usuarios = require('./models/Usuarios');
-const Restaurantes = require('./models/Restaurante');
-const Platillos = require('./models/Platillos');
-const Pedidos = require('./models/Pedidos');
 const DetallePedidos = require('./models/DetallePedido');
 
 // FORMULARIO DE GUARDAR
@@ -101,7 +95,6 @@ exports.actualizarDPedido = async (req, res) => {
     // destructuring
 
     const {
-        id, 
         sugerencia, 
         cantidad, 
         subtotal, 
