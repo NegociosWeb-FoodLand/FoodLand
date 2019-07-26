@@ -19,7 +19,7 @@ exports.formularioGuardar = async (req, res) => {
 exports.guardarDatos = async (req,res)=>{
     //verificando
 
-    let {id, usuarioNombre, correo, estado, rol, url}= req.body;
+    const {usuarioNombre, correo, estado, rol, url}= req.body;
     let errores = [];
 
     if (!usuarioNombre || !correo || !estado || !rol || !url) {
@@ -37,7 +37,6 @@ exports.guardarDatos = async (req,res)=>{
         // No existen errores
         // Inserción en la base de datos.
         await Usuarios.create({
-            id, 
             usuarioNombre, 
             correo, 
             estado, 

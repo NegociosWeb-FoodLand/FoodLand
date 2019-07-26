@@ -17,8 +17,7 @@ exports.formularioGuardar = async (req, res) => {
 exports.guardarDatos = async (req,res)=>{
     //verificando
 
-    let {
-        id, 
+    const {
         sugerencia, 
         cantidad, 
         subtotal, 
@@ -49,7 +48,6 @@ exports.guardarDatos = async (req,res)=>{
         // No existen errores
         // Inserción en la base de datos.
         await DetallePedidos.create({
-            id, 
             sugerencia, 
             cantidad, 
             subtotal, 

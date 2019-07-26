@@ -18,8 +18,7 @@ exports.formularioGuardar = async (req, res) => {
 exports.guardarDatos = async (req,res)=>{
     //verificando
 
-    let {
-        id, 
+    const {
         nombre, 
         descripcion, 
         telefono, 
@@ -31,7 +30,7 @@ exports.guardarDatos = async (req,res)=>{
     }= req.body;
     let errores = [];
 
-    if (!id || !nombre || !descripcion || !telefono || !direccion || !logo || !ultimaModificacion || !idCategoria || !url) {
+    if (!nombre || !descripcion || !telefono || !direccion || !logo || !ultimaModificacion || !idCategoria || !url) {
         errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
     }
     
@@ -46,7 +45,6 @@ exports.guardarDatos = async (req,res)=>{
         // No existen errores
         // Inserción en la base de datos.
         await Restaurantes.create({
-            id, 
             nombre, 
             descripcion, 
             telefono, 
@@ -94,7 +92,6 @@ exports.actualizarRestaurante = async (req, res) => {
     // destructuring
 
     const {
-        id, 
         nombre, 
         descripcion, 
         telefono, 
@@ -107,7 +104,7 @@ exports.actualizarRestaurante = async (req, res) => {
     let errores = [];
 
     // Verificar si el nombre del proyecto tiene un valor
-    if (!id || !nombre || !descripcion || !telefono || !direccion || !logo || !ultimaModificacion || !idCategoria || !url) {
+    if (!nombre || !descripcion || !telefono || !direccion || !logo || !ultimaModificacion || !idCategoria || !url) {
         errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
     }
 

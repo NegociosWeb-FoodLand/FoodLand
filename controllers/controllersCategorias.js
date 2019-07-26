@@ -4,7 +4,6 @@ const Categorias = require('./models/Categorias');
 
 // FORMULARIO DE GUARDAR
 
-
 exports.formularioGuardar = async (req, res) => {
     // Obtener todas las categorias (modelos)
     const categorias = await Categorias.findAll();
@@ -18,8 +17,7 @@ exports.formularioGuardar = async (req, res) => {
 exports.guardarDatos = async (req,res)=>{
     //verificando
 
-    let {
-        id, 
+    const {
         nombre, 
         descripcion, 
         imagen, 
@@ -44,7 +42,6 @@ exports.guardarDatos = async (req,res)=>{
         // No existen errores
         // Inserción en la base de datos.
         await Categorias.create({
-            id, 
             nombre, 
             descripcion, 
             imagen, 
@@ -90,7 +87,6 @@ exports.actualizarCategoria = async (req, res) => {
     // destructuring
 
     const {
-        id, 
         nombre, 
         descripcion, 
         imagen, 
@@ -102,7 +98,6 @@ exports.actualizarCategoria = async (req, res) => {
 
     // Verificar si el nombre del proyecto tiene un valor
     if (
-        !id || 
         !nombre || 
         !descripcion || 
         !imagen ||
