@@ -1,0 +1,49 @@
+mixin crearRestaurante(restaurante = {})
+  // Configuración
+  #account-settings.tab-pane.fade.in.active
+    .tabs-wrp.account-settings.brd-rd5
+      h4(itemprop='headline') ADMINISTRACIÓN DE RESTAURANTES
+      .account-settings-inner
+        .row
+          .col-md-8.col-sm-8.col-lg-8
+            .profile-info-form-wrap
+              // Formulario
+              form.profile-info-form(action='/nuevo_restaurante'  method="POST")
+                .row.mrg20
+                  .col-md-12.col-sm-12.col-lg-12
+                    label Nombre
+                    input.brd-rd3(type='text', placeholder='Nombre')
+                  .col-md-12.col-sm-12.col-lg-12
+                    label Descripción
+                    input.brd-rd3(type='text', placeholder='Descripción')
+                  // Aquí va la imagen
+                  .col-md-12.col-sm-12.col-lg-12
+                    .profile-img-upload-btn
+                      label.fileContainer.brd-rd5.yellow-bg
+                        | Elegir logo
+                        input#profile-upload(type='file')
+                    br
+                    br
+                    br
+                  .col-md-6.col-sm-6.col-lg-6
+                    label Categoría 
+                    .select-wrp
+                      select
+                        option Cafetería
+                        option Comida rápida
+                        option A la carta
+                  .col-md-6.col-sm-6.col-lg-6
+                    label Teléfono 
+                    input.brd-rd3(type='tel', placeholder='Telefono')
+                  .col-md-12.col-sm-12.col-lg-12
+                    label Dirección
+                    input.brd-rd3(type='text', placeholder='Dirección')
+                  .col-md-12.col-sm-12.col-lg-12
+                    label Estado 
+                    .select-wrp
+                      select
+                        option Activo
+                        option Inactivo
+                  .rite-meta
+                    input.view-more(type='submit', value=`${restaurante.nombre ? 'Guardar' : 'Agregar'}`)
+                    input.view-more(type='submit', value='Cancelar')
