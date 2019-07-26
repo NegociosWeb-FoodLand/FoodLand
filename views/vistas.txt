@@ -1,1 +1,13 @@
 aquí van las diferentes interfaces que e sitio va a necesitar
+- layoutAdmin.pug = Layout para el administrador
+- dashRestaurante.pug = Listar los restaurantes
+- dashRestaurante-form.pug = Agregar/modificar restaurantes
+
+
+**Mixins
+--crearPlatillo.pug = Formulario Platillo
+--crearRestaurante.pug = Formulario Restaurante
+
+**Partials
+--header.pug = Encabezados y metas
+--scripts.pug = scripts js
