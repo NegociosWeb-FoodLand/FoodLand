@@ -1,0 +1,6 @@
+extends ./layoutAdmin
+
+include mixins/crearPlatillo
+
+block contenido
+  +crearPlatillo.pug(platillos)
