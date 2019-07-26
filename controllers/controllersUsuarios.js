@@ -1,11 +1,7 @@
 // importar los modelos a utilizar
-const Proyecto = require('../models/Proyecto');
-const Categoria = require('./models/Categorias');
+
 const Usuarios = require('./models/Usuarios');
-const Restaurantes = require('./models/Restaurante');
-const Platillos = require('./models/Platillos');
-const Pedidos = require('./models/Pedidos');
-const DetallePedidos = require('./models/DetallePedido');
+
 
 // FORMULARIO DE GUARDAR
 
@@ -85,7 +81,7 @@ exports.actualizarUsuario = async (req, res) => {
     // se valida que el input del formulario traiga un valor
     // destructuring
 
-    const {id, usuarioNombre, correo, estado, rol, url}= req.body;
+    const {usuarioNombre, correo, estado, rol, url}= req.body;
     let errores = [];
 
     // Verificar si el nombre del proyecto tiene un valor
@@ -104,7 +100,6 @@ exports.actualizarUsuario = async (req, res) => {
         // No existen errores
         // Inserción en la base de datos.
         await Usuarios.update({
-            id, 
             usuarioNombre, 
             correo, 
             estado, 

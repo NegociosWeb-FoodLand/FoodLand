@@ -1,11 +1,6 @@
 // importar los modelos a utilizar
-const Proyecto = require('../models/Proyecto');
-const Categoria = require('./models/Categorias');
-const Usuarios = require('./models/Usuarios');
 const Restaurantes = require('./models/Restaurante');
-const Platillos = require('./models/Platillos');
-const Pedidos = require('./models/Pedidos');
-const DetallePedidos = require('./models/DetallePedido');
+
 
 // FORMULARIO DE GUARDAR
 
@@ -126,8 +121,7 @@ exports.actualizarRestaurante = async (req, res) => {
     } else {
         // No existen errores
         // Inserción en la base de datos.
-        await Restaurantes.update({
-            id, 
+        await Restaurantes.update({ 
             nombre, 
             descripcion, 
             telefono, 
