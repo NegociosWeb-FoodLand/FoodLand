@@ -1,12 +1,23 @@
-aquí van las diferentes interfaces que e sitio va a necesitar
+aquí van las diferentes interfaces que el sitio va a necesitar
+
+** General
+- Login.pug = Inicio de Sesión
+- Registro.pug = Creación de una cuenta
+
+**Administrador
 - layoutAdmin.pug = Layout para el administrador
 - dashRestaurante.pug = Listar los restaurantes
 - dashRestaurante-form.pug = Agregar/modificar restaurantes
+- dashPlatillo.pug = Listar los platillos
+- dashPlatillo-form.pug = Agregar/modificar Platillos
 
+**Cliente
+- 
 
 **Mixins
 --crearPlatillo.pug = Formulario Platillo
 --crearRestaurante.pug = Formulario Restaurante
+--crearPlatillo.pug = Formulario  Platillo
 
 **Partials
 --header.pug = Encabezados y metas
