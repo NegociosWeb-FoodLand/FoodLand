@@ -56,18 +56,18 @@ const Restaurantes = db.define( 'restaurante',{
 
 }, {
     hooks : {
-        beforeCreate(publicacion) {
+        beforeCreate(restaurante) {
             console.log('Antes de insertar en la base de datos');
-            const url = slug(publicacion.titulo).toLowerCase();
+            const url = slug(restaurante.nombre).toLowerCase();
 
-            publicacion.url = `${url}-${shortid.generate()}`;
+            restaurante.url = `${url}-${shortid.generate()}`;
         },
 
-        beforeUpdate(publicacion) {
+        beforeUpdate(restaurante) {
             console.log('Antes de actualizar en la base de datos');
-            const url = slug(publicacion.nombre).toLowerCase();
+            const url = slug(restaurante.nombre).toLowerCase();
 
-            publicacion.url = `${url}-${shortid.generate()}`;
+            restaurante.url = `${url}-${shortid.generate()}`;
         }
     }
 });
