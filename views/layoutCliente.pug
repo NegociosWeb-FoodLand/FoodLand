@@ -1,0 +1,175 @@
+doctype html
+html(lang='en')
+  head
+    include partials/header
+  body(itemscope='')
+    main
+      .preloader
+        #cooking
+          .bubble
+          .bubble
+          .bubble
+          .bubble
+          .bubble
+          #area
+            #sides
+              #pan
+              #handle
+            #pancake
+              #pastry
+      header.stick
+        .topbar
+          .container
+            .topbar-register
+              a(href='#', title='Cerrar sesión', itemprop='url') Cerrar sesión
+            .social1
+              a(href='https://es-la.facebook.com/', title='Facebook', itemprop='url', target='_blank')
+                i.fa.fa-facebook-square
+              a(href='https://twitter.com/', title='Twitter', itemprop='url', target='_blank')
+                i.fa.fa-twitter
+              a(href='https://www.instagram.com/?hl=es-la', title='Google Plus', itemprop='url', target='_blank')
+                i.fa.fa-instagram
+        // Barra
+        .logo-menu-sec
+          .container
+            .logo
+              h1(itemprop='headline')
+                a(href='index-2.html', title='Home', itemprop='url')
+                  img(src='assets/images/logo2.png', alt='logo.png', itemprop='image')
+            nav
+              .menu-sec
+                ul
+                  li
+                    a(href='#', title='INICIO', itemprop='url')
+                      span.red-clr CONÓCENOS
+                      | INICIO
+                  li
+                    a(href='#', title='RESTAURANTES', itemprop='url')
+                      span.red-clr COMIDA
+                      | RESTAURANTES
+                  li
+                    a(href='#', title='ACERCA DE', itemprop='url')
+                      span.red-clr ACERCA DE
+                      | SOBRE NOSOTROS
+                  li
+                    a(href='#', title='CONTACTO', itemprop='url')
+                      span.red-clr COMUNÍCATE
+                      | CONTÁCTANOS
+                a.red-bg.brd-rd4(href='register-reservation.html', title='Orden', itemprop='url') Compra
+      // Header
+      // Header Responsive
+      .responsive-header
+        .responsive-logomenu
+          .logo
+            h1(itemprop='headline')
+              a(href='index-2.html', title='Home', itemprop='url')
+                img(src='assets/images/logo.png', alt='logo.png', itemprop='image')
+          span.menu-btn.yellow-bg.brd-rd4
+            i.fa.fa-align-justify
+        // Menú responsive
+        .responsive-menu
+          span.menu-close.red-bg.brd-rd3
+            i.fa.fa-close
+          .menu-lst
+            ul
+              li
+                a(href='#', title='INICIO', itemprop='url')
+                  span.yellow-clr CONÓCENOS
+                  | INICIO
+              li
+                a(href='#', title='RESTAURANTES', itemprop='url')
+                  span.yellow-clr COMIDA
+                  | RESTAURANTES
+              li
+                a(href='#', title='ACERCA DE', itemprop='url')
+                  span.yellow-clr ACERCA DE
+                  | SOBRE NOSOTROS
+              li
+                a(href='contact.html', title='CONTACT US', itemprop='url')
+                  span.yellow-clr REAL FOOD
+                  | CONTACT US
+            // Menú responsive
+            // Cerrar Sesión
+          .topbar-register
+            a.log-popup-btn(href='#', title='Cerrar sesión', itemprop='url') Cerrar sesión
+            // Cerrar Sesión
+            // Social Media
+          .social1
+            a(href='https://es-la.facebook.com/', title='Facebook', itemprop='url', target='_blank')
+              i.fa.fa-facebook-square
+            a(href='https://twitter.com/', title='Twitter', itemprop='url', target='_blank')
+              i.fa.fa-twitter
+            a(href='https://www.instagram.com/?hl=es-la', title='Google Plus', itemprop='url', target='_blank')
+              i.fa.fa-google-plus
+          // Social Media
+          // Carrito
+          .register-btn
+            a.yellow-bg.brd-rd4(href='register-reservation.html', title='Register', itemprop='url') Compra
+          // Carrito
+          // Menu Responsive
+          // Header Responsive
+      // CONTENIDO PARA CADA CONTROLADOR
+      block contenido      
+      // Pie de página
+      footer
+        .block.top-padd80.bottom-padd80.dark-bg
+          .container
+            .row
+              .col-md-12.col-sm-12.col-lg-12
+                .footer-data
+                  .row
+                    // Columna 1
+                    .col-md-6.col-sm-12.col-lg-6
+                      .widget.about_widget.wow.fadeIn(data-wow-delay='0.1s')
+                        .logo
+                          h1(itemprop='headline')
+                            a(href='#', title='Home', itemprop='url')
+                              img(src='assets/images/logo.png', alt='logo.png', itemprop='image')
+                        p(itemprop='description') Pedido de comida en línea. La mejor opción en comidas.
+                        .social2
+                          a.brd-rd50(href='https://es-la.facebook.com/', title='Facebook', itemprop='url', target='_blank')
+                            i.fa.fa-facebook
+                          a.brd-rd50(href='https://www.instagram.com/?hl=es-la', title='Google Plus', itemprop='url', target='_blank')
+                            i.fa.fa-google-plus
+                          a.brd-rd50(href='https://twitter.com/', title='Twitter', itemprop='url', target='_blank')
+                            i.fa.fa-twitter
+                          a.brd-rd50(href='https://www.instagram.com/?hl=es-la', title='Instagram', itemprop='url', target='_blank')
+                            i.fa.fa-instagram
+                    // Columna 2
+                    .col-md-3.col-sm-6.col-lg-3
+                      .widget.information_links.wow.fadeIn(data-wow-delay='0.2s')
+                        h4.widget-title(itemprop='headline') RESTAURANTE
+                        ul
+                          li
+                            a(href='#', title='', itemprop='url') Categorías
+                    // Columna 3
+                    .col-md-3.col-sm-6.col-lg-3
+                      .widget.customer_care.wow.fadeIn(data-wow-delay='0.3s')
+                        h4.widget-title(itemprop='headline') NOSOTROS
+                        ul
+                          li
+                            a(href='#', title='', itemprop='url') Acerca de
+                    // Columna 4
+                    .col-md-3.col-sm-6.col-lg-3
+                      .widget.get_in_touch.wow.fadeIn(data-wow-delay='0.4s')
+                        h4.widget-title(itemprop='headline') CONTACTO
+                        ul
+                          li
+                            i.fa.fa-map-marker
+                            |  Honduras
+                          li
+                            i.fa.fa-phone
+                            |  +504 9542-7666
+                          li
+                            i.fa.fa-envelope
+                            a(href='#', title='', itemprop='url') simbiosis692@gmail.com          
+      // Pie de Página
+      // Copyright
+      .bottom-bar.dark-bg.text-center
+        .container
+          p(itemprop='description')
+            | Negocios Web 2019 
+            a(href='https://www.unicah.edu/') UNICAH-JS
+      // Copyright
+    // Scripts
+    include partials/scripts
