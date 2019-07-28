@@ -12,7 +12,8 @@ aquí van las diferentes interfaces que el sitio va a necesitar
 - dashPlatillo-form.pug = Agregar/modificar Platillos
 
 **Cliente
-- 
+- layoutCliente.pug = Layout para el usuario cliente
+- index.pug = Página principal para el usuario, información de la empresa
 
 **Mixins
 --crearPlatillo.pug = Formulario Platillo
