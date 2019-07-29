@@ -1,9 +1,8 @@
 // importar los modelos a utilizar
 const Restaurantes = require('../models/Restaurante');
 const Categorias = require('../models/Categorias');
-
-//Importamos el módulo de formidable para el trabajo con imágenes.
-const formidable = require('formidable')
+// Importar los módulos para direcciones (path)
+const path = require('path');
 
 const carros = require('express-fileupload');
 // renderizamos la pantalla principal para el administrador
@@ -39,7 +38,7 @@ exports.guardarDatos = async (req,res)=>{
     console.log('.----------------------------------------------------------------------');
     console.log(req.body);
     console.log(req.files);
-   req.files.logo.mv(`${req.files.logo.name}`),err => {
+   req.files.logo.mv( path.join(__dirname, `../public/images/Restaurantes/${req.files.logo.name}`)),err => {
     if(err) {
       return res.status(500).send({ message : err })
     } else {
@@ -60,12 +59,8 @@ exports.guardarDatos = async (req,res)=>{
         const idCategoria = cat.id;
     
     //definimos la fecha a guardar
-    const f = new Date();
-    const ultimaModificacion =(f.getFullYear()+ "-"+ (f.getMonth() +1) + "-"+ f.getDate() + ":"    + f.getHours()+":"+f.getMinutes()) ;
-    
-    
-
-
+    const ultimaModificacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  
     let errores = [];
     if (!nombre || !descripcion || !telefono || !direccion  || !ultimaModificacion) {
         errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
@@ -87,7 +82,7 @@ exports.guardarDatos = async (req,res)=>{
             descripcion, 
             telefono, 
             direccion,
-            logo,
+            logo:req.files.logo.name,
             ultimaModificacion,
             idCategoria,
         }),
