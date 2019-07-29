@@ -1,0 +1,48 @@
+extends ./layoutCliente
+
+block contenido
+  // HERO
+  section
+    .block
+      .fixed-bg(style='background-image: url(assets/images/topbg.jpg);')
+      .page-title-wrapper.text-center
+        .col-md-12.col-sm-12.col-lg-12
+          .page-title-inner
+            h1(itemprop='headline') Contáctanos
+            span Te daremos la información que necesitas
+  // INFO
+  section
+    .block.less-spacing.gray-bg.top-padd30
+      .container
+        .row
+          .col-md-12.col-sm-12.col-lg-12
+            .sec-box
+              // Mapa
+              #loc-map.loc-map
+                .map-responsive
+                  iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.7899419798996!2d-87.83244968564293!3d14.6110387897958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f65950c2a62de1b%3A0x35ced69748e8107c!2sUniversidad+Cat%C3%B3lica+de+Honduras!5e0!3m2!1ses-419!2shn!4v1555083175490!5m2!1ses-419!2shn', style='border:0', allowfullscreen='', width='600', height='450', frameborder='0')
+              // Información
+              .contact-info-sec.text-center
+                .row
+                  // Teléfono
+                  .col-md-4.col-sm-4.col-lg-4
+                    .contact-info-box
+                      i.fa.fa-phone-square
+                      h5(itemprop='headline') TELÉFONOS
+                      p(itemprop='description')  (+504) 9723-2402
+                      p(itemprop='description')  (+504) 9866-0887
+                      p(itemprop='description')  (+504) 9669-2267
+                      p(itemprop='description')  (+504) 9542-7666
+                  // Dirección
+                  .col-md-4.col-sm-4.col-lg-4
+                    .contact-info-box
+                      i.fa.fa-map-marker
+                      h5(itemprop='headline') DIRECCIÓN
+                      p(itemprop='description')
+                        | Barrio San Francisco, al final del Boulevard Francisco Morazán, Siguatepeque, Comayagua, Honduras.
+                  // Teléfono
+                  .col-md-4.col-sm-4.col-lg-4
+                    .contact-info-box
+                      i.fa.fa-envelope
+                      h5(itemprop='headline') CORREO ELECTRÓNICO
+                      p(itemprop='description') simbiosis692@gmail.com

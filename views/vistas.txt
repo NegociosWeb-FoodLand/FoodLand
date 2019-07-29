@@ -16,6 +16,7 @@ aquí van las diferentes interfaces que el sitio va a necesitar
 - index.pug = Página principal para el usuario, información de la empresa
 - acerca.pug = Detalle sobre la página y su desarrollo
 - platillos.pug = Muestra todos los platillos de un restaurante en específicos
+- contacto.pug = Información para comunicarse.
 
 **Mixins
 --crearPlatillo.pug = Formulario Platillo
