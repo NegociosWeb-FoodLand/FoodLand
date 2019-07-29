@@ -2,7 +2,10 @@
 const Restaurantes = require('../models/Restaurante');
 const Categorias = require('../models/Categorias');
 
+//Importamos el módulo de formidable para el trabajo con imágenes.
+const formidable = require('formidable')
 
+const carros = require('express-fileupload');
 // renderizamos la pantalla principal para el administrador
 exports.mostrarPrincipalAdmin = async (req, res)=>{
 
@@ -26,10 +29,24 @@ exports.formularioGuardar = async (req, res) => {
 };
 
 exports.guardarDatos = async (req,res)=>{
-
+      // Obtener todos los Restaurantes (modelos)
+      const restautantes = await Restaurantes.findAll();
+    
+      // Obtenemos todas las categorias a las que pueden pertenecer los restaurantes
+      const lasCategorias = await Categorias.findAll();
     //Obtenemos los datos por destructuring
-    const {nombre,descripcion,telefono, direccion,logo,nombreCategoria } = req.body;
-
+   const {nombre,descripcion,telefono, direccion,logo,nombreCategoria } = req.body;
+    console.log('.----------------------------------------------------------------------');
+    console.log(req.body);
+    console.log(req.files);
+   req.files.logo.mv(`${req.files.logo.name}`),err => {
+    if(err) {
+      return res.status(500).send({ message : err })
+    } else {
+      console.log('listo');
+    }
+  };
+   
     //filtramos la categoria que fue seleccionada por el usuario
     const laCategoria = Categorias.findOne({
         where : {
@@ -45,8 +62,10 @@ exports.guardarDatos = async (req,res)=>{
     //definimos la fecha a guardar
     const f = new Date();
     const ultimaModificacion =(f.getFullYear()+ "-"+ (f.getMonth() +1) + "-"+ f.getDate() + ":"    + f.getHours()+":"+f.getMinutes()) ;
-   
-    //Verificamos si hay errores 
+    
+    
+
+
     let errores = [];
     if (!nombre || !descripcion || !telefono || !direccion  || !ultimaModificacion) {
         errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
@@ -60,6 +79,7 @@ exports.guardarDatos = async (req,res)=>{
             restautantes,
             errores
         });
+        res.render('error en la carga');
     } else {
         // No existen errores
         await Restaurantes.create({
@@ -76,9 +96,7 @@ exports.guardarDatos = async (req,res)=>{
     }
 };
 
-
 // FORMULARIO DE EDITAR
-
 
 exports.formularioEditar = async (req, res) => {
     // Obtener todos los modelos

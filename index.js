@@ -10,6 +10,9 @@ const bodyParser = require('body-parser');
 // Importar los módulos para direcciones (path)
 const path = require('path');
 
+const fileUpload = require('express-fileupload');
+
+//importamos la configuración a la base de datos.
 const db = require('./config/db');
 
 // Importar el modelo
@@ -20,9 +23,7 @@ require('./models/Platillos');
 require('./models/Pedidos');
 require('./models/DetallePedido');
 
-
-
-
+//realizamos la conexión a la base de datos.
 db.sync()
     .then(() => console.log('Conectado al servidor de BD'))
     .catch(error => console.log(error));
@@ -32,6 +33,8 @@ db.sync()
 
  // Desde dónde se cargan los archivos estáticos
 app.use(express.static('public'));
+
+app.use(fileUpload());
 
 // Habilitar Pug como nuestro Template Engine
 app.set('view engine', 'pug');

@@ -14,6 +14,5 @@ module.exports = function(){
     router.get('/', restauranteControllers.mostrarPrincipalAdmin);
     router.get('/nuevo_Restaurante', restauranteControllers.formularioGuardar);
     router.post('/nuevo_Restaurante', restauranteControllers.guardarDatos);
-
     return router;
 }

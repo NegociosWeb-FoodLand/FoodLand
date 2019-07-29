@@ -7,7 +7,7 @@ mixin crearRestaurante(restaurante = {})
           .col-md-8.col-sm-8.col-lg-8
             .profile-info-form-wrap
               // Formulario
-              form.profile-info-form(action="/nuevo_Restaurante"  method="POST")
+              form.profile-info-form(action="/nuevo_Restaurante"  method="POST" encType="multipart/form-data")
                 .row.mrg20
                   .col-md-12.col-sm-12.col-lg-12
                     label(for='nombre') Nombre
