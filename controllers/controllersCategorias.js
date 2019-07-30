@@ -1,6 +1,10 @@
 // importar los modelos a utilizar
 const Categorias = require('./models/Categorias');
 
+//Importamos el módulo de formidable para trabajar con las imágenes.
+const formidable = require('formidable')
+
+const imgcat = require('express-fileupload');
 
 // renderizamos la pantalla principal para el administrador
 exports.mostrarPrincipalAdmin = async (req, res)=>{
@@ -23,11 +27,24 @@ exports.formularioGuardar = async (req, res) => {
 
 exports.guardarDatos = async (req,res)=>{
 
+    // Obtenemos todas las categorias a las que pueden pertenecer los restaurantes
+    const lasCategorias = await Categorias.findAll();
     
     
     //Obtenemos los datos por destructuring
-    const {nombre,descripcion,imagen, estado,ultimaModificacion,url } = req.body;
-    
+    const {nombre ,descripcion ,imagen ,estado ,ultimaModificacion, url } = req.body;
+    console.log('.----------------------------------------------------------------------');
+    console.log(req.body);
+    console.log(req.files);
+   req.files.imagen.mv(`${req.files.imagen.name}`),err => {
+    if(err) {
+      return res.status(500).send({ message : err })
+    } else {
+      console.log('listo');
+    }
+  };
+
+
     //definimos la fecha a guardar
     const f = new Date();
     const ultimaModificacion =(f.getFullYear()+ "-"+ (f.getMonth() +1) + "-"+ f.getDate() + ":"    + f.getHours()+":"+f.getMinutes()) ;
@@ -47,6 +64,7 @@ exports.guardarDatos = async (req,res)=>{
             categorias,
             errores
         });
+        res.render('error en la carga');
     } else {
         // No existen errores
         // Inserción en la base de datos.
