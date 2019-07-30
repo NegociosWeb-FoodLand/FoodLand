@@ -18,15 +18,15 @@ block contenido
       // LISTA DE RESTAURANTE
       .restaurants-list
         ul
-          if (losRestaurantes)
-            each restaurante in losRestaurantes
+          if (restaurantes)
+            each restaurante in restaurantes
               li
                 // Listado de los restaurantes
                 .featured-restaurant-box.style3.brd-rd5.wow.fadeInUp(data-wow-delay='0.2s')
                   // Logo
                   .featured-restaurant-thumb
                     a(title='', itemprop='url')
-                      img(src='assets/imagenesRestaurante/#{restaurante.logo}', alt='restaurant-logo1-1.png', itemprop='image')
+                      img(src=`images/Restaurantes/${restaurante.logo}`, alt='nodfdfg', itemprop='image')
                   .featured-restaurant-info
                     span.red-clr #{restaurante.direccion}
                     h4(itemprop='headline')

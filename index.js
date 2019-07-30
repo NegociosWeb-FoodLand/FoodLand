@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 // Importar los módulos para direcciones (path)
 const path = require('path');
 
+//Importar elmódulo para subir archivos con express-fileUpload
 const fileUpload = require('express-fileupload');
 
 //importamos la configuración a la base de datos.
@@ -34,6 +35,7 @@ db.sync()
  // Desde dónde se cargan los archivos estáticos
 app.use(express.static('public'));
 
+//Habilitamos funcionalidad de fileUpload para la carga de archivos.
 app.use(fileUpload());
 
 // Habilitar Pug como nuestro Template Engine
@@ -45,6 +47,7 @@ app.use(bodyParser.urlencoded({extended: true}));
  // Añadir la carpeta (ruta) que contiene las View (vistas)
 app.set('views', path.join(__dirname, './views'));
 
+// importamos todas las rutas que se utilizarán.
 app.use('/', routes());
 
  // iniciar el servidor en un puerto de escucha; en este caso puerto: 9000
