@@ -1,5 +1,17 @@
 // importar los modelos a utilizar
-const Categorias = require('./models/Categorias');
+const Categorias = require('../models/Categorias');
+
+// Importar los módulos para direcciones (path)
+const path = require('path');
+
+const imgcat = require('express-fileupload');
+
+// renderizamos la pantalla principal para el administrador
+exports.mostrarPrincipalAdmin = async (req, res)=>{
+
+    //renderizamos el dashboard principal del administrador.
+    res.render('dashCategoria')
+};
 
 
 // FORMULARIO DE GUARDAR
@@ -8,23 +20,44 @@ exports.formularioGuardar = async (req, res) => {
     // Obtener todas las categorias (modelos)
     const categorias = await Categorias.findAll();
 
-    res.render('nuevaCategoria', {
-        nombrePagina : 'Nueva categoria',
+    res.render('dashCategoria', {
         categorias
     });
 };
+exports.formularioLlenarCategoria = async(req, res)=>{
+     // Obtener todas las categorias (modelos)
+     const categorias = await Categorias.findAll();
+
+    res.render('dashCategoria-form',{
+        categorias
+    });
+}
 
 exports.guardarDatos = async (req,res)=>{
-    //verificando
 
-    const {
-        nombre, 
-        descripcion, 
-        imagen, 
-        estado, 
-        ultimaModificacion,
-        url
-    }= req.body;
+    // Obtenemos todas las categorias a las que pueden pertenecer los restaurantes
+    const lasCategorias = await Categorias.findAll();
+    
+    
+    //Obtenemos los datos por destructuring
+   const {nombre ,descripcion ,imagen ,estado ,ultimaModificacion, url } = req.body;
+    console.log('.----------------------------------------------------------------------');
+    console.log(req.body);
+    console.log(req.files);
+   req.files.logo.mv( path.join(__dirname, `../public/images/Categorias/${req.files.logo.name}`)),err => {
+    if(err) {
+      return res.status(500).send({ message : err })
+    } else {
+      console.log('listo');
+    }
+  };
+
+
+    //definimos la fecha a guardar
+    var  ultimaModificacion1 = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+    //Verificamos si hay errores 
+
     let errores = [];
 
     if (!nombre || !descripcion || !imagen || !estado || !ultimaModificacion || !url) {
@@ -33,20 +66,21 @@ exports.guardarDatos = async (req,res)=>{
     
     // Si hay errores
     if (errores.length > 0) {
-        res.render('nuevaCategoria', {
+        res.render('dashCategoria', {
             nombrePagina : 'Nueva categoria',
             categorias,
             errores
         });
+        res.render('error en la carga');
     } else {
         // No existen errores
         // Inserción en la base de datos.
         await Categorias.create({
             nombre, 
             descripcion, 
-            imagen, 
+            imagen:req.files.imagen.name, 
             estado, 
-            ultimaModificacion,
+            ultimaModificacion:ultimaModificacion1,
             url
         }),
 
