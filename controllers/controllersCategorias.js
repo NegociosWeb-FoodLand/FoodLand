@@ -2,29 +2,38 @@
 const Categorias = require('./models/Categorias');
 
 
+// renderizamos la pantalla principal para el administrador
+exports.mostrarPrincipalAdmin = async (req, res)=>{
+
+    //renderizamos el dashboard principal del administrador.
+    res.render('dashCategoria')
+};
+
+
 // FORMULARIO DE GUARDAR
 
 exports.formularioGuardar = async (req, res) => {
     // Obtener todas las categorias (modelos)
     const categorias = await Categorias.findAll();
 
-    res.render('nuevaCategoria', {
-        nombrePagina : 'Nueva categoria',
+    res.render('dashCategoria', {
         categorias
     });
 };
 
 exports.guardarDatos = async (req,res)=>{
-    //verificando
 
-    const {
-        nombre, 
-        descripcion, 
-        imagen, 
-        estado, 
-        ultimaModificacion,
-        url
-    }= req.body;
+    
+    
+    //Obtenemos los datos por destructuring
+    const {nombre,descripcion,imagen, estado,ultimaModificacion,url } = req.body;
+    
+    //definimos la fecha a guardar
+    const f = new Date();
+    const ultimaModificacion =(f.getFullYear()+ "-"+ (f.getMonth() +1) + "-"+ f.getDate() + ":"    + f.getHours()+":"+f.getMinutes()) ;
+   
+    //Verificamos si hay errores 
+
     let errores = [];
 
     if (!nombre || !descripcion || !imagen || !estado || !ultimaModificacion || !url) {
@@ -33,7 +42,7 @@ exports.guardarDatos = async (req,res)=>{
     
     // Si hay errores
     if (errores.length > 0) {
-        res.render('nuevaCategoria', {
+        res.render('dashCategoria', {
             nombrePagina : 'Nueva categoria',
             categorias,
             errores

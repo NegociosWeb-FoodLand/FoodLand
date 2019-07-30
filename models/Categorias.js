@@ -43,18 +43,18 @@ const Categoria = db.define( 'categoria',{
     }
 }, {
     hooks : {
-        beforeCreate(publicacion) {
+        beforeCreate(categoria) {
             console.log('Antes de insertar en la base de datos');
-            const url = slug(publicacion.titulo).toLowerCase();
+            const url = slug(categoria.nombre).toLowerCase();
 
-            publicacion.url = `${url}-${shortid.generate()}`;
+            categoria.url = `${url}-${shortid.generate()}`;
         },
 
-        beforeUpdate(publicacion) {
+        beforeUpdate(categoria) {
             console.log('Antes de actualizar en la base de datos');
-            const url = slug(publicacion.nombre).toLowerCase();
+            const url = slug(categoria.nombre).toLowerCase();
 
-            publicacion.url = `${url}-${shortid.generate()}`;
+            categoria.url = `${url}-${shortid.generate()}`;
         }
     }
 });
