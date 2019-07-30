@@ -7,40 +7,40 @@ mixin crearRestaurante(restaurante = {})
           .col-md-8.col-sm-8.col-lg-8
             .profile-info-form-wrap
               // Formulario
-              form.profile-info-form(action='/nuevo_restaurante'  method="POST")
+              form.profile-info-form(action="/nuevo_Restaurante"  method="POST" encType="multipart/form-data")
                 .row.mrg20
                   .col-md-12.col-sm-12.col-lg-12
-                    label Nombre
-                    input.brd-rd3(type='text', placeholder='Nombre')
+                    label(for='nombre') Nombre
+                    input(type='text', placeholder='Nombre' name="nombre" id="nombre")
                   .col-md-12.col-sm-12.col-lg-12
                     label Descripción
-                    input.brd-rd3(type='text', placeholder='Descripción')
+                    input(type='text', placeholder='Descripción' id='descripcion' name="descripcion")
                   // Aquí va la imagen
                   .col-md-12.col-sm-12.col-lg-12
                     .profile-img-upload-btn
                       label.fileContainer.brd-rd5.yellow-bg
                         | Elegir logo
-                        input#profile-upload(type='file')
+                        input#profile-upload(type='file' name="logo")
                     br
                     br
                     br
                   .col-md-6.col-sm-6.col-lg-6
                     label Categoría 
                     .select-wrp
-                      select
-                        option Cafetería
-                        option Comida rápida
-                        option A la carta
+                      select(name="nombreCategoria")
+                        if (lasCategorias)
+                          each categoria in lasCategorias
+                            option #{categoria.nombre}
                   .col-md-6.col-sm-6.col-lg-6
                     label Teléfono 
-                    input.brd-rd3(type='tel', placeholder='Telefono')
+                    input.brd-rd3(type='tel', placeholder='Telefono' id= 'telefono' name="telefono")
                   .col-md-12.col-sm-12.col-lg-12
                     label Dirección
-                    input.brd-rd3(type='text', placeholder='Dirección')
+                    input.brd-rd3(type='text', placeholder='Dirección' id= 'direccion' name="direccion")
                   .col-md-12.col-sm-12.col-lg-12
                     label Estado 
                     .select-wrp
-                      select
+                      select(name ="estado")
                         option Activo
                         option Inactivo
                   .rite-meta
