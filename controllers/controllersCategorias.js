@@ -1,5 +1,5 @@
 // importar los modelos a utilizar
-const Categorias = require('./models/Categorias');
+const Categorias = require('../models/Categorias');
 
 // Importar los módulos para direcciones (path)
 const path = require('path');
@@ -46,7 +46,7 @@ exports.guardarDatos = async (req,res)=>{
 
 
     //definimos la fecha a guardar
-    const ultimaModificacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    ultimaModificacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     //Verificamos si hay errores 
 
