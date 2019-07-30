@@ -21,6 +21,16 @@ const Usuarios = db.define('usuario',{
         type:Sequelize.STRING
     },
 
+    password : {
+        type : Sequelize.STRING(60),
+        allowNull : false,
+        validate : {
+            notEmpty : {
+                msg : 'La contraseña no puede ser vacía'
+            }
+        }
+    },
+
     correo: {
         type:Sequelize.STRING
     },

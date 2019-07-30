@@ -45,7 +45,7 @@ const Restaurantes = db.define( 'restaurante',{
     idCategoria: {
         type: Sequelize.INTEGER,
         references: {
-            model: 'Categoria',
+            model: 'categoria',
             key: 'id'
         }
     },
