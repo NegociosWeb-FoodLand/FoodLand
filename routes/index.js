@@ -20,6 +20,7 @@ module.exports = function(){
     router.post('/nuevo_Restaurante', restauranteControllers.guardarDatos);
 
     router.get('/nueva_Categoria', categoriasControllers.formularioGuardar);
+    router.get('/categoriaForm',categoriasControllers.formularioLlenarCategoria);
     router.post('/nueva_Categoria', categoriasControllers.guardarDatos);
 
     return router;

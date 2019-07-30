@@ -1,5 +1,5 @@
 // importar los modelos a utilizar
-const Categorias = require('./models/Categorias');
+const Categorias = require('../models/Categorias');
 
 // Importar los módulos para direcciones (path)
 const path = require('path');
@@ -24,6 +24,14 @@ exports.formularioGuardar = async (req, res) => {
         categorias
     });
 };
+exports.formularioLlenarCategoria = async(req, res)=>{
+     // Obtener todas las categorias (modelos)
+     const categorias = await Categorias.findAll();
+
+    res.render('dashCategoria-form',{
+        categorias
+    });
+}
 
 exports.guardarDatos = async (req,res)=>{
 
@@ -46,7 +54,7 @@ exports.guardarDatos = async (req,res)=>{
 
 
     //definimos la fecha a guardar
-    const ultimaModificacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    var  ultimaModificacion1 = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     //Verificamos si hay errores 
 
@@ -72,7 +80,7 @@ exports.guardarDatos = async (req,res)=>{
             descripcion, 
             imagen:req.files.imagen.name, 
             estado, 
-            ultimaModificacion,
+            ultimaModificacion:ultimaModificacion1,
             url
         }),
 
