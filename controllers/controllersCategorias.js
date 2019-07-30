@@ -1,8 +1,8 @@
 // importar los modelos a utilizar
 const Categorias = require('./models/Categorias');
 
-//Importamos el módulo de formidable para trabajar con las imágenes.
-const formidable = require('formidable')
+// Importar los módulos para direcciones (path)
+const path = require('path');
 
 const imgcat = require('express-fileupload');
 
@@ -32,11 +32,11 @@ exports.guardarDatos = async (req,res)=>{
     
     
     //Obtenemos los datos por destructuring
-    const {nombre ,descripcion ,imagen ,estado ,ultimaModificacion, url } = req.body;
+   const {nombre ,descripcion ,imagen ,estado ,ultimaModificacion, url } = req.body;
     console.log('.----------------------------------------------------------------------');
     console.log(req.body);
     console.log(req.files);
-   req.files.imagen.mv(`${req.files.imagen.name}`),err => {
+   req.files.logo.mv( path.join(__dirname, `../public/images/Categorias/${req.files.logo.name}`)),err => {
     if(err) {
       return res.status(500).send({ message : err })
     } else {
@@ -46,9 +46,8 @@ exports.guardarDatos = async (req,res)=>{
 
 
     //definimos la fecha a guardar
-    const f = new Date();
-    const ultimaModificacion =(f.getFullYear()+ "-"+ (f.getMonth() +1) + "-"+ f.getDate() + ":"    + f.getHours()+":"+f.getMinutes()) ;
-   
+    const ultimaModificacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
     //Verificamos si hay errores 
 
     let errores = [];
@@ -71,7 +70,7 @@ exports.guardarDatos = async (req,res)=>{
         await Categorias.create({
             nombre, 
             descripcion, 
-            imagen, 
+            imagen:req.files.imagen.name, 
             estado, 
             ultimaModificacion,
             url
