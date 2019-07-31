@@ -40,11 +40,11 @@ exports.guardarDatos = async (req,res)=>{
     
     
     //Obtenemos los datos por destructuring
-   const {nombre ,descripcion ,imagen ,estado ,ultimaModificacion, url } = req.body;
+   const {nombre ,descripcion ,estado , url } = req.body;
     console.log('.----------------------------------------------------------------------');
-    console.log(req.body);
+    //console.log(req.body);
     console.log(req.files);
-   req.files.logo.mv( path.join(__dirname, `../public/images/Categorias/${req.files.logo.name}`)),err => {
+   req.files.icono.mv( path.join(__dirname, `../public/images/Categorias/${req.files.icono.name}`)),err => {
     if(err) {
       return res.status(500).send({ message : err })
     } else {
@@ -60,7 +60,7 @@ exports.guardarDatos = async (req,res)=>{
 
     let errores = [];
 
-    if (!nombre || !descripcion || !imagen || !estado || !ultimaModificacion || !url) {
+    if (!nombre || !descripcion || !estado) {
         errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
     }
     
@@ -68,7 +68,7 @@ exports.guardarDatos = async (req,res)=>{
     if (errores.length > 0) {
         res.render('dashCategoria', {
             nombrePagina : 'Nueva categoria',
-            categorias,
+            lasCategorias,
             errores
         });
         res.render('error en la carga');
@@ -78,7 +78,7 @@ exports.guardarDatos = async (req,res)=>{
         await Categorias.create({
             nombre, 
             descripcion, 
-            imagen:req.files.imagen.name, 
+            imagen:req.files.icono.name, 
             estado, 
             ultimaModificacion:ultimaModificacion1,
             url
@@ -108,7 +108,7 @@ exports.formularioEditar = async (req, res) => {
     const [categorias, categoria] = await Promise.all([categoriasPromise, categoriaPromise]);
 
     res.render('editor', {
-        categorias,
+        lasCategorias,
         categoria
     })
 };
