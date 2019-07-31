@@ -37,22 +37,24 @@ mixin crearRestaurante(restaurante = {})
                   .col-md-6.col-sm-6.col-lg-6
                     label Categoría 
                     .select-wrp
-                      select(name="nombreCategoria")
+                      select(name="nombreCategoria" value = nombreCategoria)
+                        if(nombreCategoria)
+                          option(selected='true') #{nombreCategoria}
                         if (lasCategorias)
                           each categoria in lasCategorias
-                            option #{categoria.nombre}
+                            option #{categoria.nombre} 
                   .col-md-6.col-sm-6.col-lg-6
                     label Teléfono 
-                    input.brd-rd3(type='tel', placeholder='Telefono' id= 'telefono' name="telefono")
+                    input.brd-rd3(type='tel', placeholder='Telefono' id= 'telefono' name="telefono" value= restaurante.telefono)
                   .col-md-12.col-sm-12.col-lg-12
                     label Dirección
-                    input.brd-rd3(type='text', placeholder='Dirección' id= 'direccion' name="direccion")
+                    input.brd-rd3(type='text', placeholder='Dirección' id= 'direccion' name="direccion" value = restaurante.direccion)
                   .col-md-12.col-sm-12.col-lg-12
                     label Estado 
                     .select-wrp
-                      select(name ="estado")
+                      select(name ="estado" value = restaurante.estado)
                         option Activo
                         option Inactivo
                   .rite-meta
-                    input.view-more(type='submit', value=`${restaurante.nombre ? 'Guardar' : 'Agregar'}`)
+                    input.view-more(type='submit', value=`${restaurante.nombre ? 'Guardar cambios' : 'Agregar'}`)
                     input.view-more(type='submit', value='Cancelar')

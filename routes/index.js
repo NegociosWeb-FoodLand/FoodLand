@@ -16,5 +16,6 @@ module.exports = function(){
     router.post('/nuevo_Restaurante', restauranteControllers.guardarDatos);
 
     router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
+    router.post('/nuevo_Restaurante/:id',restauranteControllers.actualizarRestaurante);
     return router;
 }
