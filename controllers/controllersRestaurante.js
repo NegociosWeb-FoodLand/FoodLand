@@ -16,7 +16,6 @@ exports.mostrarPrincipalAdmin = async (req, res)=>{
     })
 };
 
-
 // FORMULARIO DE GUARDAR
 exports.formularioGuardar = async (req, res) => {
     // Obtener todos los Restaurantes (modelos)
@@ -31,6 +30,7 @@ exports.formularioGuardar = async (req, res) => {
     });
 };
 
+// Guardando datos de un nuevo restaurante.
 exports.guardarDatos = async (req,res)=>{
       // Obtener todos los Restaurantes (modelos)
       const restautantes = await Restaurantes.findAll();
@@ -112,7 +112,7 @@ exports.formularioEditar = async (req, res) => {
     // Promise con destructuring
     const [restaurantes, restaurante] = await Promise.all([restaurantesPromise, restaurantePromise]);
 
-    res.render('editor', {
+    res.render('dashRestaurante-form', {
         restaurantes,
         restaurante
     })
