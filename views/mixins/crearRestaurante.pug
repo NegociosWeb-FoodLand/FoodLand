@@ -17,14 +17,20 @@ mixin crearRestaurante(restaurante = {})
                     label Descripción
                     input(type='text', placeholder='Descripción' id='descripcion' name="descripcion" value=restaurante.descripcion)
                   // Aquí va la imagen
+                  .col-md-6.col-sm-6.col-lg-6
+                    .profile-img-upload-btn
+                      if(restaurante.logo)
+                        label Imagen Actual
+                        input#profile-upload(type='text' name="actual" value = `${restaurante.logo || 'sin selección'} ` readonly )
+                  .col-md-6.col-sm-6.col-lg-6
+                    .profile-img-upload-btn
+                      if(restaurante.logo)
+                        img(src=`/images/Restaurantes/${restaurante.logo}`, alt="Imagen Actal")
                   .col-md-12.col-sm-12.col-lg-12
                     .profile-img-upload-btn
-                      label Imagen Actual
-                      input#profile-upload(type='text' name="actual" value = `${restaurante.logo || 'sin selección'} ` )
                       label.fileContainer.brd-rd5.yellow-bg
                         | Elegir logo
                         input#profile-upload(type='file' name="logo" )
-                        
                     br
                     br
                     br
