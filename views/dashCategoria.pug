@@ -7,9 +7,9 @@ block contenido
       .welcome-note.yellow-bg.brd-rd5
         h4(itemprop='headline') BIENVENIDO A TU CUENTA
         p(itemprop='description') Como administrador pordras realizar diversas acciones en el sitio web.
-        img(src='assets/images/resource/welcome-note-img.png', alt='welcome-note-img.png', itemprop='image')
+        img(src='/assets/images/resource/welcome-note-img.png', alt='welcome-note-img.png', itemprop='image')
         a.remove-noti(href='#', title='', itemprop='url')
-          img(src='assets/images/close-icon.png', alt='close-icon.png', itemprop='image')
+          img(src='/assets/images/close-icon.png', alt='close-icon.png', itemprop='image')
       // RESTAURANTES
       .dashboard-title
         h4(itemprop='headline') LISTA DE CATEGORÍAS
@@ -26,7 +26,7 @@ block contenido
                   // Logo
                   .featured-restaurant-thumb
                     a(title='', itemprop='url')
-                      img(src='assets/imagenesRestaurante/#{categoria.logo}', alt='restaurant-logo1-1.png', itemprop='image')
+                      img(src='/assets/imagenesRestaurante/#{categoria.logo}', alt='restaurant-logo1-1.png', itemprop='image')
                   .featured-restaurant-info
                     h4(itemprop='headline')
                       a(href='#', title='', itemprop='url') #{categoria.nombre}
