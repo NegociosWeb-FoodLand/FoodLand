@@ -218,12 +218,15 @@ exports.actualizarRestaurante = async (req, res) => {
                 }
               };
 
-            // 2. Eliminamos el logo anterior
-            fs.unlink(path.join(__dirname, `../public/images/Restaurantes/${actual.trim()}`) , (err) => {
-                if (err) throw err;
-                console.log('successfully deleted /tmp/hello');
-              });
-
+            // 2. Eliminamos el logo anterior si es uno diferente al que está por defecto.
+            console.log(actual);
+            if(actual.trim() !='restaurante.png'){
+                fs.unlink(path.join(__dirname, `../public/images/Restaurantes/${actual.trim()}`) , (err) => {
+                    if (err) throw err;
+                    console.log('Borrado completo');
+                  });
+            }
+            
             // 3. Cambiamos el nombre de la imagen
             const url = slug(req.files.logo.name).toLowerCase();           
             nombreImagen = `${url}-${shortid.generate()}`;
