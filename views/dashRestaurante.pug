@@ -33,5 +33,8 @@ block contenido
                       a(href='#', title='', itemprop='url') #{restaurante.nombre}
                   .view-menu-liks
                     a.brd-rd3(href=`/editar_Restaurante/${restaurante.id}`) Modificar
-                    a.brd-rd3(href='#', title='', itemprop='url') Eliminar 
+                    br
+                    br
+                    br
+                    button#eliminar-restaurante(class='brd-rd3' type='button' data-restaurante-id=restaurante.id) Eliminar 
       // Lista de Restaurantes   

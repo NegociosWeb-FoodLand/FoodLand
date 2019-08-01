@@ -265,13 +265,27 @@ exports.eliminarRestaurante = async (req, res, next) => {
     // Obtener el id mediante query o params
     const { id } = req.params;
 
+    // // Eliminar imagen del servidor
+    // const elRestaurante = Restaurantes.findOne({
+    //     where : {
+    //         id: id
+    //     }
+    // });
+
+    // fs.unlink(path.join(__dirname, `../public/images/Restaurantes/${elRestaurante.logo.trim()}`) , (err) => {
+    //     if (err) throw err;
+    //     console.log('Borrado completo');
+    // });
+    
+
     // Eliminar el restaurante
-    const resultado = await Restaurante.destroy({
+    const resultado = await Restaurantes.destroy({
         where : {
             id : id
         }
     });
 
+   
     if(!resultado) {
         return next();
     }
