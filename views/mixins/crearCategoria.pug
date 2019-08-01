@@ -7,27 +7,27 @@ mixin crearCategoria(categoria = {})
           .col-md-8.col-sm-8.col-lg-8
             .profile-info-form-wrap
               // Formulario
-              form.profile-info-form(action='/nueva_Categoria'  method="POST" encType="multipart/form-data")
+              form.profile-info-form(action=`/nueva_Categoria/${categoria.id || ''}`  method="POST" encType="multipart/form-data")
                 .row.mrg20
                   .col-md-12.col-sm-12.col-lg-12
                     label Nombre
-                    input(type='text', placeholder='Nombre' name="nombre" id="nombre")
+                    input(type='text', placeholder='Nombre' name="nombre" id="nombre" value = categoria.nombre)
                   .col-md-12.col-sm-12.col-lg-12
                     label Descripción
-                    input(type='text', placeholder='Descripción' name="descripcion" id="descripcion")
+                    input(type='text', placeholder='Descripción' name="descripcion" id="descripcion" value =categoria.descripcion)
                   // Aquí va la imagen
                   .col-md-12.col-sm-12.col-lg-12
                     .profile-img-upload-btn
                       label.fileContainer.brd-rd5.yellow-bg
                         | Elegir ícono
-                        input#profile-upload(type='file' name="icono")
+                        input#profile-upload(type='file' name="icono" value =categoria.icono)
                     br
                     br
                     br
                   .col-md-12.col-sm-12.col-lg-12
                     label Estado 
                     .select-wrp
-                      select(name ="estado")
+                      select(name ="estado" value =categoria.estado)
                         option Activo
                         option Inactivo
                   .rite-meta

@@ -19,9 +19,16 @@ module.exports = function(){
     router.get('/nuevo_Restaurante', restauranteControllers.formularioGuardar);
     router.post('/nuevo_Restaurante', restauranteControllers.guardarDatos);
 
+
     router.get('/nueva_Categoria', categoriasControllers.formularioGuardar);
     router.get('/categoriaForm',categoriasControllers.formularioLlenarCategoria);
     router.post('/nueva_Categoria', categoriasControllers.guardarDatos);
+
+    router.get('/editar_Categoria/:id',categoriasControllers.formularioEditar);
+    router.post('/nueva_Categoria/:id',categoriasControllers.actualizarCategoria);
+    
+
+    router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
 
     return router;
 }

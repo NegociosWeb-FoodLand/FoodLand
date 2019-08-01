@@ -46,14 +46,12 @@ const Categoria = db.define( 'categoria',{
         beforeCreate(categoria) {
             console.log('Antes de insertar en la base de datos');
             const url = slug(categoria.nombre).toLowerCase();
-
             categoria.url = `${url}-${shortid.generate()}`;
         },
 
         beforeUpdate(categoria) {
             console.log('Antes de actualizar en la base de datos');
             const url = slug(categoria.nombre).toLowerCase();
-
             categoria.url = `${url}-${shortid.generate()}`;
         }
     }
