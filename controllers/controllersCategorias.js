@@ -47,14 +47,6 @@ exports.guardarDatos = async (req,res)=>{
    const {nombre ,descripcion ,estado , url } = req.body;
     console.log('.----------------------------------------------------------------------');
     (req.body);
-    //console.loonsole.log(req.files);
-   req.files.icono.mv( path.join(__dirname, `../public/images/Categorias/${req.files.icono.name}`)),err => {
-    if(err) {
-      return res.status(500).send({ message : err })
-    } else {
-      console.log('listo');
-    }
-  };
 
 
     //definimos la fecha a guardar
@@ -70,7 +62,7 @@ exports.guardarDatos = async (req,res)=>{
     
     // Si hay errores
     if (errores.length > 0) {
-        res.render('dashCategoria', {
+        res.render('dashCategoria-form', {
             nombrePagina : 'Nueva categoria',
             lasCategorias,
             errores
@@ -78,10 +70,31 @@ exports.guardarDatos = async (req,res)=>{
         res.render('error en la carga');
     } else {
         // No existen errores
-        const url = slug(req.files.icono.name).toLowerCase();           
-        const nombreImagen = `${url}-${shortid.generate()}`;
+        var nombreImagen ="";
+        console.log(req.files);
+        if(req.files){
+            // guardamos la imagen que ha sido seleccionada por el usuario.
+            req.files.icono.mv( path.join(__dirname, `../public/images/Categorias/${req.files.icono.name}`)),err => {
+                if(err) {
+                    return res.status(500).send({ message : err })
+                } else {
+                    console.log('listo');
+                }
+            };
+            const url = slug(req.files.icono.name).toLowerCase();           
+            nombreImagen = `${url}-${shortid.generate()}`;
 
-        // Inserción en la base de datos.
+            // renombramos la imagen con el valor contenido en la base de datos
+            fs.rename( path.join(__dirname, `../public/images/Categorias/${req.files.icono.name}`), path.join(__dirname, `../public/images/Categorias/${nombreImagen}`),function(err) { if ( err ) console.log('ERROR: ' + err); });            
+            console.log(req.body.icono);
+            
+        }else{
+            // usuario no ha seleccionado ninguna foto, se inserta una por defecto.
+            console.log(req.body.icono)
+            nombreImagen = "categoria.png";
+        }
+        
+        //Guardamos los valores en las base de datos
         await Categorias.create({
             nombre, 
             descripcion, 
@@ -90,12 +103,6 @@ exports.guardarDatos = async (req,res)=>{
             ultimaModificacion:ultimaModificacion1,
             url
         }),
-
-          // renombramos la imagen con el valor contenido en la base de datos
-          fs.rename( path.join(__dirname, `../public/images/Categorias/${req.files.icono.name}`), path.join(__dirname, `../public/images/Categorias/${nombreImagen}`),function(err) { if ( err ) console.log('ERROR: ' + err); }); 
-
-          console.log()
-          
         res.redirect('/');
     }
 };
@@ -161,7 +168,9 @@ exports.actualizarCategoria = async (req, res) => {
             errores
         });
     } else {
-        
+        // No existen errores
+        var nombreImagen ="";
+
         //validamos si se seleccionó otra imagen diferente
         if(!req.files){
             //  se seleccionó un logo diferente
@@ -185,6 +194,18 @@ exports.actualizarCategoria = async (req, res) => {
             }
 
             // 3. guardar los datos
+            const url = slug(req.files.icono.name).toLowerCase();           
+            nombreImagen = `${url}-${shortid.generate()}`;
+
+            // renombramos la imagen con el valor contenido en la base de datos
+            fs.rename( path.join(__dirname, `../public/images/Categorias/${req.files.icono.name}`), path.join(__dirname, `../public/images/Categorias/${nombreImagen}`),function(err) { if ( err ) console.log('ERROR: ' + err); });            
+            console.log(req.body.icono);
+    
+        }else{
+            nombreImagen = actual;
+        }
+              
+        //Guardamos los cambios realizados.
             await Categorias.update({
                 nombre, 
                 descripcion, 
@@ -198,24 +219,6 @@ exports.actualizarCategoria = async (req, res) => {
             ),
             
             res.redirect('/');
-        
-
-        }else{
-            //logo = actual no hubo cambios;
-            // Inserción en la base de datos.
-
-        await Categorias.update({
-            nombre, 
-            descripcion, 
-            imagen, 
-            estado, 
-            ultimaModificacion,
-        },
-            { where : {
-                id : req.params.id
-            }}
-        ),
-        res.redirect('/');
     }
 };
 
@@ -238,5 +241,4 @@ exports.eliminarCategoria = async (req, res, next) => {
     }
 
     res.send(200).send('La categoria ha sido eliminada correctamente');
-}
 }
