@@ -103,7 +103,7 @@ exports.guardarDatos = async (req,res)=>{
             ultimaModificacion:ultimaModificacion1,
             url
         }),
-        res.redirect('/');
+        res.redirect('/nueva_Categoria');
     }
 };
 
@@ -142,14 +142,13 @@ exports.actualizarCategoria = async (req, res) => {
     const {
         nombre, 
         descripcion, 
-        imagen, 
         estado,
         actual
     }= req.body;
     let errores = [];
 
     //definimos la fecha a guardar
-    const ultimaModificacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const ultimaModificacion1 = new Date().toISOString().slice(0, 19).replace('T', ' ');
   
     // Verificar si el nombre del proyecto tiene un valor
     if (
@@ -172,7 +171,7 @@ exports.actualizarCategoria = async (req, res) => {
         var nombreImagen ="";
 
         //validamos si se seleccionó otra imagen diferente
-        if(!req.files){
+        if(req.files){
             //  se seleccionó un logo diferente
             
             //1. guardar la nueva imagen.
@@ -193,7 +192,7 @@ exports.actualizarCategoria = async (req, res) => {
                   });
             }
 
-            // 3. guardar los datos
+            // 3. identificador de la imagen
             const url = slug(req.files.icono.name).toLowerCase();           
             nombreImagen = `${url}-${shortid.generate()}`;
 
@@ -209,16 +208,16 @@ exports.actualizarCategoria = async (req, res) => {
             await Categorias.update({
                 nombre, 
                 descripcion, 
-                imagen, 
+                imagen:nombreImagen, 
                 estado, 
-                ultimaModificacion
+                ultimaModificacion:ultimaModificacion1
                 },
                 { where : {
                     id : req.params.id
                 }}
             ),
             
-            res.redirect('/');
+            res.redirect('/nueva_Categoria');
     }
 };
 

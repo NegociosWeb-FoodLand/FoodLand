@@ -26,7 +26,7 @@ module.exports = function(){
 
     router.get('/editar_Categoria/:id',categoriasControllers.formularioEditar);
     router.post('/nueva_Categoria/:id',categoriasControllers.actualizarCategoria);
-    
+
 
     router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
 
