@@ -1,0 +1,70 @@
+doctype html
+html(lang='en')
+  head
+    include partials/header
+  body(itemscope='')
+    main
+      .preloader
+        #cooking
+          .bubble
+          .bubble
+          .bubble
+          .bubble
+          .bubble
+          #area
+            #sides
+              #pan
+              #handle
+            #pancake
+              #pastry
+      // LOGIN
+      section
+        .block.no-padding
+          .container-fluid
+            .row.merged
+              // LADO IZQUIERDO
+              .col-md-6.col-sm-12.col-xs-12
+                .tab-content
+                  #link1.tab-pane.active.fade.in
+                    .chef-box
+                      img(src='/assets/images/resource/chef.png', alt='')
+                      ul
+                        li.wow.fadeInUp(data-wow-delay='0.2s')
+                          // <span class="food-price">Bienvenido a</span>
+                          h4
+                            a(href='#', title='#') Bienvenido a
+                          h1 FoodLand
+                          span.food-price Creamos recuerdos delicioso
+              // LADO DERECHO
+              .col-md-6.col-sm-12.col-xs-12
+                br
+                br
+                br
+                br
+                br
+                .sign-popup-wrapper.brd-rd5
+                  .sign-popup-inner.brd-rd5
+                    .sign-popup-title.text-center
+                      h4(itemprop='headline') INICIA SESIÓN
+                      span Realiza tus pedidos
+                    span.popup-seprator.text-center
+                      i.brd-rd50
+                    form.sign-form(action="/crear_cuenta" method="POST" id="formulario")
+                      .row
+                        .col-md-12.col-sm-12.col-lg-12.col-xs-12
+                          input.brd-rd3(type='text', placeholder='Correo Electrónico')
+                        .col-md-12.col-sm-12.col-lg-12.col-xs-12
+                          input.brd-rd3(type='password', placeholder='Contraseña')
+                        .col-md-12.col-sm-12.col-lg-12.col-xs-12
+                          button.red-bg.brd-rd3(type='submit') INGRESA
+                        .col-md-12.col-sm-12.col-lg-12.col-xs-12
+                          a.sign-btn(href='Registro.html', title='', itemprop='url') ¿No eres miembro? Regístrate
+      // Copyright
+      .bottom-bar.dark-bg.text-center
+        .container
+          p(itemprop='description')
+            | Negocios Web 2019 
+            a(href='https://www.unicah.edu/') UNICAH-JS
+      // Copyright
+    // Scripts
+    include partials/scripts

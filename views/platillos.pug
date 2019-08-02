@@ -1,0 +1,38 @@
+extends ./layoutCliente
+
+block contenido
+  // Hero
+  section
+    .block
+      .fixed-bg(style='background-image: url(/assets/images/topbg.jpg);')
+      .page-title-wrapper.text-center
+        .col-md-12.col-sm-12.col-lg-12
+          .page-title-inner
+            h1(itemprop='headline') Nuestro menú
+            span Los platillos más deliciosos
+  section
+    .block.less-spacing.gray-bg.top-padd30
+      .container
+        .row
+          .col-md-12.col-sm-12.col-lg-12
+            .sec-box
+              .remove-ext
+                .row
+                  ul
+                    if(losPlatillos)
+                      each platillo in losPlatillo
+                        li
+                          // Listado de platillos
+                          .col-md-4.col-sm-6.col-lg-4
+                            .popular-dish-box.style2.wow.fadeIn(data-wow-delay='0.3s')
+                              // Imagen
+                              .popular-dish-thumb
+                                a(href='food-detail.html', title='', itemprop='url')
+                                  img(src='/assets/images/resource/popular-dish-img1.jpg', alt='popular-dish-img1.jpg', itemprop='image')
+                              // Detalles
+                              .popular-dish-info
+                                h4(itemprop='headline')
+                                  a(href='food-detail.html', title='', itemprop='url') #{platillo.nombre}
+                                p(itemprop='description') #{platillo.descripcion}
+                                span.price Lps. #{platillo.precio}
+                                a.brd-rd4(href='food-detail.html', title='Order Now', itemprop='url') Ordenar

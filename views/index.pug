@@ -1,0 +1,174 @@
+extends ./layoutCliente
+
+block contenido
+  // Hero
+  section
+    .block
+      .fixed-bg(style='background-image: url(/assets/images/topbg.jpg);')
+      .restaurant-searching.text-center
+        .restaurant-searching-inner
+          h2(itemprop='headline')
+            | Ordena 
+            span Comida en línea
+            |  de los mejores restaurantes
+          // Contadores
+          .funfacts
+            // Restaurantes
+            .col-md-3.col-sm-6.col-lg-3
+              .fact-box
+                i.brd-rd50
+                  img(src='/assets/images/resource/fact-icon1.png', alt='fact-icon1', itemprop='image')
+                .fact-inner
+                  strong
+                    span.counter 50
+                  h5 Restaurantes
+            // Clientes
+            .col-md-3.col-sm-6.col-lg-3
+              .fact-box
+                i.brd-rd50
+                  img(src='/assets/images/resource/fact-icon2.png', alt='fact-icon2', itemprop='image')
+                .fact-inner
+                  strong
+                    | + 
+                    span.counter 200
+                  h5 Clientes
+            // Órdenes
+            .col-md-3.col-sm-6.col-lg-3
+              .fact-box
+                i.brd-rd50
+                  img(src='/assets/images/resource/fact-icon3.png', alt='fact-icon3', itemprop='image')
+                .fact-inner
+                  strong
+                    span.counter 10
+                    | K
+                  h5 Órdenes
+            // Usuarios
+            .col-md-3.col-sm-6.col-lg-3
+              .fact-box
+                i.brd-rd50
+                  img(src='/assets/images/resource/fact-icon4.png', alt='fact-icon4', itemprop='image')
+                .fact-inner
+                  strong
+                    span.counter 150
+                  h5 Usuarios frecuentes
+          // Contadores
+        img.left-scooty-mockup(src='/assets/images/resource/restaurant-mockup1.png', alt='restaurant-mockup1.png', itemprop='image')
+        img.bottom-clouds-mockup(src='/assets/images/resource/clouds.png', alt='clouds.png', itemprop='image')
+  // Bienvenida
+  section
+    .block.remove-bottom
+      .container
+        .row
+          .welcome-sec
+            .col-md-6.col-sm-6.col-lg-6
+              .welcome-secinfo
+                br
+                br
+                h2 Bienvenido a FoodLan
+                span Creamos recuerdos delicioso
+                p
+                  | ¡Gracias por visitarnos!
+                  br
+                  | Somos una empresa dedicada al rubro de los alimentos.
+                  br
+                  | La mejor opción al momento de realizar tus pedidos de comida en línea.
+                .award
+                  img(src='/assets/images/award.png', alt='')
+                  span
+                    em middle east
+                    | hotel 
+                    i award
+                span.sign
+                  img(src='/assets/images/sign.png', alt='')
+            // Imagenes de comida
+            .col-md-6.col-sm-6.col-lg-6
+              .welcome-gallery
+                img(src='/assets/images/resource/food1.jpg', alt='')
+                img(src='/assets/images/resource/food2.jpg', alt='')
+                img(src='/assets/images/resource/food3.jpg', alt='')
+  // Resturantes destacados
+  section
+    .block.remove-bottom
+      .container
+        .row
+          .col-md-12.col-sm-12.col-lg-12
+            .title1-wrapper.text-center
+              .title1-inner
+                span Sitio web para restaurantes y cafeterías
+                h2(itemprop='headline') Mejores restaurantes
+                p(itemprop='description')
+                  | Nuestros restaurantes afiliados cuentan con un amplio menú, y por supuesto con la comida más deliciosa. 
+                  br
+                  |  ¡Atrévete a probarla!
+            // Lista de restaurantes
+            .top-restaurants-wrapper
+              ul.restaurants-wrapper.style2
+                li.wow.bounceIn(data-wow-delay='0.2s')
+                  .top-restaurant
+                    a.brd-rd50(itemprop='url')
+                      img(src='/assets/images/resource/WENDYS.jpg', alt='top-restaurant1.png', itemprop='image')
+                li.wow.bounceIn(data-wow-delay='0.4s')
+                  .top-restaurant
+                    a.brd-rd50(itemprop='url')
+                      img(src='/assets/images/resource/venecia.jpg', alt='top-restaurant2.png', itemprop='image')
+                li.wow.bounceIn(data-wow-delay='0.6s')
+                  .top-restaurant
+                    a.brd-rd50(itemprop='url')
+                      img(src='/assets/images/resource/corral.png', alt='top-restaurant3.png', itemprop='image')
+                li.wow.bounceIn(data-wow-delay='0.8s')
+                  .top-restaurant
+                    a.brd-rd50(itemprop='url')
+                      img(src='/assets/images/resource/frites.jpg', alt='top-restaurant4.png', itemprop='image')
+                li.wow.bounceIn(data-wow-delay='1s')
+                  .top-restaurant
+                    a.brd-rd50(itemprop='url')
+                      img(src='/assets/images/resource/cantones.jpeg', alt='top-restaurant5.png', itemprop='image')
+                li.wow.bounceIn(data-wow-delay='1.2s')
+                  .top-restaurant
+                    a.brd-rd50(itemprop='url')
+                      img(src='/assets/images/resource/bigos.jpeg', alt='top-restaurant6.png', itemprop='image')
+              .rite-meta
+                a.view-more(href='#', title='') Ver más
+                br
+                br
+                br
+  // Ordenar
+  section
+    .block.blackish.low-opacity
+      .fixed-bg(style='background-image: url(/assets/images/parallax1.jpg);')
+      .container
+        .row
+          .col-md-12.col-sm-12.col-lg-12
+            .title1-wrapper.text-center
+              .title1-inner
+                span ¿Cómo funciona?
+                h2.text-white(itemprop='headline') Ordena en 3 pasos
+            .remove-ext.text-center
+              .row
+                // Paso 1
+                .col-md-4.col-sm-4.col-lg-4
+                  .step-box.wow.fadeIn(data-wow-delay='0.2s')
+                    i
+                      img(src='/assets/images/resource/setp-img1.png', alt='setp-img1.png', itemprop='image')
+                      span.brd-rd50.red-bg 1
+                    .setp-box-inner
+                      h4(itemprop='headline') Explora restaurantes
+                      p(itemprop='description') Revisa nuestros restaurantes afiliados, ayudándote de nuestras categorías
+                // Paso 2
+                .col-md-4.col-sm-4.col-lg-4
+                  .step-box.wow.fadeIn(data-wow-delay='0.4s')
+                    i
+                      img(src='/assets/images/resource/setp-img2.png', alt='setp-img2.png', itemprop='image')
+                      span.brd-rd50.red-bg 2
+                    .setp-box-inner
+                      h4(itemprop='headline') Elige
+                      p(itemprop='description') La comida de tu preferencia de los diferentes restaurantes
+                // Paso 3
+                .col-md-4.col-sm-4.col-lg-4
+                  .step-box.wow.fadeIn(data-wow-delay='0.6s')
+                    i
+                      img(src='/assets/images/resource/setp-img3.png', alt='setp-img3.png', itemprop='image')
+                      span.brd-rd50.red-bg 3
+                    .setp-box-inner
+                      h4(itemprop='headline') Ordena
+                      p(itemprop='description') Procesa tu orden para terminar tu pedido

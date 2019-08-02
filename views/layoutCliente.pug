@@ -29,7 +29,7 @@ html(lang='en')
                 i.fa.fa-twitter
               a(href='https://www.instagram.com/?hl=es-la', title='Google Plus', itemprop='url', target='_blank')
                 i.fa.fa-instagram
-        // Topbar
+        // Barra
         .logo-menu-sec
           .container
             .logo
@@ -40,22 +40,22 @@ html(lang='en')
               .menu-sec
                 ul
                   li
+                    a(href='#', title='INICIO', itemprop='url')
+                      span.red-clr CONÓCENOS
+                      | INICIO
+                  li
                     a(href='#', title='RESTAURANTES', itemprop='url')
-                      span.red-clr
+                      span.red-clr COMIDA
                       | RESTAURANTES
                   li
-                    a(href='#', title='PLATILLOS', itemprop='url')
-                      span.red-clr
-                      | PLATILLOS
+                    a(href='#', title='ACERCA DE', itemprop='url')
+                      span.red-clr ACERCA DE
+                      | SOBRE NOSOTROS
                   li
-                    a(href='/nueva_Categoria', title='CATEGORIAS', itemprop='url')
-                      span.red-clr
-                      | CATEGORÍAS
-                  li
-                    a(href='#', title='CONFIGURACIÓN', itemprop='url')
-                      span.red-clr
-                      | CONFIGURACIÓN
-      // Logo Menu Section
+                    a(href='#', title='CONTACTO', itemprop='url')
+                      span.red-clr COMUNÍCATE
+                      | CONTÁCTANOS
+                a.red-bg.brd-rd4(href='register-reservation.html', title='Orden', itemprop='url') Compra
       // Header
       // Header Responsive
       .responsive-header
@@ -108,61 +108,8 @@ html(lang='en')
           // Carrito
           // Menu Responsive
           // Header Responsive
-      // HERO
-      section
-        .block
-          .fixed-bg(style='background-image: url(/assets/images/topbg.jpg);')
-          .page-title-wrapper.text-center
-            .col-md-12.col-sm-12.col-lg-12
-              .page-title-inner
-                h1(itemprop='headline') Dashboard
-                  span La mejor opción para ordenar comida en línea
-      // HERO
-      // DASHBOARD
-      section
-        .block.less-spacing.gray-bg.top-padd30
-          .container
-            .row
-              .col-md-12.col-sm-12.col-lg-12
-                .sec-box
-                  .dashboard-tabs-wrapper
-                    .row
-                      // CONFIGURACIÓN
-                      .col-md-4.col-sm-12.col-lg-4
-                        .profile-sidebar.brd-rd5.wow.fadeIn(data-wow-delay='0.2s')
-                          .profile-sidebar-inner.brd-rd5
-                            .user-info.red-bg
-                              // Usuario
-                              .user-info-inner
-                                h5(itemprop='headline')
-                                  a(href='#', title='', itemprop='url') Administrador
-                                span
-                                  a(href='#', title='', itemprop='url') simbiosis@foodland.com
-                                a.brd-rd3.sign-out-btn.yellow-bg(href='#', title='', itemprop='url')
-                                  i.fa.fa-sign-out
-                                  |  CERRAR SESIÓN
-                            // Barra lateral
-                            ul.nav.nav-tabs
-                              li
-                                a(href='dashboardAdmin.html')
-                                  i.fa.fa-shopping-basket
-                                  |  RESTAURANTES
-                              li
-                                a(href='dashPlatillo.html')
-                                  i.fa.fa-cutlery
-                                  |  PLATILLOS
-                              li
-                                a(href='/nueva_Categoria')
-                                  i.fa.fa-list
-                                  |  CATEGORÍAS
-                              li
-                                a(href='dashConfiguracion.html')
-                                  i.fa.fa-cog
-                                  |  CONFIGURACIÓN
-                      .col-md-8.col-sm-12.col-lg-8
-                        .tab-content
-                          // contenido de cada controlador
-                          block contenido
+      // CONTENIDO PARA CADA CONTROLADOR
+      block contenido      
       // Pie de página
       footer
         .block.top-padd80.bottom-padd80.dark-bg
@@ -172,13 +119,13 @@ html(lang='en')
                 .footer-data
                   .row
                     // Columna 1
-                    .col-md-6.col-sm-12.col-lg-6
+                    .col-md-3.col-sm-6.col-lg-3
                       .widget.about_widget.wow.fadeIn(data-wow-delay='0.1s')
                         .logo
                           h1(itemprop='headline')
                             a(href='#', title='Home', itemprop='url')
                               img(src='/assets/images/logo.png', alt='logo.png', itemprop='image')
-                        p(itemprop='description') Pedido de comida en línea. La mejor opción en comidas.
+                        p(itemprop='description') Pedido de comida en línea.
                         .social2
                           a.brd-rd50(href='https://es-la.facebook.com/', title='Facebook', itemprop='url', target='_blank')
                             i.fa.fa-facebook
@@ -189,16 +136,33 @@ html(lang='en')
                           a.brd-rd50(href='https://www.instagram.com/?hl=es-la', title='Instagram', itemprop='url', target='_blank')
                             i.fa.fa-instagram
                     // Columna 2
-                    .col-md-6.col-sm-12.col-lg-6
+                    .col-md-3.col-sm-6.col-lg-3
                       .widget.information_links.wow.fadeIn(data-wow-delay='0.2s')
-                        h4.widget-title(itemprop='headline') ADMINISTRAR
+                        h4.widget-title(itemprop='headline') RESTAURANTE
                         ul
                           li
-                            a(href='#', title='', itemprop='url') Restaurantes
-                          li
-                            a(href='#', title='', itemprop='url') Platillos
-                          li
                             a(href='#', title='', itemprop='url') Categorías
+                    // Columna 3
+                    .col-md-3.col-sm-6.col-lg-3
+                      .widget.customer_care.wow.fadeIn(data-wow-delay='0.3s')
+                        h4.widget-title(itemprop='headline') NOSOTROS
+                        ul
+                          li
+                            a(href='#', title='', itemprop='url') Acerca de
+                    // Columna 4
+                    .col-md-3.col-sm-6.col-lg-3
+                      .widget.get_in_touch.wow.fadeIn(data-wow-delay='0.4s')
+                        h4.widget-title(itemprop='headline') CONTACTO
+                        ul
+                          li
+                            i.fa.fa-map-marker
+                            |  Honduras
+                          li
+                            i.fa.fa-phone
+                            |  +504 9542-7666
+                          li
+                            i.fa.fa-envelope
+                            a(href='#', title='', itemprop='url') simbiosis692@gmail.com          
       // Pie de Página
       // Copyright
       .bottom-bar.dark-bg.text-center
@@ -209,5 +173,3 @@ html(lang='en')
       // Copyright
     // Scripts
     include partials/scripts
-    script(src="/assets/dist/bundle.js")
-
