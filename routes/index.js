@@ -9,6 +9,8 @@ const restauranteControllers = require('../controllers/controllersRestaurante')
 
 const categoriasControllers = require('../controllers/controllersCategorias')
 
+const usuariosControllers = require('../controllers/controllersUsuarios')
+
 //defininedo las rutas
 module.exports = function(){
 
@@ -26,5 +28,9 @@ module.exports = function(){
     router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
     router.post('/nuevo_Restaurante/:id',restauranteControllers.actualizarRestaurante);
     router.delete('/:id', restauranteControllers.eliminarRestaurante);
+
+    router.get('/nuevo_Usuario', usuariosControllers.formularioGuardar);
+    router.get('/usuarioForm', usuariosControllers.formularioLlenarUsuario);
+    router.post('/nuevo_Usuario', usuariosControllers.guardarDatos);
     return router;
 }

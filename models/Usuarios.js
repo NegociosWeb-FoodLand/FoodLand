@@ -48,12 +48,12 @@ const Usuarios = db.define('usuario',{
         }
     },
 
-    estado: {
-        type:Sequelize.INTEGER
+    imagen: {
+        type: Sequelize.STRING
     },
 
-    rol: {
-        type:Sequelize.STRING
+    estado: {
+        type:Sequelize.INTEGER
     },
 
     url: {

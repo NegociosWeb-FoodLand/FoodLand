@@ -1,6 +1,7 @@
 // importar los modelos a utilizar
 
-const Usuarios = require('./models/Usuarios');
+const Usuarios = require('../models/Usuarios');
+
 
 
 // FORMULARIO DE GUARDAR
@@ -10,11 +11,19 @@ exports.formularioGuardar = async (req, res) => {
     // Obtener todos los usuarios (modelos)
     const usuarios = await Usuarios.findAll();
 
-    res.render('nuevoUsuario', {
-        nombrePagina : 'Nuevo usuario',
+    res.render('dashUsuarios', {
         usuarios
     });
 };
+
+exports.formularioLlenarUsuario = async(req, res)=>{
+    // Obtener todos los usuarios
+    const usuarios = await Usuarios.findAll();
+
+    res.render('dashUsuarios-form', {
+        usuarios
+    })
+}
 
 exports.guardarDatos = async (req,res)=>{
     //verificando
@@ -28,7 +37,7 @@ exports.guardarDatos = async (req,res)=>{
     
     // Si hay errores
     if (errores.length > 0) {
-        res.render('nuevoUsuario', {
+        res.render('dashUsuarios', {
             nombrePagina : 'Nuevo usuario',
             usuarios,
             errores
@@ -37,7 +46,8 @@ exports.guardarDatos = async (req,res)=>{
         // No existen errores
         // Inserción en la base de datos.
         await Usuarios.create({
-            usuarioNombre, 
+            usuarioNombre,
+            password, 
             correo, 
             estado, 
             rol,
@@ -90,8 +100,8 @@ exports.actualizarUsuario = async (req, res) => {
 
      // Si hay errores
      if (errores.length > 0) {
-        res.render('nuevoUsuario', {
-            nombrePagina : 'Nuevo usuario',
+        res.render('dashUsuarios-form', {
+            nombrePagina : 'Editar usuario',
             usuarios,
             errores
         });
