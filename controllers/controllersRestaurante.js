@@ -42,7 +42,7 @@ exports.guardarDatos = async (req,res)=>{
     const restautantes = await Restaurantes.findAll();
 
     //Obtenemos los datos por destructuring
-    const {nombre,descripcion,telefono, direccion,nombreCategoria } = req.body;
+    const {nombre,descripcion,telefono, direccion,nombreCategoria,estado } = req.body;
      
     //filtramos la categoria que fue seleccionada por el usuario
     const laCategoria = Categorias.findOne({
@@ -98,7 +98,11 @@ exports.guardarDatos = async (req,res)=>{
             console.log(req.body.logo)
             nombreImagen = "restaurante.png";
         }
-        
+        var elEstado=0;
+        if(estado ==='Activo'){
+            elEstado=1;
+        }
+        // verificamos si el estado es activo o inactivo
         //Guardamos los valores en las base de datos
         await Restaurantes.create({
             nombre, 
@@ -108,6 +112,7 @@ exports.guardarDatos = async (req,res)=>{
             logo:nombreImagen,
             ultimaModificacion,
             idCategoria,
+            estado:elEstado
         }),
 
         res.redirect('/');
@@ -148,11 +153,21 @@ exports.formularioEditar = async (req, res) => {
         let nombreCategoria = categoriaSeleccionada.nombre;
         console.log(nombreCategoria);
 
+    //definiendo el estado del restaurante
+    var estadoActual="";
+    if(restaurante.estado ==1){
+        estadoActual='Activo';
+    }else{
+        estadoActual='Inactivo';
+    }
+    console.log(estadoActual);
+
     res.render('dashRestaurante-form', {
         restaurantes,
         restaurante,
         lasCategorias,
-        nombreCategoria
+        nombreCategoria,
+        estadoActual
     })
 };
 
@@ -169,6 +184,7 @@ exports.actualizarRestaurante = async (req, res) => {
         logo,
         actual,
         nombreCategoria,
+        estado
     }= req.body;
     
      
@@ -232,13 +248,17 @@ exports.actualizarRestaurante = async (req, res) => {
             nombreImagen = `${url}-${shortid.generate()}`;
 
             // renombramos la imagen con el valor contenido en la base de datos
-            fs.rename( path.join(__dirname, `../public/images/Restaurantes/${req.files.logo.name}`), path.join(__dirname, `../public/images/Restaurantes/${nombreImagen}`),function(err) { if ( err ) console.log('ERROR: ' + err); });            
+            fs.rename( path.join(__dirname, `../public/images/Restaurantes/${req.files.logo.name.trim()}`), path.join(__dirname, `../public/images/Restaurantes/${nombreImagen}`),function(err) { if ( err ) console.log('ERROR: ' + err); });            
             console.log(req.body.logo);
     
         }else{
             nombreImagen = actual;
         }
-              
+        
+        var elEstado=0;
+        if(estado ==='Activo'){
+            elEstado=1;
+        }
         //Guardamos los cambios realizados.
         await Restaurantes.update({ 
             nombre, 
@@ -248,6 +268,7 @@ exports.actualizarRestaurante = async (req, res) => {
             logo:nombreImagen,
             ultimaModificacion,
             idCategoria,
+            estado:elEstado
             },
             { where : {
                 id : req.params.id
