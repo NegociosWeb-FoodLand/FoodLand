@@ -17,7 +17,7 @@ exports.mostrarPrincipalAdmin = async (req, res)=>{
     // cargamos todos los restaurantes que se encuentran registrados en la BD.
     const restaurantes = await Restaurantes.findAll();
     //renderizamos el dashboard principal del administrador.
-    res.render('platilloIndividual',{
+    res.render('dashRestaurante',{
         restaurantes
     })
 };
@@ -286,17 +286,22 @@ exports.eliminarRestaurante = async (req, res, next) => {
     // Obtener el id mediante query o params
     const { id } = req.params;
 
-    // // Eliminar imagen del servidor
-    // const elRestaurante = Restaurantes.findOne({
-    //     where : {
-    //         id: id
-    //     }
-    // });
+     // Eliminar imagen del servidor
+     const el_Restaurante = Restaurantes.findOne({
+         where : {
+             id: id
+         }
+     });
+     // obtenenemos los valores por promise
+    const [elRestaurante] = await Promise.all([el_Restaurante]);
 
-    // fs.unlink(path.join(__dirname, `../public/images/Restaurantes/${elRestaurante.logo.trim()}`) , (err) => {
-    //     if (err) throw err;
-    //     console.log('Borrado completo');
-    // });
+     console.log(elRestaurante.logo);
+     if(elRestaurante.logo.trim() !='restaurante.png'){
+        fs.unlink(path.join(__dirname, `../public/images/Restaurantes/${elRestaurante.logo.trim()}`) , (err) => {
+            if (err) throw err;
+            console.log('Borrado completo');
+          });
+    }
     
 
     // Eliminar el restaurante
@@ -306,6 +311,7 @@ exports.eliminarRestaurante = async (req, res, next) => {
         }
     });
 
+    
    
     if(!resultado) {
         return next();
