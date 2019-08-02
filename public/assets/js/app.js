@@ -1,1 +1,1 @@
-alert("Hola mundo!");
+import restaurantes from './modules/restaurante';
