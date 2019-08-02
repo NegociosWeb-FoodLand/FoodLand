@@ -14,23 +14,25 @@ block contenido
       .dashboard-title
         h4(itemprop='headline') LISTA DE CATEGORÍAS
         .rite-meta
-          a.view-more(href='dashRestaurante.html', title='') Agregar
+          a.view-more(href='/categoriaForm', title='') Agregar
+
       // LISTA DE CATEGORÍAS
       .restaurants-list
         ul
-          if (lasCategorias)
-            each categoria in lasCategorias
+          if (categorias)
+            each categoria in categorias
               li
                 // Listado de las categorias
                 .featured-restaurant-box.style3.brd-rd5.wow.fadeInUp(data-wow-delay='0.2s')
                   // Logo
                   .featured-restaurant-thumb
                     a(title='', itemprop='url')
-                      img(src='assets/imagenesRestaurante/#{categoria.logo}', alt='restaurant-logo1-1.png', itemprop='image')
+                       img(src=`images/Categorias/${categoria.imagen}`, alt='Categoria', itemprop='image')
                   .featured-restaurant-info
                     h4(itemprop='headline')
                       a(href='#', title='', itemprop='url') #{categoria.nombre}
+                    span.red-clr #{categoria.descripcion}
                   .view-menu-liks
-                    a.brd-rd3(href='#', title='', itemprop='url') Modificar
+                    a.brd-rd3(href=`/editar_Categoria/${categoria.id}`) Modificar
                     a.brd-rd3(href='#', title='', itemprop='url') Eliminar 
       // LISTA DE CATEGORÍAS  
