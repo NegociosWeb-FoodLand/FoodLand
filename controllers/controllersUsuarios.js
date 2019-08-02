@@ -4,23 +4,13 @@ const Usuarios = require('../models/Usuarios');
 
 
 
-// FORMULARIO DE GUARDAR
-
-
-exports.formularioGuardar = async (req, res) => {
-    // Obtener todos los usuarios (modelos)
-    const usuarios = await Usuarios.findAll();
-
-    res.render('dashUsuarios', {
-        usuarios
-    });
-};
+// FORMULARIO DE AGREGAR
 
 exports.formularioLlenarUsuario = async(req, res)=>{
     // Obtener todos los usuarios
     const usuarios = await Usuarios.findAll();
 
-    res.render('dashUsuarios-form', {
+    res.render('registrarse', {
         usuarios
     })
 }
@@ -28,30 +18,29 @@ exports.formularioLlenarUsuario = async(req, res)=>{
 exports.guardarDatos = async (req,res)=>{
     //verificando
 
-    const {usuarioNombre, correo, estado, rol, url}= req.body;
+    const {usuarioNombre, correo, password}= req.body;
     let errores = [];
 
-    if (!usuarioNombre || !correo || !estado || !rol || !url) {
+    if (!usuarioNombre || !correo || !password) {
         errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
     }
     
     // Si hay errores
     if (errores.length > 0) {
-        res.render('dashUsuarios', {
+        res.render('registrarse', {
             nombrePagina : 'Nuevo usuario',
             usuarios,
             errores
         });
     } else {
         // No existen errores
+        const elEstado = 1;
         // Inserción en la base de datos.
         await Usuarios.create({
             usuarioNombre,
             password, 
             correo, 
-            estado, 
-            rol,
-            url
+            estado:elEstado
         }),
 
         res.redirect('/');
@@ -100,7 +89,7 @@ exports.actualizarUsuario = async (req, res) => {
 
      // Si hay errores
      if (errores.length > 0) {
-        res.render('dashUsuarios-form', {
+        res.render('', {
             nombrePagina : 'Editar usuario',
             usuarios,
             errores

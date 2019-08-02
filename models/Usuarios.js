@@ -10,6 +10,9 @@ const slug = require('slug');
 // Importar shortid
 const shortid = require('shortid');
 
+// Importar bcrypt
+const bcrypt = require('bcrypt-nodejs');
+
 const Usuarios = db.define('usuario',{
     id:{
         type:Sequelize.INTEGER,
@@ -66,6 +69,8 @@ const Usuarios = db.define('usuario',{
             const url = slug(usuario.usuarioNombre).toLowerCase();
 
             usuario.url = `${url}-${shortid.generate()}`;
+
+            usuario.password = bcrypt.hashSync(usuario.password, bcrypt.genSaltSync(10));
         },
 
         beforeUpdate(usuario) {
@@ -73,6 +78,8 @@ const Usuarios = db.define('usuario',{
             const url = slug(usuario.usuarioNombre).toLowerCase();
 
             usuario.url = `${url}-${shortid.generate()}`;
+
+            usuario.password = bcrypt.hashSync(usuario.password, bcrypt.genSaltSync(10));
         }
     }
 });

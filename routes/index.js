@@ -29,8 +29,7 @@ module.exports = function(){
     router.post('/nuevo_Restaurante/:id',restauranteControllers.actualizarRestaurante);
     router.delete('/:id', restauranteControllers.eliminarRestaurante);
 
-    router.get('/nuevo_Usuario', usuariosControllers.formularioGuardar);
-    router.get('/usuarioForm', usuariosControllers.formularioLlenarUsuario);
-    router.post('/nuevo_Usuario', usuariosControllers.guardarDatos);
+    router.get('/nuevoUsuario', usuariosControllers.formularioLlenarUsuario);
+    router.post('/nuevoUsuario', usuariosControllers.guardarDatos);
     return router;
 }
