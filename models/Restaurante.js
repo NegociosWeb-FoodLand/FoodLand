@@ -10,6 +10,7 @@ const slug = require('slug');
 // Importar shortid
 const shortid = require('shortid');
 
+
 //Definimos los modelos a utilizar
 const Restaurantes = db.define( 'restaurante',{
     id:{
@@ -58,9 +59,10 @@ const Restaurantes = db.define( 'restaurante',{
     hooks : {
         beforeCreate(restaurante) {
             console.log('Antes de insertar en la base de datos');
-            const url = slug(restaurante.nombre).toLowerCase();
-
+            const url = slug(restaurante.nombre).toLowerCase();           
             restaurante.url = `${url}-${shortid.generate()}`;
+
+            
         },
 
         beforeUpdate(restaurante) {

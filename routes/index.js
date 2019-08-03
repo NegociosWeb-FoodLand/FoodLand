@@ -22,6 +22,10 @@ module.exports = function(){
     router.get('/nuevo_Restaurante', restauranteControllers.formularioGuardar);
     router.post('/nuevo_Restaurante', restauranteControllers.guardarDatos);
 
+<<<<<<< HEAD
+    router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
+    router.post('/nuevo_Restaurante/:id',restauranteControllers.actualizarRestaurante);
+=======
 
     router.get('/nueva_Categoria', categoriasControllers.formularioGuardar);
     router.get('/categoriaForm',categoriasControllers.formularioLlenarCategoria);
@@ -32,9 +36,13 @@ module.exports = function(){
 
     router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
 
+<<<<<<< HEAD
+>>>>>>> Gimena
+=======
     router.get('/nuevo_Platillo', platillosControllers.formularioGuardar);
     router.get('/PlatilloForm',platillosControllers.formularioLlenarPlatillo);
     router.post('/nuevo_Platillo', platillosControllers.guardarDatos);
 
+>>>>>>> Gimena
     return router;
 }

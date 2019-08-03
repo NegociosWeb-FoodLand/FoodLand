@@ -1,0 +1,50 @@
+doctype html
+html(lang='en')
+  head
+    include partials/header
+  body(itemscope='')
+    main
+      .preloader
+        #cooking
+          .bubble
+          .bubble
+          .bubble
+          .bubble
+          .bubble
+          #area
+            #sides
+              #pan
+              #handle
+            #pancake
+              #pastry
+      // REGISTRO
+      section
+        .block.less-spacing.gray-bg.top-padd30
+          .container
+            .row
+              .col-md-12.col-sm-12.col-lg-12
+                .sec-box
+                  img(src='assets/images/logo2.png', alt='')
+                  .contact-form-wrapper.text-center
+                    .contact-form-inner
+                      .sign-popup-wrapper.brd-rd5
+                        .sign-popup-inner.brd-rd5
+                          .sign-popup-title.text-center
+                            h4(itemprop='headline') REGISTRO
+                            span Crea una cuenta
+                          span.popup-seprator.text-center
+                            i.brd-rd50
+                          form.sign-form
+                            .row
+                              .col-md-12.col-sm-12.col-lg-12.col-xs-12
+                                input.brd-rd3(type='text', placeholder='Correo Electrónico')
+                              .col-md-12.col-sm-12.col-lg-12.col-xs-12
+                                input.brd-rd3(type='password', placeholder='Contraseña')
+                              .col-md-12.col-sm-12.col-lg-12.col-xs-12
+                                input.brd-rd3(type='text', placeholder='Nombre')
+                              .col-md-12.col-sm-12.col-lg-12.col-xs-12
+                                button.red-bg.brd-rd3(type='submit') REGISTRARSE
+                              .col-md-12.col-sm-12.col-lg-12.col-xs-12
+                                a.sign-btn(href='Login.html', title='', itemprop='url') ¿Ya eres miembro? Inicia sesión
+    // Scripts
+    include partials/scripts
