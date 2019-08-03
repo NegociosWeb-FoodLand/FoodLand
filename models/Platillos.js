@@ -55,18 +55,18 @@ const Platillo = db.define( 'platillo',{
     }
 }, {
     hooks : {
-        beforeCreate(publicacion) {
+        beforeCreate(platillo) {
             console.log('Antes de insertar en la base de datos');
-            const url = slug(publicacion.titulo).toLowerCase();
+            const url = slug(platillo.nombre).toLowerCase();
 
-            publicacion.url = `${url}-${shortid.generate()}`;
+            platillo.url = `${url}-${shortid.generate()}`;
         },
 
-        beforeUpdate(publicacion) {
+        beforeUpdate(platillo) {
             console.log('Antes de actualizar en la base de datos');
-            const url = slug(publicacion.nombre).toLowerCase();
+            const url = slug(platillo.nombre).toLowerCase();
 
-            publicacion.url = `${url}-${shortid.generate()}`;
+            platillo.url = `${url}-${shortid.generate()}`;
         }
     }
 });
