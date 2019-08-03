@@ -5,7 +5,7 @@ import axios from 'axios';
 // Obtener el botón desde el DOM
 const btnEliminar = document.querySelector('.restaurants-list');
 
-if(btnEliminar){
+if(btnEliminar){ooou
     btnEliminar.addEventListener('click', e => {
         console.log('entra al boton eliminar');
         // const restauranteHTML = e.target.parentElement.parentElement;
@@ -57,12 +57,6 @@ if(btnEliminar){
 
     });
 }
-
+d
 
 export default btnEliminar;
-
- /*      const restauranteHTML = e.target.parentElement.parentElement;
-        const idRestaurante = restauranteHTML.dataset.restauranteId;
-
-    
-});*/

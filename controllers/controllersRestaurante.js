@@ -5,7 +5,7 @@
 // Importar los módulos para direcciones (path)
     const path = require('path');
 
-// importar .... para eliminar archivos del servidor
+// importar módulos necesarios para nombrar y eliminar archivos del servidor
     const fs = require('fs');
     const shortid = require('shortid');
     const slug = require('slug');
@@ -312,11 +312,11 @@ exports.eliminarRestaurante = async (req, res, next) => {
     });
 
     
-   
+  
     if(!resultado) {
         return next();
+         
     }
 
     res.send(200).send('El restaurante ha sido eliminado correctamente');
 }
-
