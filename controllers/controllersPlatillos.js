@@ -1,73 +1,111 @@
 // importar los modelos a utilizar
-const Platillos = require('./models/Platillos');
+const Platillos = require('../models/Platillos');
+const Restaurantes = require('../models/Restaurante');
 
+// Importar los módulos para direcciones (path)
+const path = require('path');
+
+const carros = require('express-fileupload');
+// renderizamos la pantalla principal para el administrador
+exports.mostrarPrincipalAdmin = async (req, res)=>{
+
+    // cargamos todos los restaurantes que se encuentran registrados en la BD.
+    const platillos = await Platillos.findAll();
+    //renderizamos el dashboard principal del administrador.
+    res.render('dashPlatillo',{
+        platillos
+    })
+};
 
 // FORMULARIO DE GUARDAR
-
-
 exports.formularioGuardar = async (req, res) => {
     // Obtener todos los platillos (modelos)
     const platillos = await Platillos.findAll();
 
-    res.render('nuevoPlatillo', {
-        nombrePagina : 'Nuevo platillo',
-        platillos
+    // Obtenemos todas las restaurantesen los que pueden estar los platillos
+    const losRestaurantes = await Restaurantes.findAll();
+
+    res.render('dashPlatillo', {
+        platillos,
+        losRestaurantes
     });
 };
 
+exports.formularioLlenarPlatillo = async(req, res)=>{
+    // Obtener todas las categorias (modelos)
+    const platillos = await Platillos.findAll();
+
+    const losRestaurantes = await Restaurantes.findAll();
+
+   res.render('dashPlatillo-form',{
+    platillos,
+    losRestaurantes
+   });
+}
+
 exports.guardarDatos = async (req,res)=>{
-    //verificando
-
-    const {
-        nombre, 
-        descripcion, 
-        precio, 
-        imagen, 
-        idRestaurante,
-        estado,
-        ultimaModificacion,
-        url
-    }= req.body;
-    let errores = [];
-
-    if (
-        !nombre ||
-        !descripcion ||
-        !precio || 
-        !imagen ||
-        !idRestaurante ||
-        !estado ||
-        !ultimaModificacion ||
-        !url
-    ) {
-        errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
-    }
+    // Obtener todos los Platillos (modelos)
+    const platillos = await Platillos.findAll();
     
-    // Si hay errores
-    if (errores.length > 0) {
-        res.render('nuevoPlatillo', {
-            nombrePagina : 'Nuevo platillo',
-            usuarios,
-            errores
-        });
+    // Obtenemos todas las restaurantes a las que pueden pertenecer los platillos
+    const losRestaurantes = await Restaurantes.findAll();
+
+  //Obtenemos los datos por destructuring
+ const {nombre,descripcion, precio, nombreRestaurante, estado } = req.body;
+ console.log('.----------------------------------------------------------------------');
+    console.log(req.body);
+    console.log(req.files);
+    req.files.imagen.mv( path.join(__dirname, `../public/images/Platillos/${req.files.imagen.name}`)),err => {
+    if(err) {
+      return res.status(500).send({ message : err })
     } else {
-        // No existen errores
-        // Inserción en la base de datos.
-        await Platillos.create({
-            nombre, 
-            descripcion, 
-            precio, 
-            imagen, 
-            idRestaurante,
-            estado,
-            ultimaModificacion,
-            url
-        }),
-
-        res.redirect('/');
+      console.log('listo');
     }
-};
+  };
+  //filtramos el restaurante que fue seleccionada por el usuario
+  const elRestaurante = Restaurantes.findOne({
+      where : {
+          nombre : nombreRestaurante
+      }
+  });
 
+   // Promise con destructuring
+   const [cat] = await Promise.all([elRestaurante]);
+   //asignando el id
+      const codRestaurante = cat.id;
+  
+  //definimos la fecha a guardar
+  const ultimaModificacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  let errores = [];
+  if (!nombre || !descripcion || !precio || !ultimaModificacion) {
+      errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
+  }
+  
+  // Si hay errores
+  if (errores.length > 0) {
+      
+      res.render('dashPlatillo-form', {
+          nombrePagina : 'Nuevo Platillo',
+          platillos,
+          errores
+      });
+      res.render('error en la carga');
+  } else {
+      // No existen errores
+      await Platillos.create({
+          nombre, 
+          descripcion, 
+          precio, 
+          imagen:req.files.imagen.name,
+          ultimaModificacion,
+          idRestaurante:codRestaurante,
+          estado
+      }),
+
+      res.redirect('/nuevo_Platillo');
+  }
+};
 
 // FORMULARIO DE EDITAR
 
@@ -105,10 +143,7 @@ exports.actualizarPlatillo = async (req, res) => {
         descripcion, 
         precio, 
         imagen, 
-        idRestaurante,
-        estado,
-        ultimaModificacion,
-        url
+        idRestaurante
     }= req.body;
     let errores = [];
 
@@ -118,17 +153,14 @@ exports.actualizarPlatillo = async (req, res) => {
         !descripcion ||
         !precio || 
         !imagen ||
-        !idRestaurante ||
-        !estado ||
-        !ultimaModificacion ||
-        !url
+        !idRestaurante
     ) {
         errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
     }
 
      // Si hay errores
      if (errores.length > 0) {
-        res.render('nuevoPlatillo', {
+        res.render('dashPlatillo', {
             nombrePagina : 'Nuevo platillo',
             platillos,
             errores
@@ -141,17 +173,14 @@ exports.actualizarPlatillo = async (req, res) => {
             descripcion, 
             precio, 
             imagen, 
-            idRestaurante,
-            estado,
-            ultimaModificacion,
-            url
+            idRestaurante
             },
             { where : {
                 id : req.params.id
             }}
         ),
 
-        res.redirect('/');
+        res.redirect('/nuevo_Platillo');
     }
 };
 
