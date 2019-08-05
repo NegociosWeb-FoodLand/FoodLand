@@ -2,6 +2,16 @@
 
 const Usuarios = require('../models/Usuarios');
 
+// Importar los módulos para direcciones (path)
+const path = require('path');
+
+// importar .... para eliminar archivos del servidor
+const fs = require('fs');
+const shortid = require('shortid');
+
+const slug = require('slug');
+
+const archivo = require('express-fileupload'); 
 
 
 // FORMULARIO DE AGREGAR
@@ -18,7 +28,10 @@ exports.formularioLlenarUsuario = async(req, res)=>{
 exports.guardarDatos = async (req,res)=>{
     //verificando
 
+    const usuarios = await Usuarios.findAll();
+
     const {usuarioNombre, correo, password}= req.body;
+    
     let errores = [];
 
     if (!usuarioNombre || !correo || !password) {
@@ -32,14 +45,41 @@ exports.guardarDatos = async (req,res)=>{
             usuarios,
             errores
         });
+        console.log('error en la carga');
     } else {
+
+        var imagenUsuario="";
+        // console.log(req.files);
+        
+        if(req.files){
+            req.files.imagen.mv(path.join(__dirname, `../public/images/Usuarios/${req.files.imagen.name}`)), err => {
+                if(err){
+                    return res.status(500).send({message: err})
+                } else {
+                    console.log('listo');
+                }
+            };
+
+            const url = slug(req.files.imagen.name).toLowerCase();
+            imagenUsuario = `${url}-${shortid.generate()}`;
+
+            // renombramos la imagen con el valor contenido en la base de datos
+            fs.rename(path.join(__dirname, `../public/images/Usuarios/${req.files.imagen.name}`), path.join(__dirname, `../public/images/Usuarios/${imagenUsuario}`), function(err) { if( err ) console.log('ERROR: '+ err); });
+            // console.log(req.body.imagen);
+        } else {
+            // El usuario no ha seleccionado ninguna foto, se inserta una por defecto
+            // console.log(req.body.imagen);
+            imagenUsuario = "Usuario.png";
+        }
         // No existen errores
         const elEstado = 1;
-        // Inserción en la base de datos.
+        
+        //Guardamos los valores en las base de datos
         await Usuarios.create({
             usuarioNombre,
             password, 
             correo, 
+            imagen:imagenUsuario,
             estado:elEstado
         }),
 

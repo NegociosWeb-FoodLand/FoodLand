@@ -34,8 +34,15 @@ html(lang='en')
                             span Crea una cuenta
                           span.popup-seprator.text-center
                             i.brd-rd50
-                          form.sign-form(action="/nuevoUsuario" method="POST")
+                          form.sign-form(action="/nuevoUsuario" method="POST" encType="multipart/form-data")
                             .row
+                            // Aquí va la imagen
+                            .col-md-12.col-sm-12.col-lg-12
+                              .profile-img-upload-btn
+                                label.fileContainer.brd-rd5.yellow-bg
+                                  | Elegir imagen para el perfil de tu cuenta
+                                  input#profile-upload(type='file' name="imagen")
+                                  br
                               .col-md-12.col-sm-12.col-lg-12.col-xs-12
                                 input.brd-rd3(type='text', placeholder='Usuario' name="usuarioNombre")
                               .col-md-12.col-sm-12.col-lg-12.col-xs-12
