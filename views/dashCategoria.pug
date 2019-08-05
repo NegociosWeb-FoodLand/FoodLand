@@ -17,7 +17,7 @@ block contenido
           a.view-more(href='/categoriaForm', title='') Agregar
 
       // LISTA DE CATEGORÍAS
-      .restaurants-list
+      .categorias-list
         ul
           if (categorias)
             each categoria in categorias
@@ -33,6 +33,10 @@ block contenido
                       a(href='#', title='', itemprop='url') #{categoria.nombre}
                     span.red-clr #{categoria.descripcion}
                   .view-menu-liks
-                    a.brd-rd3(href=`/editar_Categoria/${categoria.id}`) Modificar
-                    a.brd-rd3(href='#', title='', itemprop='url') Eliminar 
+                    a.brd-rd3.modificar(href=`/editar_Categoria/${categoria.id}`) Modificar
+                    br
+                    br
+                    br
+                    button#eliminar-categoria(class='brd-rd3' type='button' data-categoria-id=categoria.id) Eliminar 
+                    //a#eliminar-categoria(class='brd-rd3', type='button', data-categoria-id=categoria.id) Eliminar 
       // LISTA DE CATEGORÍAS  

@@ -5,7 +5,7 @@ import axios from 'axios';
 // Obtener el botón desde el DOM
 const btnEliminar = document.querySelector('.restaurants-list');
 
-if(btnEliminar){ooou
+if(btnEliminar){
     btnEliminar.addEventListener('click', e => {
         console.log('entra al boton eliminar');
         // const restauranteHTML = e.target.parentElement.parentElement;
@@ -44,7 +44,7 @@ if(btnEliminar){ooou
                         Swal.fire({
                             type : 'error',
                             title : 'Un error ha ocurrido',
-                            text : 'No se pudo eliminar el proyecto'
+                            text : 'No se pudo eliminar el restaurante'
                         });
                     })
                 
@@ -57,6 +57,6 @@ if(btnEliminar){ooou
 
     });
 }
-d
+
 
 export default btnEliminar;
