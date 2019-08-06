@@ -15,6 +15,7 @@ exports.mostrarPrincipalAdmin = async (req, res)=>{
 
     // cargamos todos los restaurantes que se encuentran registrados en la BD.
     const platillos = await Platillos.findAll();
+
     //renderizamos el dashboard principal del administrador.
     res.render('dashPlatillo',{
         platillos
