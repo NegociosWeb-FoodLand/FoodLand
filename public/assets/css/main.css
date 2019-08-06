@@ -1530,9 +1530,14 @@ h3.marginb-0 {margin-bottom: 0;}
   right: 20px;
 }
 
+.categorias-list > ul {
+  list-style:none;
+}
+
 .filters-inner.style2 .featured-restaurant-box .featured-restaurant-info > h4 {
     margin-bottom: 15px;
     width: 100%;
+    list-style: none;
 }
 .filters-inner.style2 .featured-restaurant-box .featured-restaurant-info .price {
     margin-right: 50px;
@@ -1568,13 +1573,13 @@ h3.marginb-0 {margin-bottom: 0;}
   display: block;
   font-family: Poppins;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.2px;
 }
 .featured-restaurant-info > h4 {
     display: inline-block;
     float: left;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     margin: 10px 0 19px;
     width: 100%;
@@ -5814,7 +5819,7 @@ html.thanks-message-popup-active .thanks-message {
 .view-menu-liks > a {
   background-color: #434343;
   color: #fff;
-  font-size: 12px;
+  font-size: 15px;
   padding: 10px 25px;
   float: right;
   margin-top: 5px;

@@ -28,13 +28,14 @@ block contenido
                     a(title='', itemprop='url')
                       img(src=`images/Restaurantes/${restaurante.logo}`, alt='nodfdfg', itemprop='image')
                   .featured-restaurant-info
-                    span.red-clr #{restaurante.direccion}
                     h4(itemprop='headline')
                       a(href='#', title='', itemprop='url') #{restaurante.nombre}
+                    span.red-clr #{restaurante.descripcion}
+                    span.red-clr #{restaurante.direccion}
                   .view-menu-liks
                     a.brd-rd3(href=`/editar_Restaurante/${restaurante.id}`) Modificar
                     br
                     br
                     br
-                    a#eliminar-restaurante(class='brd-rd3' type='button' data-restaurante-id=restaurante.id) Eliminar 
+                    a.eliminar-restaurante(class='brd-rd3' type='button' data-restaurante-id=restaurante.id) Eliminar 
       // Lista de Restaurantes   
