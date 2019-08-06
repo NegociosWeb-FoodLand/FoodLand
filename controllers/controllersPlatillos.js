@@ -17,7 +17,7 @@ exports.mostrarPrincipalAdmin = async (req, res)=>{
     })
 };
 
-// FORMULARIO DE GUARDAR
+// FORMULARIO DE GUARDAR se encarga de mostrar la pantalla principal al administrador
 exports.formularioGuardar = async (req, res) => {
     // Obtener todos los platillos (modelos)
     const platillos = await Platillos.findAll();
@@ -108,8 +108,6 @@ exports.guardarDatos = async (req,res)=>{
 };
 
 // FORMULARIO DE EDITAR
-
-
 exports.formularioEditar = async (req, res) => {
     // Obtener todos los modelos
     console.log(req.params.id)
