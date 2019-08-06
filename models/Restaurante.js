@@ -51,6 +51,10 @@ const Restaurantes = db.define( 'restaurante',{
         }
     },
 
+    estado: {
+        type:Sequelize.INTEGER
+    },
+
     url: {
         type:Sequelize.STRING
     }

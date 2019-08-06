@@ -1,0 +1,1 @@
+import restaurantes from './modules/restaurante';

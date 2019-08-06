@@ -32,7 +32,20 @@ const Usuarios = db.define('usuario',{
     },
 
     correo: {
-        type:Sequelize.STRING
+        type:Sequelize.STRING,
+        allowNull : false,
+        validate : {
+            isEmail : {
+                msg : 'Verifica que tu correo es un correo electrónico válido'
+            },
+            notEmpty : {
+                msg : 'El correo electrónico no puede ser vacío'
+            }
+        },
+        unique : {
+            args : true,
+            msg : 'Ya existe un usuario registrado con ésta dirección de correo electrónico'
+        }
     },
 
     estado: {
@@ -48,18 +61,18 @@ const Usuarios = db.define('usuario',{
     }
 }, {
     hooks : {
-        beforeCreate(publicacion) {
+        beforeCreate(usuario) {
             console.log('Antes de insertar en la base de datos');
-            const url = slug(publicacion.titulo).toLowerCase();
+            const url = slug(usuario.usuarioNombre).toLowerCase();
 
-            publicacion.url = `${url}-${shortid.generate()}`;
+            usuario.url = `${url}-${shortid.generate()}`;
         },
 
-        beforeUpdate(publicacion) {
+        beforeUpdate(usuario) {
             console.log('Antes de actualizar en la base de datos');
-            const url = slug(publicacion.nombre).toLowerCase();
+            const url = slug(usuario.usuarioNombre).toLowerCase();
 
-            publicacion.url = `${url}-${shortid.generate()}`;
+            usuario.url = `${url}-${shortid.generate()}`;
         }
     }
 });

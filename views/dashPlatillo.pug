@@ -7,9 +7,9 @@ block contenido
       .welcome-note.yellow-bg.brd-rd5
         h4(itemprop='headline') BIENVENIDO A TU CUENTA
         p(itemprop='description') Como administrador pordras realizar diversas acciones en el sitio web.
-        img(src='assets/images/resource/welcome-note-img.png', alt='welcome-note-img.png', itemprop='image')
+        img(src='/assets/images/resource/welcome-note-img.png', alt='welcome-note-img.png', itemprop='image')
         a.remove-noti(href='#', title='', itemprop='url')
-          img(src='assets/images/close-icon.png', alt='close-icon.png', itemprop='image')
+          img(src='/assets/images/close-icon.png', alt='close-icon.png', itemprop='image')
       // Platillos
       h4(itemprop='headline') LISTA DE PLATILLOS
       .rite-meta
@@ -23,7 +23,11 @@ block contenido
                 // Listado de los platillos
                 .order-item.brd-rd5
                   .order-thumb.brd-rd5
+<<<<<<< HEAD
                      img(src=`images/Platillos/${platillo.imagen}`, alt='platillo', itemprop='image')
+=======
+                    img(src='/assets/imagenesPlatillos/#{platillo.imagen}', alt='order-img1.jpg', itemprop='image')
+>>>>>>> Hesler
                   .order-info
                     h4(itemprop='headline')
                       a(href='#', title='', itemprop='url') #{platillo.nombre}

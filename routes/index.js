@@ -23,14 +23,18 @@ module.exports = function(){
     router.post('/nuevo_Restaurante', restauranteControllers.guardarDatos);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
     router.post('/nuevo_Restaurante/:id',restauranteControllers.actualizarRestaurante);
 =======
 
+=======
+>>>>>>> Hesler
     router.get('/nueva_Categoria', categoriasControllers.formularioGuardar);
     router.get('/categoriaForm',categoriasControllers.formularioLlenarCategoria);
     router.post('/nueva_Categoria', categoriasControllers.guardarDatos);
 
+<<<<<<< HEAD
     router.get('/editar_Categoria/:id',categoriasControllers.formularioEditar);
     router.post('/nueva_Categoria/:id',categoriasControllers.actualizarCategoria);
 
@@ -44,5 +48,10 @@ module.exports = function(){
     router.post('/nuevo_Platillo', platillosControllers.guardarDatos);
 
 >>>>>>> Gimena
+=======
+    router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
+    router.post('/nuevo_Restaurante/:id',restauranteControllers.actualizarRestaurante);
+    router.delete('/:id', restauranteControllers.eliminarRestaurante);
+>>>>>>> Hesler
     return router;
 }
