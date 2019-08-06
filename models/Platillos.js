@@ -27,7 +27,8 @@ const Platillo = db.define( 'platillo',{
     },
 
     precio:{
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(10,2),
+        
     },
 
     imagen: {

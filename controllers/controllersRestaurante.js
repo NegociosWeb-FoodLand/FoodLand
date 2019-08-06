@@ -311,7 +311,7 @@ exports.eliminarRestaurante = async (req, res, next) => {
         }
     });
 
-    
+
   
     if(!resultado) {
         return next();

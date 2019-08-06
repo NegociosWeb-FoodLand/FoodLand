@@ -5,7 +5,11 @@ const Restaurantes = require('../models/Restaurante');
 // Importar los módulos para direcciones (path)
 const path = require('path');
 
-const carros = require('express-fileupload');
+// importar módulos necesarios para nombrar y eliminar archivos del servidor
+const fs = require('fs');
+const shortid = require('shortid');
+const slug = require('slug');
+
 // renderizamos la pantalla principal para el administrador
 exports.mostrarPrincipalAdmin = async (req, res)=>{
 
@@ -52,16 +56,7 @@ exports.guardarDatos = async (req,res)=>{
 
   //Obtenemos los datos por destructuring
  const {nombre,descripcion, precio, nombreRestaurante, estado } = req.body;
- console.log('.----------------------------------------------------------------------');
-    console.log(req.body);
-    console.log(req.files);
-    req.files.imagen.mv( path.join(__dirname, `../public/images/Platillos/${req.files.imagen.name}`)),err => {
-    if(err) {
-      return res.status(500).send({ message : err })
-    } else {
-      console.log('listo');
-    }
-  };
+
   //filtramos el restaurante que fue seleccionada por el usuario
   const elRestaurante = Restaurantes.findOne({
       where : {
@@ -93,11 +88,36 @@ exports.guardarDatos = async (req,res)=>{
       res.render('error en la carga');
   } else {
       // No existen errores
+
+      // verificamos si el usuario ha ingresado una imagen para el platillo
+      var nombreImagen="";
+      if(req.files){
+          // usuario ingresa imagen (se guarda)
+          nombreImagen= req.files.imagen.name;
+        req.files.imagen.mv( path.join(__dirname, `../public/images/Platillos/${req.files.imagen.name}`)),err => {
+            if(err) {
+            return res.status(500).send({ message : err })
+            } else {
+            console.log('listo');
+            }
+        };
+
+        const url = slug(req.files.imagen.name).toLowerCase();
+        nombreImagen = `${url}-${shortid.generate()}`;
+
+        //renombramos la imagen een el servidor
+        // renombramos la imagen con el valor contenido en la base de datos
+        fs.rename( path.join(__dirname, `../public/images/Platillos/${req.files.imagen.name}`), path.join(__dirname, `../public/images/Platillos/${nombreImagen}`),function(err) { if ( err ) console.log('ERROR: ' + err); });
+
+      }else{
+          // usuario no ingresa imagen, se envia una por defecto
+          nombreImagen="platillo.png";
+      }
       await Platillos.create({
           nombre, 
           descripcion, 
           precio, 
-          imagen:req.files.imagen.name,
+          imagen:nombreImagen,
           ultimaModificacion,
           idRestaurante:codRestaurante,
           estado
