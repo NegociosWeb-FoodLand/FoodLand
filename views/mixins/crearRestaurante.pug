@@ -5,7 +5,7 @@ mixin crearRestaurante(restaurante = {})
       h4(itemprop='headline') ADMINISTRACIÓN DE RESTAURANTES
       .account-settings-inner
         .row
-          .col-md-8.col-sm-8.col-lg-8
+          .col-md-8.col-sm-8.col-lg-12
             .profile-info-form-wrap
               // Formulario
               form.profile-info-form(action=`/nuevo_Restaurante/${restaurante.id || ''}`  method="POST" encType="multipart/form-data")
@@ -17,9 +17,12 @@ mixin crearRestaurante(restaurante = {})
                     label Descripción
                     input(type='text', placeholder='Descripción' id='descripcion' name="descripcion" value=restaurante.descripcion)
                   // Aquí va la imagen
-                  .col-md-6.col-sm-6.col-lg-6
-                    .profile-img-upload-btn
-                      if(restaurante.logo)
+                  if(restaurante.logo)
+                    .col-md-6.col-sm-6.col-lg-6
+                      .profile-img-upload-btn
+                        br
+                        br
+                        br
                         label Imagen Actual
                         input#profile-upload(type='text' name="actual" value = `${restaurante.logo || 'sin selección'} ` readonly )
                   .col-md-6.col-sm-6.col-lg-6

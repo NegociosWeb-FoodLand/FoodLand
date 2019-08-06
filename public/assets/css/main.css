@@ -1526,7 +1526,8 @@ h3.marginb-0 {margin-bottom: 0;}
   border-top: 1px solid #f5f5f5;
   position: relative;
   display: table;
-	width: 100%;
+  width: 100%;
+  right: 20px;
 }
 
 .filters-inner.style2 .featured-restaurant-box .featured-restaurant-info > h4 {
@@ -4493,7 +4494,7 @@ input:checked + .switch-slider:before {
   font-family: lato;
   font-weight: 400;
   color: #3c3838;
-  font-size: 12px;
+  font-size: 16px;
   float: left;
   width: 100%;
   margin-bottom: 9px;
@@ -4506,7 +4507,7 @@ input:checked + .switch-slider:before {
   float: left;
   width: 100%;
   margin-bottom: 17px;
-  font-size: 11px;
+  font-size: 13px;
   color: #888;
   font-family: lato;
   height: 50px;
@@ -5776,6 +5777,12 @@ html.thanks-message-popup-active .thanks-message {
   padding: 0 20px 20px;
   width: 100%;
 }
+.restaurants-list > ul {
+  list-style:none;
+}
+.restaurants-list > ul > li {
+  padding-bottom: 30px;
+}
 .featured-restaurant-box.style3 {
   border-top: 0;
   padding: 30px;
@@ -5823,7 +5830,7 @@ html.thanks-message-popup-active .thanks-message {
 }
 .tabs-wrp > h4 {
   font-family: Poppins;
-  font-size: 22px;
+  font-size: 30px;
   color: #3c3838;
   display: inline-block;
   margin-bottom: 0;
