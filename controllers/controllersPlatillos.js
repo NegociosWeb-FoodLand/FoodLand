@@ -129,8 +129,8 @@ exports.guardarDatos = async (req,res)=>{
 
 // FORMULARIO DE EDITAR
 exports.formularioEditar = async (req, res) => {
+   
     // Obtener todos los modelos
-    console.log(req.params.id)
     const platillosPromise = Platillos.findAll();
 
     // Obtener el platillo a editar
@@ -139,40 +139,62 @@ exports.formularioEditar = async (req, res) => {
             id : req.params.id
         }
     });
-
+    
     // Promise con destructuring
     const [platillos, platillo] = await Promise.all([platillosPromise, platilloPromise]);
 
-    res.render('editor', {
+    // obtenemos todos los restaurantes posibles para el platillo
+    const losRestaurantes = await Restaurantes.findAll();
+
+    // onbtenenos el restaurante seleccionado para el platillo.
+        const elRestaurante = Restaurantes.findOne({
+            where : {
+                id : platillo.idRestaurante
+            }
+        });
+    
+        // Promise con destructuring
+        const [restauranteSeleccionado] = await Promise.all([elRestaurante]);
+    
+         //asignando el id
+            let nombreRestaurante = restauranteSeleccionado.nombre;
+
+    res.render('dashPlatillo-form', {
         platillos,
-        platillo
+        platillo,
+        losRestaurantes,
+        nombreRestaurante,
+        
     })
 };
 
 exports.actualizarPlatillo = async (req, res) => {
-    // Obtener todos los platillos (modelos)
-    const platillos = await platillos.findAll();
+
 
     // se valida que el input del formulario traiga un valor
     // destructuring
-
-    const {
-        nombre, 
-        descripcion, 
-        precio, 
-        imagen, 
-        idRestaurante
-    }= req.body;
+    const {nombre, descripcion,  precio,  actual, nombreRestaurante ,estado }= req.body;
     let errores = [];
 
+        //definimos la fecha a guardar
+    const ultimaModificacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+        // obtenemos el id del restaurante que ha sido seleccionado.
+            //filtramos la categoria que fue seleccionada por el usuario
+    const Restaurant = Restaurantes.findOne({
+        where : {
+            nombre : nombreRestaurante
+        }
+    });
+
+     // Promise con destructuring
+     const [rest] = await Promise.all([Restaurant]);
+
+     //asignando el id
+    const idRestaurante = rest.id;
+
     // Verificar si todos los campos tienen un valor
-    if (
-        !nombre ||
-        !descripcion ||
-        !precio || 
-        !imagen ||
-        !idRestaurante
-    ) {
+    if (!nombre || !descripcion || !precio || !nombreRestaurante) {
         errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
     }
 
@@ -185,13 +207,53 @@ exports.actualizarPlatillo = async (req, res) => {
         });
     } else {
         // No existen errores
+        //verificamos si el usuario ha seleccionado una imagen diferente
+        var nombreImagen ="";
+        if(req.files){
+            // el usuario a ingresado una nueva imagen
+
+            //1. guardamos la nueva imagen
+            req.files.imagen.mv( path.join(__dirname, `../public/images/Platillos/${req.files.imagen.name}`)),err => {
+                if(err) {
+                  return res.status(500).send({ message : err })
+                } else {
+                  console.log('listo');
+                }
+              };
+
+            // 2. Eliminamos el logo anterior si es uno diferente al que está por defecto.
+            if(actual.trim() !='restaurante.png'){
+                fs.unlink(path.join(__dirname, `../public/images/Platillos/${actual.trim()}`) , (err) => {
+                    if (err) throw err;
+                    console.log('Borrado completo');
+                  });
+            }
+
+            // 3. Cambiamos el nombre de la imagen
+            const url = slug(req.files.imagen.name).toLowerCase();           
+            nombreImagen = `${url}-${shortid.generate()}`;
+
+            // renombramos la imagen con el valor contenido en la base de datos
+            fs.rename( path.join(__dirname, `../public/images/Platillos/${req.files.imagen.name.trim()}`), path.join(__dirname, `../public/images/Platillos/${nombreImagen}`),function(err) { if ( err ) console.log('ERROR: ' + err); });            
+        }else{
+            nombreImagen = actual;
+        }
+
+        //verificamos si el estado es activo o inactivo
+        var elEstado=0;
+        if(estado ==='Activo'){
+            elEstado=1;
+        }
+
         // Inserción en la base de datos.
         await Platillos.update({
             nombre, 
             descripcion, 
             precio, 
-            imagen, 
-            idRestaurante
+            imagen:nombreImagen, 
+            ultimaModificacion,
+            idRestaurante,
+            estado:elEstado
             },
             { where : {
                 id : req.params.id

@@ -7,15 +7,25 @@ mixin crearPlatillo(platillo = {})
           .col-md-8.col-sm-8.col-lg-8
             .profile-info-form-wrap
               // Formulario
-              form.profile-info-form(action="/nuevo_Platillo"  method="POST" encType="multipart/form-data")
+              form.profile-info-form(action=`/nuevo_Platillo/${platillo.id || ''}`  method="POST" encType="multipart/form-data")
                 .row.mrg20
                   .col-md-12.col-sm-12.col-lg-12
                     label(for='nombre') Nombre
-                    input(type='text', placeholder='Nombre' name="nombre" id="nombre")
+                      input(type='text', placeholder='Nombre' name="nombre" id="nombre" value=platillo.nombre)
                   .col-md-12.col-sm-12.col-lg-12
                     label Descripción
-                    input(type='text', placeholder='Descripción' name="descripcion" id="descripcion")
+                    input(type='text', placeholder='Descripción' name="descripcion" id="descripcion" value=platillo.descripcion)
                   // Aquí va la imagen
+                  .col-md-6.col-sm-6.col-lg-6
+                    .profile-img-upload-btn
+                      if(platillo.imagen)
+                        label Imagen Actual
+                        input#profile-upload(type='text' name="actual" value = `${platillo.imagen || 'sin selección'} ` readonly )
+                  .col-md-6.col-sm-6.col-lg-6
+                    .profile-img-upload-btn
+                      if(platillo.imagen)
+                        img(src=`/images/Platillos/${platillo.imagen}`, alt="Imagen Actal")
+
                   .col-md-12.col-sm-12.col-lg-12
                     .profile-img-upload-btn
                       label.fileContainer.brd-rd5.yellow-bg
@@ -33,11 +43,11 @@ mixin crearPlatillo(platillo = {})
                             option #{restaurante.nombre}
                   .col-md-6.col-sm-6.col-lg-6
                     label Precio
-                    input(type='text', placeholder='Precio' name="precio" id="precio")
+                    input(type='text', placeholder='Precio' name="precio" id="precio" value= platillo.precio)
                   .col-md-12.col-sm-12.col-lg-12
                     label Estado 
                     .select-wrp
-                      select
+                      select(name="estado")
                         option Activo
                         option Inactivo
                   .rite-meta

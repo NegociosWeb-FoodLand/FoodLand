@@ -44,6 +44,8 @@ module.exports = function(){
     router.get('/nuevo_Platillo', platillosControllers.formularioGuardar);
     router.get('/PlatilloForm',platillosControllers.formularioLlenarPlatillo);
     router.post('/nuevo_Platillo', platillosControllers.guardarDatos);
+    router.get('/modificarPlatillo/:id',platillosControllers.formularioEditar);
+    router.post('/nuevo_Platillo/:id', platillosControllers.actualizarPlatillo);
 
 
     router.get('/nuevoUsuario', usuariosControllers.formularioLlenarUsuario);

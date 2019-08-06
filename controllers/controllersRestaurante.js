@@ -164,10 +164,11 @@ exports.formularioEditar = async (req, res) => {
 
     res.render('dashRestaurante-form', {
         restaurantes,
-        restaurante,
         lasCategorias,
         nombreCategoria,
-        estadoActual
+        restaurante,
+        estadoActual,
+        
     })
 };
 
