@@ -7,33 +7,33 @@ mixin crearPlatillo(platillo = {})
           .col-md-8.col-sm-8.col-lg-8
             .profile-info-form-wrap
               // Formulario
-              form.profile-info-form(action='/nuevo_platillo'  method="POST")
+              form.profile-info-form(action="/nuevo_Platillo"  method="POST" encType="multipart/form-data")
                 .row.mrg20
                   .col-md-12.col-sm-12.col-lg-12
-                    label Nombre
-                    input.brd-rd3(type='text', placeholder='Nombre')
+                    label(for='nombre') Nombre
+                    input(type='text', placeholder='Nombre' name="nombre" id="nombre")
                   .col-md-12.col-sm-12.col-lg-12
                     label Descripción
-                    input.brd-rd3(type='text', placeholder='Descripción')
+                    input(type='text', placeholder='Descripción' name="descripcion" id="descripcion")
                   // Aquí va la imagen
                   .col-md-12.col-sm-12.col-lg-12
                     .profile-img-upload-btn
                       label.fileContainer.brd-rd5.yellow-bg
                         | Elegir imagen
-                        input#profile-upload(type='file')
+                        input#profile-upload(type='file' name="imagen")
                     br
                     br
                     br
                   .col-md-6.col-sm-6.col-lg-6
                     label Restaurante 
                     .select-wrp
-                      select
-                        option Palacio China
-                        option Pizzeria Venecia
-                        option Norberta
+                      select(name="nombreRestaurante")
+                        if (losRestaurantes)
+                          each restaurante in losRestaurantes
+                            option #{restaurante.nombre}
                   .col-md-6.col-sm-6.col-lg-6
                     label Precio
-                    input.brd-rd3(type='number', placeholder='Telefono')
+                    input(type='text', placeholder='Precio' name="precio" id="precio")
                   .col-md-12.col-sm-12.col-lg-12
                     label Estado 
                     .select-wrp
@@ -41,5 +41,5 @@ mixin crearPlatillo(platillo = {})
                         option Activo
                         option Inactivo
                   .rite-meta
-                    input.view-more(type='submit', value=`${restaurante.nombre ? 'Guardar' : 'Agregar'}`)
+                    input.view-more(type='submit', value=`${platillo.nombre ? 'Guardar' : 'Agregar'}`)
                     input.view-more(type='submit', value='Cancelar')

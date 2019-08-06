@@ -12,6 +12,7 @@ const categoriasControllers = require('../controllers/controllersCategorias')
 const usuariosControllers = require('../controllers/controllersUsuarios')
 
 const authControllers = require('../controllers/authController')
+const platillosControllers = require('../controllers/controllersPlatillos')
 
 
 //defininedo las rutas
@@ -19,8 +20,11 @@ module.exports = function(){
 
     // llamando a la página principal
 
-    router.get('/', restauranteControllers.mostrarPrincipalAdmin);
+    router.get('/', authControllers.usuarioAutenticado,
+        restauranteControllers.mostrarPrincipalAdmin
+    );
     
+    // Restaurante
     router.get('/nuevo_Restaurante', authControllers.usuarioAutenticado,
         restauranteControllers.formularioGuardar
     );
@@ -28,6 +32,18 @@ module.exports = function(){
         restauranteControllers.guardarDatos
     );
 
+    router.get('/editar_Restaurante/:id', authControllers.usuarioAutenticado,
+        restauranteControllers.formularioEditar
+    );
+    router.post('/nuevo_Restaurante/:id', authControllers.usuarioAutenticado,
+        restauranteControllers.actualizarRestaurante
+    );
+
+    router.delete('/:id', authControllers.usuarioAutenticado,
+        restauranteControllers.eliminarRestaurante
+    );
+
+    // Categoria
     router.get('/nueva_Categoria', authControllers.usuarioAutenticado,
         categoriasControllers.formularioGuardar
     );
@@ -38,16 +54,18 @@ module.exports = function(){
         categoriasControllers.guardarDatos
     );
 
-    router.get('/editar_Restaurante/:id', authControllers.usuarioAutenticado,
-        restauranteControllers.formularioEditar
+    // Platillo
+    router.get('/nuevo_Platillo', authControllers.usuarioAutenticado,
+        platillosControllers.formularioGuardar
     );
-    router.post('/nuevo_Restaurante/:id', authControllers.usuarioAutenticado,
-        restauranteControllers.actualizarRestaurante
+    router.get('/PlatilloForm', authControllers.usuarioAutenticado,
+        platillosControllers.formularioLlenarPlatillo
     );
-    router.delete('/:id', authControllers.usuarioAutenticado,
-        restauranteControllers.eliminarRestaurante
-    );
+    router.post('/nuevo_Platillo', authControllers.usuarioAutenticado,
+        platillosControllers.guardarDatos
+    );    
 
+    // Usuario
     router.get('/nuevoUsuario', usuariosControllers.formularioLlenarUsuario);
     router.post('/nuevoUsuario', usuariosControllers.guardarDatos);
     router.get('/inicioSesion', usuariosControllers.iniciarSesion

@@ -5,7 +5,7 @@
 // Importar los módulos para direcciones (path)
     const path = require('path');
 
-// importar .... para eliminar archivos del servidor
+// importar módulos necesarios para nombrar y eliminar archivos del servidor
     const fs = require('fs');
     const shortid = require('shortid');
     const slug = require('slug');
@@ -286,17 +286,22 @@ exports.eliminarRestaurante = async (req, res, next) => {
     // Obtener el id mediante query o params
     const { id } = req.params;
 
-    // // Eliminar imagen del servidor
-    // const elRestaurante = Restaurantes.findOne({
-    //     where : {
-    //         id: id
-    //     }
-    // });
+     // Eliminar imagen del servidor
+     const el_Restaurante = Restaurantes.findOne({
+         where : {
+             id: id
+         }
+     });
+     // obtenenemos los valores por promise
+    const [elRestaurante] = await Promise.all([el_Restaurante]);
 
-    // fs.unlink(path.join(__dirname, `../public/images/Restaurantes/${elRestaurante.logo.trim()}`) , (err) => {
-    //     if (err) throw err;
-    //     console.log('Borrado completo');
-    // });
+     console.log(elRestaurante.logo);
+     if(elRestaurante.logo.trim() !='restaurante.png'){
+        fs.unlink(path.join(__dirname, `../public/images/Restaurantes/${elRestaurante.logo.trim()}`) , (err) => {
+            if (err) throw err;
+            console.log('Borrado completo');
+          });
+    }
     
 
     // Eliminar el restaurante
@@ -306,11 +311,12 @@ exports.eliminarRestaurante = async (req, res, next) => {
         }
     });
 
-   
+    
+  
     if(!resultado) {
         return next();
+         
     }
 
     res.send(200).send('El restaurante ha sido eliminado correctamente');
 }
-

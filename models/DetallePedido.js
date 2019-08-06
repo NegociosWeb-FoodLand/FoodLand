@@ -26,7 +26,7 @@ const DetallePedido = db.define('detallepedido', {
     },
 
     subtotal: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(10,2)
     },
 
     url: {
