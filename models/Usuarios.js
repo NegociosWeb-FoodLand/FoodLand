@@ -59,6 +59,14 @@ const Usuarios = db.define('usuario',{
         type:Sequelize.INTEGER
     },
 
+    token: {
+        type:Sequelize.STRING
+    },
+
+    expiracion: {
+        type: Sequelize.DATE
+    },
+
     url: {
         type:Sequelize.STRING
     }
@@ -83,6 +91,12 @@ const Usuarios = db.define('usuario',{
         }
     }
 });
+
+// Métodos personalizados
+// Verificar si el password enviado es igual al existente
+Usuarios.prototype.verificarPassword = function(password){
+    return bcrypt.compareSync(password, this.password);
+}
 
 // importar los modelos para realizarlos
 module.exports = Usuarios;

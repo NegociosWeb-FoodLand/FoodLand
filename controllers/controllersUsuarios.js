@@ -1,5 +1,4 @@
 // importar los modelos a utilizar
-
 const Usuarios = require('../models/Usuarios');
 
 // Importar los módulos para direcciones (path)
@@ -11,8 +10,22 @@ const shortid = require('shortid');
 
 const slug = require('slug');
 
-const archivo = require('express-fileupload'); 
+const archivo = require('express-fileupload');
 
+// FORMULARIO INICIO DE SESION
+exports.iniciarSesion = (req, res) => {
+    const {error} = res.locals.mensajes;
+    res.render('login', {
+        nombrePagina: 'Inicio de sesión FoodLand',
+        error
+    })
+};
+
+exports.formularioRestablecerPassword = async(req, res) => {
+    res.render('reestablecer', {
+        nombrePagina: 'Reestablecer tu contraseña'
+    });
+}
 
 // FORMULARIO DE AGREGAR
 
@@ -86,73 +99,6 @@ exports.guardarDatos = async (req,res)=>{
         res.redirect('/');
     }
 };
-
-
-// FORMULARIO DE EDITAR
-
-
-exports.formularioEditar = async (req, res) => {
-    // Obtener todos los modelos
-    console.log(req.params.id)
-    const usuariosPromise = Usuarios.findAll();
-
-    // Obtener el usuario a editar
-    const usuarioPromise = Usuarios.findOne({
-        where : {
-            id : req.params.id
-        }
-    });
-
-    // Promise con destructuring
-    const [usuarios, usuario] = await Promise.all([usuariosPromise, usuarioPromise]);
-
-    res.render('editor', {
-        usuarios,
-        usuario
-    })
-};
-
-exports.actualizarUsuario = async (req, res) => {
-    // Obtener todos los usuarios (modelos)
-    const usuarios = await Usuarios.findAll();
-
-    // se valida que el input del formulario traiga un valor
-    // destructuring
-
-    const {usuarioNombre, correo, estado, rol, url}= req.body;
-    let errores = [];
-
-    // Verificar si el nombre del proyecto tiene un valor
-    if (!usuarioNombre || !correo || !estado || !rol || !url) {
-        errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
-    }
-
-     // Si hay errores
-     if (errores.length > 0) {
-        res.render('', {
-            nombrePagina : 'Editar usuario',
-            usuarios,
-            errores
-        });
-    } else {
-        // No existen errores
-        // Inserción en la base de datos.
-        await Usuarios.update({
-            usuarioNombre, 
-            correo, 
-            estado, 
-            rol,
-            url
-            },
-            { where : {
-                id : req.params.id
-            }}
-        ),
-
-        res.redirect('/');
-    }
-};
-
 
 
 //Eliminando usuario
