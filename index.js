@@ -16,6 +16,21 @@ const fileUpload = require('express-fileupload');
 //importamos la configuración a la base de datos.
 const db = require('./config/db');
 
+// Importar express-session para poder manejar sesiones de usuario
+const session = require('express-session');
+
+// Importar passport para permitir el inicio de sesión en el sitio
+const passport = require('./config/passport');
+
+// Importar los helpers con funciones en común para el proyecto
+const helpers = require('./helpers');
+
+// importar connect-flash disponible para el sitio
+const flash = require('connect-flash');
+
+// importar cookie-parser para permitir el uso de cookies en el sitio
+const cookieParser = require('cookie-parser');
+
 // Importar el modelo
 require('./models/Categorias');
 require('./models/Usuarios');
@@ -43,6 +58,31 @@ app.set('view engine', 'pug');
 
 // Habilitar BodyParser para leer los datos de los formularios
 app.use(bodyParser.urlencoded({extended: true}));
+
+// Habilitar el uso de mensajes de tipo connect-flash
+app.use(flash());
+
+app.use(cookieParser());
+
+// habilitar las sesiones
+app.use(session({
+    secret: 'unultrasecreto',
+    resave: false,
+    saveUninitialized: false
+}));
+
+
+// Crear una instancia de passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Pasar el vadump a la aplicación (middleware)
+app.use((req, res, next) => {
+    res.locals.vardump = helpers.vardump;
+    res.locals.mensajes = req.flash();
+    res.locals.usuario = {...req.user}||null;
+    next();
+});
 
  // Añadir la carpeta (ruta) que contiene las View (vistas)
 app.set('views', path.join(__dirname, './views'));

@@ -10,6 +10,9 @@ const slug = require('slug');
 // Importar shortid
 const shortid = require('shortid');
 
+// Importar bcrypt
+const bcrypt = require('bcrypt-nodejs');
+
 const Usuarios = db.define('usuario',{
     id:{
         type:Sequelize.INTEGER,
@@ -48,12 +51,20 @@ const Usuarios = db.define('usuario',{
         }
     },
 
+    imagen: {
+        type: Sequelize.STRING
+    },
+
     estado: {
         type:Sequelize.INTEGER
     },
 
-    rol: {
+    token: {
         type:Sequelize.STRING
+    },
+
+    expiracion: {
+        type: Sequelize.DATE
     },
 
     url: {
@@ -66,6 +77,8 @@ const Usuarios = db.define('usuario',{
             const url = slug(usuario.usuarioNombre).toLowerCase();
 
             usuario.url = `${url}-${shortid.generate()}`;
+
+            usuario.password = bcrypt.hashSync(usuario.password, bcrypt.genSaltSync(10));
         },
 
         beforeUpdate(usuario) {
@@ -73,9 +86,17 @@ const Usuarios = db.define('usuario',{
             const url = slug(usuario.usuarioNombre).toLowerCase();
 
             usuario.url = `${url}-${shortid.generate()}`;
+
+            usuario.password = bcrypt.hashSync(usuario.password, bcrypt.genSaltSync(10));
         }
     }
 });
+
+// Métodos personalizados
+// Verificar si el password enviado es igual al existente
+Usuarios.prototype.verificarPassword = function(password){
+    return bcrypt.compareSync(password, this.password);
+}
 
 // importar los modelos para realizarlos
 module.exports = Usuarios;

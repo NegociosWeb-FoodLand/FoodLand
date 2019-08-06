@@ -1,0 +1,79 @@
+extends ./layoutCliente
+
+block contenido
+  // Hero
+  //- section
+  //-   .block
+  //-     .fixed-bg(style='background-image: url(/assets/images/topbg.jpg);')
+  //-     .page-title-wrapper.text-center
+  //-       .col-md-12.col-sm-12.col-lg-12
+  //-         .page-title-inner
+  //-           h1(itemprop='headline') Restaurantes
+  //-           span ¡Los mejores de la ciudad!
+  section
+    .block.less-spacing.gray-bg.top-padd30
+      .container
+        .row
+          .col-md-12.col-sm-12.col-lg-12
+            .sec-box
+              .dashboard-tabs-wrapper
+                .row
+                  // CONFIGURACIÓN
+                  .col-md-4.col-sm-12.col-lg-4
+                    .profile-sidebar.brd-rd5.wow.fadeIn(data-wow-delay='0.2s')
+                      .profile-sidebar-inner.brd-rd5
+                        .user-info.red-bg
+                          img.brd-rd50(src='/assets/images/resource/user-avatar.jpg', alt='user-avatar.jpg', itemprop='image')
+                          // Usuario
+                          .user-info-inner
+                            br
+                            h5(itemprop='headline')
+                              a(href='#', title='', itemprop='url') Nombre de Usuario
+                            span
+                              a(href='#', title='', itemprop='url') elcorreo@gmail.com
+                        // Barra lateral
+                        ul.nav.nav-tabs
+                          li.active
+                            a(href='#', data-toggle='tab')
+                              i.fa.fa-wpforms
+                              |  PEDIDOS
+                  .col-md-8.col-sm-12.col-lg-8
+                    .tab-content
+                      #statement.tab-pane.fade.in.active
+                        .tabs-wrp.brd-rd5
+                          // Mensaje desplegable
+                          .welcome-note.yellow-bg.brd-rd5
+                            h4(itemprop='headline') BIENVENIDO A TU CUENTA
+                            p(itemprop='description') Aquí podras visualizar todos los pedidos realizados
+                            img(src='/assets/images/resource/welcome-note-img.png', alt='welcome-note-img.png', itemprop='image')
+                            a.remove-noti(href='#', title='', itemprop='url')
+                              img(src='/assets/images/close-icon.png', alt='close-icon.png', itemprop='image')
+                          h4(itemprop='headline') PEDIDOS
+                            .statement-table
+                              table
+                                thead
+                                  tr
+                                    th N. FACTURA
+                                    th FECHA
+                                    th TOTAL
+                                tbody
+                                  tr
+                                    td #30737723
+                                    td Aug 17,2017
+                                    td
+                                      span.red-clr $35.97
+                                  tr
+                                    td #30737723
+                                    td Aug 17,2017
+                                    td
+                                      span.red-clr $35.97
+                                  tr
+                                    td #30737723
+                                    td Aug 17,2017
+                                    td
+                                      span.red-clr $35.97
+                                  
+                                
+
+  
+    

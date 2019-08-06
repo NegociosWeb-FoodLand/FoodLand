@@ -223,12 +223,29 @@ exports.actualizarCategoria = async (req, res) => {
 
 
 
-//Eliminando usuario
+//Eliminando categoría
 exports.eliminarCategoria = async (req, res, next) => {
     // Obtener el id mediante query o params
     const { id } = req.params;
 
-    // Eliminar el usuario
+    // Eliminar imagen del servidor
+    const la_Categoria = Categorias.findOne({
+        where : {
+            id: id
+        }
+    });
+    // obtenenemos los valores por promise
+    const [laCategoria] = await Promise.all([la_Categoria]);
+
+    console.log(laCategoria.imagen);
+    if(laCategoria.imagen.trim() !='categoria.png'){
+        fs.unlink(path.join(__dirname, `../public/images/Categorias/${laCategoria.imagen.trim()}`) , (err) => {
+            if (err) throw err;
+            console.log('Borrado completo');
+           });
+     }
+
+    // Eliminar la categoria
     const resultado = await Categorias.destroy({
         where : {
             id : id
