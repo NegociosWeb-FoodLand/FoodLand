@@ -1,47 +1,86 @@
 // importar los modelos a utilizar
 
-const Usuarios = require('./models/Usuarios');
+const Usuarios = require('../models/Usuarios');
+
+// Importar los módulos para direcciones (path)
+const path = require('path');
+
+// importar .... para eliminar archivos del servidor
+const fs = require('fs');
+const shortid = require('shortid');
+
+const slug = require('slug');
+
+const archivo = require('express-fileupload'); 
 
 
-// FORMULARIO DE GUARDAR
+// FORMULARIO DE AGREGAR
 
-
-exports.formularioGuardar = async (req, res) => {
-    // Obtener todos los usuarios (modelos)
+exports.formularioLlenarUsuario = async(req, res)=>{
+    // Obtener todos los usuarios
     const usuarios = await Usuarios.findAll();
 
-    res.render('nuevoUsuario', {
-        nombrePagina : 'Nuevo usuario',
+    res.render('registrarse', {
         usuarios
-    });
-};
+    })
+}
 
 exports.guardarDatos = async (req,res)=>{
     //verificando
 
-    const {usuarioNombre, correo, estado, rol, url}= req.body;
+    const usuarios = await Usuarios.findAll();
+
+    const {usuarioNombre, correo, password}= req.body;
+    
     let errores = [];
 
-    if (!usuarioNombre || !correo || !estado || !rol || !url) {
+    if (!usuarioNombre || !correo || !password) {
         errores.push({'texto': 'Hay campos que aún se encuentran vacíos.'});
     }
     
     // Si hay errores
     if (errores.length > 0) {
-        res.render('nuevoUsuario', {
+        res.render('registrarse', {
             nombrePagina : 'Nuevo usuario',
             usuarios,
             errores
         });
+        console.log('error en la carga');
     } else {
+
+        var imagenUsuario="";
+        // console.log(req.files);
+        
+        if(req.files){
+            req.files.imagen.mv(path.join(__dirname, `../public/images/Usuarios/${req.files.imagen.name}`)), err => {
+                if(err){
+                    return res.status(500).send({message: err})
+                } else {
+                    console.log('listo');
+                }
+            };
+
+            const url = slug(req.files.imagen.name).toLowerCase();
+            imagenUsuario = `${url}-${shortid.generate()}`;
+
+            // renombramos la imagen con el valor contenido en la base de datos
+            fs.rename(path.join(__dirname, `../public/images/Usuarios/${req.files.imagen.name}`), path.join(__dirname, `../public/images/Usuarios/${imagenUsuario}`), function(err) { if( err ) console.log('ERROR: '+ err); });
+            // console.log(req.body.imagen);
+        } else {
+            // El usuario no ha seleccionado ninguna foto, se inserta una por defecto
+            // console.log(req.body.imagen);
+            imagenUsuario = "Usuario.png";
+        }
         // No existen errores
-        // Inserción en la base de datos.
+        const elEstado = 1;
+        
+        //Guardamos los valores en las base de datos
         await Usuarios.create({
-            usuarioNombre, 
+            usuarioNombre,
+            password, 
             correo, 
-            estado, 
-            rol,
-            url
+            imagen:imagenUsuario,
+            estado:elEstado
         }),
 
         res.redirect('/');
@@ -90,8 +129,8 @@ exports.actualizarUsuario = async (req, res) => {
 
      // Si hay errores
      if (errores.length > 0) {
-        res.render('nuevoUsuario', {
-            nombrePagina : 'Nuevo usuario',
+        res.render('', {
+            nombrePagina : 'Editar usuario',
             usuarios,
             errores
         });

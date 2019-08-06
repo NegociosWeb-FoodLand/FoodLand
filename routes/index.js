@@ -11,6 +11,7 @@ const categoriasControllers = require('../controllers/controllersCategorias')
 
 const platillosControllers = require('../controllers/controllersPlatillos')
 
+const usuariosControllers = require('../controllers/controllersUsuarios')
 
 //defininedo las rutas
 module.exports = function(){
@@ -45,5 +46,7 @@ module.exports = function(){
     router.post('/nuevo_Platillo', platillosControllers.guardarDatos);
 
 
+    router.get('/nuevoUsuario', usuariosControllers.formularioLlenarUsuario);
+    router.post('/nuevoUsuario', usuariosControllers.guardarDatos);
     return router;
 }
