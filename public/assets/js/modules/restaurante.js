@@ -44,7 +44,7 @@ if(btnEliminar){
                         Swal.fire({
                             type : 'error',
                             title : 'Un error ha ocurrido',
-                            text : 'No se pudo eliminar el proyecto'
+                            text : 'No se pudo eliminar el restaurante'
                         });
                     })
                 

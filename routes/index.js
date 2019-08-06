@@ -23,14 +23,13 @@ module.exports = function(){
     router.get('/nuevo_Restaurante', restauranteControllers.formularioGuardar);
     router.post('/nuevo_Restaurante', restauranteControllers.guardarDatos);
 
-
     router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
     router.post('/nuevo_Restaurante/:id',restauranteControllers.actualizarRestaurante);
 
     router.get('/nueva_Categoria', categoriasControllers.formularioGuardar);
     router.get('/categoriaForm',categoriasControllers.formularioLlenarCategoria);
     router.post('/nueva_Categoria', categoriasControllers.guardarDatos);
-
+    router.delete('/nueva_Categoria/:id', categoriasControllers.eliminarCategoria);
 
     router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
     router.post('/nuevo_Restaurante/:id',restauranteControllers.actualizarRestaurante);
@@ -39,7 +38,6 @@ module.exports = function(){
     router.get('/editar_Categoria/:id',categoriasControllers.formularioEditar);
     router.post('/nueva_Categoria/:id',categoriasControllers.actualizarCategoria);
     router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
-
 
     router.get('/nuevo_Platillo', platillosControllers.formularioGuardar);
     router.get('/PlatilloForm',platillosControllers.formularioLlenarPlatillo);

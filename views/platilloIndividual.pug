@@ -18,7 +18,7 @@ block contenido
           .col-md-12
             .sec-box
               .sec-wrapper
-                .col-md-8.col-sm-12.col-lg-8
+                .col-md-8.col-sm-12.col-lg-6
                   .restaurant-detail-wrapper
                     .restaurant-detail-info
                       // SLIDER
@@ -28,18 +28,18 @@ block contenido
                             img.brd-rd3(src='/assets/images/resource/restaurant-detail-big-img1-1.jpg', alt='restaurant-detail-big-img1-1.jpg', itemprop='image')
                       // PLATILLO
                       .restaurant-detail-title
-                        h1(itemprop='headline') #{platillo.nombre}
+                        h1(itemprop='headline') Nombre Platillo
                         .info-meta
                           span
-                            a(href='#', title='', itemprop='url') #{platillo.restaurante}
-                        span.price #{platillo.precio}
+                            a(href='#', title='', itemprop='url') Restaurante
+                        span.price Precio
                         .qty-wrap
                           input.qty(type='text', value='1', min='1')
-                        p(itemprop='description') #{platillo.descripcion}
+                        p(itemprop='description') Descripción
                         br
                         a.brd-rd3(href='#', title='', itemprop='url') Ordenar
                 // COMANDA
-                .col-md-4.col-sm-12.col-lg-4
+                .col-md-4.col-sm-12.col-lg-6
                   .order-wrapper
                     .order-inner.gradient-brd
                       h4(itemprop='headline') Tu orden
@@ -48,21 +48,33 @@ block contenido
                           // Primer platillo
                           li
                             .dish-name
-                              i .1
-                              h6(itemprop='headline') Nombre
-                              span.price Precio
-                          // Platillo 2
+                              i 1.
+                              h6(itemprop='headline')
+                                a(href='#') Nombre
+                              span.price
+                                i.fa.fa-pencil(aria-hidden='true')
+                              span.price
+                                i.fa.fa-trash(aria-hidden='true')
+                            .dish-name
+                              br
+                              h6(itemprop='headline')
+                                a() #{`Cantidad   100   X   $90.00 `}
+                              span.price $9000.00
+                          // Segundo platillo
                           li
                             .dish-name
-                              i .2
-                              h6(itemprop='headline') Chicken Tandoori Special
-                              span.price $90.00
-                          // Platillo 3
-                          li
+                              i 1.
+                              h6(itemprop='headline')
+                                a(href='#') Nombre
+                              span.price
+                                i.fa.fa-pencil(aria-hidden='true')
+                              span.price
+                                i.fa.fa-trash(aria-hidden='true')
                             .dish-name
-                              i .3
-                              h6(itemprop='headline') Chicken Tandoori Special
-                              span.price $100.00
+                              br
+                              h6(itemprop='headline')
+                                a() #{`Cantidad   100   X   $90.00 `}
+                              span.price $9000.00
                         // Subtotales
                         ul.order-total
                           li
@@ -78,16 +90,5 @@ block contenido
                           li
                             span Total
                             span.price $340
-                          li
-                            span.radio-box.cash-popup-btn
-                              input#pay1-1(type='radio', name='method')
-                              label(for='pay1-1')
-                                i.fa.fa-money
-                                |  Cash
-                            span.radio-box.card-popup-btn
-                              input#pay1-2(type='radio', name='method')
-                              label(for='pay1-2')
-                                i.fa.fa-credit-card-alt
-                                |  Card
                           li
                             a.brd-rd2(href='#', title='', itemprop='url') Confirmar orden
