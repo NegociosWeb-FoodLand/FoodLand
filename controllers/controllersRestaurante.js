@@ -17,7 +17,7 @@ exports.mostrarPrincipalAdmin = async (req, res)=>{
     // cargamos todos los restaurantes que se encuentran registrados en la BD.
     const restaurantes = await Restaurantes.findAll();
     //renderizamos el dashboard principal del administrador.
-    res.render('dashRestaurante',{
+    res.render('restablecer',{
         restaurantes
     })
 };

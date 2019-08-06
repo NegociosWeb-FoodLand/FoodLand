@@ -68,14 +68,13 @@ module.exports = function(){
     // Usuario
     router.get('/nuevoUsuario', usuariosControllers.formularioLlenarUsuario);
     router.post('/nuevoUsuario', usuariosControllers.guardarDatos);
-    router.get('/inicioSesion', usuariosControllers.iniciarSesion
-    );
+    router.get('/inicioSesion', usuariosControllers.iniciarSesion);
     router.post('/inicioSesion', authControllers.autenticarUsuario);
     router.get('/cerrarSesion', authControllers.cerrarSesion);
 
     // reestablecer contraseña
-    router.get('/reestablecer', usuariosControllers.formularioRestablecerPassword);
-    router.post('/reestablecer', authControllers.enviarToken);
+    router.get('/restablecer', usuariosControllers.formularioRestablecerPassword);
+    router.post('/restablecer', authControllers.enviarToken);
     router.get('/reestablecer/:token', authControllers.validarToken);
     router.post('/reestablecer/:token', authControllers.actualizarPassword);
     return router;

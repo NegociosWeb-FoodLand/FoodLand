@@ -50,7 +50,7 @@ exports.enviarToken = async(req, res) => {
 
     if(!usuario){
         req.flash('error', 'El correo electrónico no es válido');
-        res.redirect('/reestablecer');
+        res.redirect('/restablecer');
     }
 
     // El usuario existe
@@ -62,7 +62,7 @@ exports.enviarToken = async(req, res) => {
     await usuario.save();
 
     // URL de reset
-    const resetUrl = `http://${req.headers.host}/reestablecer/${usuario.token}`;
+    const resetUrl = `http://${req.headers.host}/restablecer/${usuario.token}`;
 
     console.log(resetUrl);
 }
@@ -78,12 +78,12 @@ exports.validarToken = async(req, res) => {
     // Si no encuentra el usuario
     if(!usuario) {
         req.flash('error', 'El hipervínculo que seguiste no es válido');
-        res.redirect('/reestablecer');
+        res.redirect('/restablecer');
     }
 
     // Si el usuario existe, mostrarle el formulario para generar una nueva contraseña
     res.render('resetPassword', {
-        nombrePagina: 'Reestablecer la contraseña'
+        nombrePagina: 'Restablecer la contraseña'
     });
 }
 
@@ -102,7 +102,7 @@ exports.actualizarPassword = async(req, res) => {
     // Verificar si obtenemos un modelo de usuario
     if(!usuario) {
         req.flash('error', 'Token no válido o vencido, intenta de nuevo');
-        res.redirect('/reestablecer');
+        res.redirect('/restablecer');
     }
 
     // El token del usuario es correcto y aún no vence
