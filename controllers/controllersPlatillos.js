@@ -272,6 +272,24 @@ exports.eliminarPlatillo = async (req, res, next) => {
     // Obtener el id mediante query o params
     const { id } = req.params;
 
+    // Eliminar la imagen del servidor
+    const el_Platillo = Platillos.findOne({
+        where : {
+            id: id
+        }
+    });
+
+    // Obtenemos los valores por promise
+    const [elPlatillo] = await Promise.all([el_Platillo]);
+
+    console.log(elPlatillo.imagen);
+    if(elPlatillo.imagen.trim() !='platillo.png'){
+        fs.unlink(path.join(__dirname, `../public/images/Platillos/${elPlatillo.imagen.trim()}`) , (err) => {
+            if (err) throw err;
+            console.log('Borrado completo');
+        });
+    }
+
     // Eliminar el platillo
     const resultado = await Platillos.destroy({
         where : {

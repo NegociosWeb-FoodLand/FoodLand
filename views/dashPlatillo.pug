@@ -33,4 +33,7 @@ block contenido
                     span.red-clr Lps. #{platillo.precio}
                   .view-menu-liks
                     a.brd-rd3(href=`/modificarPlatillo/${platillo.id}`) Modificar
-                    a.brd-rd3(href='#', title='', itemprop='url') Eliminar
+                    br
+                    br
+                    br
+                    a.eliminar-platillo(class='brd-rd3', type='button', title='', itemprop='url', data-platillo-id=platillo.id) Eliminar
