@@ -53,5 +53,6 @@ module.exports = function(){
     /*--------------------Rutas del área del cliente-----------------------*/
     router.get('/foodLand', clienteOperaciones.principalCliente);
     router.get('/foodLand/nuestrosRestaurantes',clienteOperaciones.mostrarRestaurantes);
+    router.get('/foodLand/nuestrosRestaurantes/platillos/:id',clienteOperaciones.mostrarPlatillosporRestaurante);
     return router;
 }

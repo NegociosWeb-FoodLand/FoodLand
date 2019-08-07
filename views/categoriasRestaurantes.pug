@@ -36,11 +36,11 @@ block contenido
                             .col-md-12.col-sm-12.col-lg-6.filter-item(class=`${restaurante.idCategoria}`)
                               .featured-restaurant-box.wow.fadeIn(data-wow-delay='0.2s')
                                 .featured-restaurant-thumb
-                                  a(href='food-detail.html', title='', itemprop='url')
+                                  a(href=`/foodLand/nuestrosRestaurantes/platillos/${restaurante.id}`)
                                     img.brd-rd50(src=`/images/Restaurantes/${restaurante.logo}`, alt='featured-restaurant-img1.jpg', itemprop='image')
                                 .featured-restaurant-info
                                   h4(itemprop='headline')
-                                    a(href='food-detail.html', title='', itemprop='url') #{restaurante.nombre}
+                                    a(href=`/foodLand/nuestrosRestaurantes/platillos/${restaurante.id}`, title='', itemprop='url') #{restaurante.nombre}
                                   span.red-clr #{restaurante.descripcion}
                                   span.red-clr #{restaurante.direccion}
                                   span.red-clr #{restaurante.telefono}

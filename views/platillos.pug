@@ -17,10 +17,12 @@ block contenido
           .col-md-12.col-sm-12.col-lg-12
             .sec-box
               .remove-ext
-                .row
+                .row                
                   ul
-                    if(losPlatillos)
-                      each platillo in losPlatillo
+                    if (losPlatillos.length==0)
+                      h1 No hay platillos disponibles.
+                    else
+                      each platillo in losPlatillos
                         li
                           // Listado de platillos
                           .col-md-4.col-sm-6.col-lg-4
@@ -28,7 +30,7 @@ block contenido
                               // Imagen
                               .popular-dish-thumb
                                 a(href='food-detail.html', title='', itemprop='url')
-                                  img(src='/assets/images/resource/popular-dish-img1.jpg', alt='popular-dish-img1.jpg', itemprop='image')
+                                  img(src=`/images/Platillos/${platillo.imagen}`, alt='popular-dish-img1.jpg', itemprop='image')
                               // Detalles
                               .popular-dish-info
                                 h4(itemprop='headline')
@@ -36,3 +38,4 @@ block contenido
                                 p(itemprop='description') #{platillo.descripcion}
                                 span.price Lps. #{platillo.precio}
                                 a.brd-rd4(href='food-detail.html', title='Order Now', itemprop='url') Ordenar
+                    
