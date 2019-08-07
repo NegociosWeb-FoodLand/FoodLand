@@ -30,7 +30,7 @@ block contenido
                        img(src=`images/Categorias/${categoria.imagen}`, alt='Categoria', itemprop='image')
                   .featured-restaurant-info
                     h4(itemprop='headline')
-                      a(href='#', title='', itemprop='url') #{categoria.nombre}
+                      a(title='', itemprop='url') #{categoria.nombre}
                     span.red-clr #{categoria.descripcion}
                   .view-menu-liks
                     a.brd-rd3.modificar(href=`/editar_Categoria/${categoria.id}`) Modificar

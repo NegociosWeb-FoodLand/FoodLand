@@ -23,7 +23,7 @@ mixin crearRestaurante(restaurante = {})
                         br
                         br
                         br
-                        label Imagen Actual
+                        label(for='nombre') Imagen Actual
                         input#profile-upload(type='text' name="actual" value = `${restaurante.logo || 'sin selección'} ` readonly )
                   .col-md-6.col-sm-6.col-lg-6
                     .profile-img-upload-btn
