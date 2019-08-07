@@ -5,13 +5,13 @@ const router = express.Router();
 //i
 
 // Importando los modelos de los controladores
-const restauranteControllers = require('../controllers/controllersRestaurante')
+const restauranteControllers = require('../controllers/controllersRestaurante');
+const categoriasControllers = require('../controllers/controllersCategorias');
+const platillosControllers = require('../controllers/controllersPlatillos');
+const usuariosControllers = require('../controllers/controllersUsuarios');
 
-const categoriasControllers = require('../controllers/controllersCategorias')
-
-const platillosControllers = require('../controllers/controllersPlatillos')
-
-const usuariosControllers = require('../controllers/controllersUsuarios')
+// importando controladores del lado del cliente
+const clienteOperaciones = require('../controllers/controllersClientes');
 
 //defininedo las rutas
 module.exports = function(){
@@ -46,8 +46,12 @@ module.exports = function(){
     router.post('/nuevo_Platillo/:id', platillosControllers.actualizarPlatillo);
     router.delete('/nuevo_Platillo/:id', platillosControllers.eliminarPlatillo);
 
-
     router.get('/nuevoUsuario', usuariosControllers.formularioLlenarUsuario);
     router.post('/nuevoUsuario', usuariosControllers.guardarDatos);
+
+
+    /*--------------------Rutas del área del cliente-----------------------*/
+    router.get('/foodLand', clienteOperaciones.principalCliente);
+    router.get('/foodLand/nuestrosRestaurantes',clienteOperaciones.mostrarRestaurantes);
     return router;
 }

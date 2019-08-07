@@ -303,4 +303,3 @@ exports.eliminarPlatillo = async (req, res, next) => {
 
     res.send(200).send('El platillo ha sido eliminado correctamente');
 }
-
