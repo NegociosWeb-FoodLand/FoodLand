@@ -11,23 +11,29 @@ block contenido
         a.remove-noti(href='#', title='', itemprop='url')
           img(src='/assets/images/close-icon.png', alt='close-icon.png', itemprop='image')
       // Platillos
-      h4(itemprop='headline') LISTA DE PLATILLOS
-      .rite-meta
-        a.view-more(href='/PlatilloForm', title='') Agregar
-         // LISTA DE PLATILLOS
-      .order-list
+      .dashboard-title
+        h4(itemprop='headline') LISTA DE PLATILLOS
+        .rite-meta
+          a.view-more(href='/PlatilloForm', title='') Agregar
+      // LISTA DE PLATILLOS
+      .platillos-list
         ul
           if (platillos)
             each platillo in platillos
               li
-                // Listado de los platillos
-                .order-item.brd-rd5
-                  .order-thumb.brd-rd5
-                     img(src=`images/Platillos/${platillo.imagen}`, alt='platillo', itemprop='image')
-                  .order-info
+                // Listado de las categorias
+                .featured-restaurant-box.style3.brd-rd5.wow.fadeInUp(data-wow-delay='0.2s')
+                  // Logo
+                  .featured-restaurant-thumb
+                    a(title='', itemprop='url')
+                      img(src=`images/Platillos/${platillo.imagen}`, alt='platillo', itemprop='image')
+                  .featured-restaurant-info
                     h4(itemprop='headline')
-                      a(href='#', title='', itemprop='url') #{platillo.nombre}
-                    span.price Lps. #{platillo.precio}
+                      a(title='', itemprop='url') #{platillo.nombre}
+                    span.red-clr Lps. #{platillo.precio}
                   .view-menu-liks
-                    a.brd-rd3(href='#', title='', itemprop='url') Modificar
-                    a.brd-rd3(href='#', title='', itemprop='url') Eliminar
+                    a.brd-rd3(href=`/modificarPlatillo/${platillo.id}`) Modificar
+                    br
+                    br
+                    br
+                    a.eliminar-platillo(class='brd-rd3', type='button', title='', itemprop='url', data-platillo-id=platillo.id) Eliminar

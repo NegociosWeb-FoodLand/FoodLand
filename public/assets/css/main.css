@@ -949,7 +949,7 @@ header.sticky nav > div > ul > li span {font-size: 11px;}
 .menu-lst {
   float: left;
   width: 100%;
-  margin-bottom: 55px;
+  margin-bottom: 25px;
 }
 .menu-lst > ul {
   padding-left: 0;
@@ -1530,7 +1530,12 @@ h3.marginb-0 {margin-bottom: 0;}
   right: 20px;
 }
 
+/* Estilo para la lista no ordenada sin viñeta*/
 .categorias-list > ul {
+  list-style:none;
+}
+
+.platillos-list > ul {
   list-style:none;
 }
 
