@@ -22,7 +22,7 @@ exports.iniciarSesion = (req, res) => {
 };
 
 exports.formularioRestablecerPassword = async(req, res) => {
-    res.render('reestablecer', {
+    res.render('restablecer', {
         nombrePagina: 'Reestablecer tu contraseña'
     });
 }
@@ -99,24 +99,3 @@ exports.guardarDatos = async (req,res)=>{
         res.redirect('/');
     }
 };
-
-
-//Eliminando usuario
-exports.eliminarUsuario = async (req, res, next) => {
-    // Obtener el id mediante query o params
-    const { id } = req.params;
-
-    // Eliminar el usuario
-    const resultado = await usuarios.destroy({
-        where : {
-            id : id
-        }
-    });
-
-    if(!resultado) {
-        return next();
-    }
-
-    res.send(200).send('El usuario ha sido eliminado correctamente');
-}
-

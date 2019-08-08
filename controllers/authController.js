@@ -10,6 +10,9 @@ const Op = Sequelize.Op;
 // Importar bcrypt
 const bcrypt = require('bcrypt-nodejs');
 
+// Importar el módulo de envío de correos electrónicos
+const enviarEmail = require('../handlers/email');
+
 exports.autenticarUsuario = passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/inicioSesion',
@@ -46,7 +49,7 @@ exports.enviarToken = async(req, res) => {
         }
     });
 
-    console.log('hola usuario' + usuario);
+    console.log(usuario);
 
     if(!usuario){
         req.flash('error', 'El correo electrónico no es válido');
@@ -61,12 +64,22 @@ exports.enviarToken = async(req, res) => {
     // Guardar el token y la expiración en la base de datos
     await usuario.save();
 
-    // URL de reset
-    const resetUrl = `http://${req.headers.host}/restablecer/${usuario.token}`;
+        // URL de reset
+        const resetUrl = `http://${req.headers.host}/restablecer/${usuario.token}`;
 
-    console.log(resetUrl);
-}
-
+        // Envía el correo electrónico con el token generado
+        await enviarEmail.enviarCorreo({
+            usuario,
+            subject : 'Reestablecer tu contraseña en foodland',
+            resetUrl,
+            vista : 'restablecerPassword'
+        });
+    
+        // redireccionar al inicio de sesión
+        req.flash('correcto', 'Se envió un enlace para reestablecer tu contraseña a tu correo electrónico');
+        res.redirect('/inicioSesion');
+    }
+// valida que el token se envie atraves de la URL
 exports.validarToken = async(req, res) => {
     // Buscar el usuario que pertenece a dicho token
     const usuario = await Usuario.findOne({

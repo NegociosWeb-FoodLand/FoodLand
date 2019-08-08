@@ -83,6 +83,7 @@ const Usuarios = db.define('usuario',{
 
         beforeUpdate(usuario) {
             console.log('Antes de actualizar en la base de datos');
+           
             const url = slug(usuario.usuarioNombre).toLowerCase();
 
             usuario.url = `${url}-${shortid.generate()}`;

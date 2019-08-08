@@ -24,42 +24,29 @@ module.exports = function(){
         restauranteControllers.mostrarPrincipalAdmin
     );
     
-<<<<<<< HEAD
     router.get('/nuevo_Restaurante', restauranteControllers.formularioGuardar);
     router.post('/nuevo_Restaurante', restauranteControllers.guardarDatos);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
     router.post('/nuevo_Restaurante/:id',restauranteControllers.actualizarRestaurante);
-=======
 
-=======
->>>>>>> Hesler
     router.get('/nueva_Categoria', categoriasControllers.formularioGuardar);
     router.get('/categoriaForm',categoriasControllers.formularioLlenarCategoria);
     router.post('/nueva_Categoria', categoriasControllers.guardarDatos);
 
-<<<<<<< HEAD
     router.get('/editar_Categoria/:id',categoriasControllers.formularioEditar);
     router.post('/nueva_Categoria/:id',categoriasControllers.actualizarCategoria);
 
     router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
 
-<<<<<<< HEAD
->>>>>>> Gimena
-=======
     router.get('/nuevo_Platillo', platillosControllers.formularioGuardar);
     router.get('/PlatilloForm',platillosControllers.formularioLlenarPlatillo);
     router.post('/nuevo_Platillo', platillosControllers.guardarDatos);
 
->>>>>>> Gimena
-=======
     router.get('/editar_Restaurante/:id',restauranteControllers.formularioEditar);
     router.post('/nuevo_Restaurante/:id',restauranteControllers.actualizarRestaurante);
     router.delete('/:id', restauranteControllers.eliminarRestaurante);
->>>>>>> Hesler
-=======
+
     // Restaurante
     router.get('/nuevo_Restaurante', authControllers.usuarioAutenticado,
         restauranteControllers.formularioGuardar
@@ -111,8 +98,8 @@ module.exports = function(){
     // reestablecer contraseña
     router.get('/restablecer', usuariosControllers.formularioRestablecerPassword);
     router.post('/restablecer', authControllers.enviarToken);
-    router.get('/reestablecer/:token', authControllers.validarToken);
-    router.post('/reestablecer/:token', authControllers.actualizarPassword);
->>>>>>> Hesler
+    router.get('/restablecer/:token', authControllers.validarToken);
+    router.post('/restablecer/:token', authControllers.actualizarPassword);
+
     return router;
 }
