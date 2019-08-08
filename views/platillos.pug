@@ -29,13 +29,13 @@ block contenido
                             .popular-dish-box.style2.wow.fadeIn(data-wow-delay='0.3s')
                               // Imagen
                               .popular-dish-thumb
-                                a(href='food-detail.html', title='', itemprop='url')
+                                a(href=`/foodLand/nuestrosRestaurantes/platillos/platilloOrden/${platillo.id}`, title='', itemprop='url')
                                   img(src=`/images/Platillos/${platillo.imagen}`, alt='popular-dish-img1.jpg', itemprop='image')
                               // Detalles
                               .popular-dish-info
                                 h4(itemprop='headline')
-                                  a(href='food-detail.html', title='', itemprop='url') #{platillo.nombre}
+                                  a(href=`/foodLand/nuestrosRestaurantes/platillos/platilloOrden/${platillo.id}`, title='', itemprop='url') #{platillo.nombre}
                                 p(itemprop='description') #{platillo.descripcion}
                                 span.price Lps. #{platillo.precio}
-                                a.brd-rd4(href='food-detail.html', title='Order Now', itemprop='url') Ordenar
+                                a.brd-rd4(href=`/foodLand/nuestrosRestaurantes/platillos/platilloOrden/${platillo.id}`, title='Order Now', itemprop='url') Ordenar
                     

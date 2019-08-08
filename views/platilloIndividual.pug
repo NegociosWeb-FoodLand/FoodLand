@@ -25,19 +25,20 @@ block contenido
                       .restaurant-detail-thumb
                         ul.restaurant-detail-img-carousel
                           li
-                            img.brd-rd3(src='/assets/images/resource/restaurant-detail-big-img1-1.jpg', alt='restaurant-detail-big-img1-1.jpg', itemprop='image')
+                            img.brd-rd3(src=`/images/Platillos/${elPlatillo.imagen}`, alt='restaurant-detail-big-img1-1.jpg', itemprop='image')
                       // PLATILLO
-                      .restaurant-detail-title
-                        h1(itemprop='headline') Nombre Platillo
-                        .info-meta
-                          span
-                            a(href='#', title='', itemprop='url') Restaurante
-                        span.price Precio
-                        .qty-wrap
-                          input.qty(type='text', value='1', min='1')
-                        p(itemprop='description') Descripción
-                        br
-                        a.brd-rd3(href='#', title='', itemprop='url') Ordenar
+                      form(action=`/foodLand/platillos/pedidos/${elPlatillo.id}`, method="post")
+                        .restaurant-detail-title
+                          h1(itemprop='headline') #{elPlatillo.nombre}
+                          .info-meta
+                            span
+                              a(title='', itemprop='url') #{elRestaurante.nombre}
+                          span.price Lps. #{elPlatillo.precio}
+                          .qty-wrap
+                            input.qty(type='text', value='1', min='1' name="cantidad")
+                          p(itemprop='description') #{elPlatillo.descripcion}
+                          br
+                         button.brd-rd3(type ='submit' title='', itemprop='url') Ordenar
                 // COMANDA
                 .col-md-4.col-sm-12.col-lg-6
                   .order-wrapper
