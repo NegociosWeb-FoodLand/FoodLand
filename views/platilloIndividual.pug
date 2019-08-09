@@ -12,6 +12,11 @@ block contenido
             span La comida más deliciosa de la ciudad
   div
   section
+    if(elPedidoID)
+      h4 tienes un pedido actualmente
+        input(type="text" name = "ordenActual" value = elPedidoID.id)
+    else
+      h4 aún no ordenas nada.
     .block.gray-bg.bottom-padd210.top-padd30
       .container
         .row
@@ -27,18 +32,19 @@ block contenido
                           li
                             img.brd-rd3(src=`/images/Platillos/${elPlatillo.imagen}`, alt='restaurant-detail-big-img1-1.jpg', itemprop='image')
                       // PLATILLO
-                      form(action=`/foodLand/platillos/pedidos/${elPlatillo.id}`, method="post")
-                        .restaurant-detail-title
-                          h1(itemprop='headline') #{elPlatillo.nombre}
-                          .info-meta
-                            span
-                              a(title='', itemprop='url') #{elRestaurante.nombre}
-                          span.price Lps. #{elPlatillo.precio}
+                      
+                      .restaurant-detail-title
+                        h1(itemprop='headline') #{elPlatillo.nombre}
+                        .info-meta
+                          span
+                            a(title='', itemprop='url') #{elRestaurante.nombre}
+                        span.price Lps. #{elPlatillo.precio}                     
+                        p(itemprop='description') #{elPlatillo.descripcion}
+                        br
+                        form(action=`/foodLand/platillos/pedidos/${elPlatillo.id}`, method="post")
                           .qty-wrap
-                            input.qty(type='text', value='1', min='1' name="cantidad")
-                          p(itemprop='description') #{elPlatillo.descripcion}
-                          br
-                         button.brd-rd3(type ='submit' title='', itemprop='url') Ordenar
+                            input.qty(type='number', value='1', min='1' name="cantidad")
+                          input.brd-rd3(type ='submit' title='', itemprop='url' value="Ordenar") 
                 // COMANDA
                 .col-md-4.col-sm-12.col-lg-6
                   .order-wrapper

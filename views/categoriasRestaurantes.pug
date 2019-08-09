@@ -11,6 +11,11 @@ block contenido
             h1(itemprop='headline') Restaurantes
             span ¡Los mejores de la ciudad!
   section
+    if(elPedidoID)
+      h4 tienes un pedido actualmente
+        input(type="text" name = "ordenActual" value = elPedidoID.id)
+    else
+      h4 aún no ordenas nada.
     .block.less-spacing.gray-bg.top-padd30
       .container
         .row

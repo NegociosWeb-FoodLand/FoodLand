@@ -34,14 +34,14 @@ html(lang='en')
                       // AQUÍ VAN LOS ERRORES
                     span.popup-seprator.text-center
                       i.brd-rd50
-                    form.sign-form(action="/crear_cuenta" method="POST" id="formulario")
+                    form.sign-form(action="/restablecer" method="POST" id="formulario")
                       .row
                         .col-md-12.col-sm-12.col-lg-12.col-xs-12
-                          input.brd-rd3(type='text', placeholder='Ingresa tu correo electrónico')
+                          input.brd-rd3(type='text', placeholder='Ingresa tu correo electrónico' name='correo')
                         .col-md-12.col-sm-12.col-lg-12.col-xs-12
                           button.red-bg.brd-rd3(type='submit') Restablecer la contraseña
                         .col-md-12.col-sm-12.col-lg-12.col-xs-12
-                          a.sign-btn(href='#', title='', itemprop='url', align='right') ¡Volver a iniciar sesión!       
+                          a.sign-btn(href='/inicioSesion', title='', itemprop='url', align='right') ¡Volver a iniciar sesión!       
                   
       // Copyright
       .bottom-bar.dark-bg.text-center

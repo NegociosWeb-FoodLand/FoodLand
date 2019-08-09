@@ -26,10 +26,10 @@ block contenido
                   // Logo
                   .featured-restaurant-thumb
                     a(title='', itemprop='url')
-                       img(src=`images/Platillos/${platillo.imagen}`, alt='platillo', itemprop='image')
+                      img(src=`images/Platillos/${platillo.imagen}`, alt='platillo', itemprop='image')
                   .featured-restaurant-info
                     h4(itemprop='headline')
-                      a(href='#', title='', itemprop='url') #{platillo.nombre}
+                      a(title='', itemprop='url') #{platillo.nombre}
                     span.red-clr Lps. #{platillo.precio}
                   .view-menu-liks
                     a.brd-rd3(href=`/modificarPlatillo/${platillo.id}`) Modificar

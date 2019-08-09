@@ -47,18 +47,26 @@ html(lang='en')
                     .sign-popup-title.text-center
                       h4(itemprop='headline') INICIA SESIÓN
                       span Realiza tus pedidos
+                      // Mostrando los errores de inicio de sesion
+                      if locals.mensajes
+                        each categoria in Object.keys(locals.mensajes)
+                          each error in mensajes[categoria]
+                            .alerta(class=`${categoria}`)
+                              p #{error}
                     span.popup-seprator.text-center
                       i.brd-rd50
-                    form.sign-form(action="/crear_cuenta" method="POST" id="formulario")
+                    form.sign-form(action="/inicioSesion" method="POST" id="formulario")
                       .row
                         .col-md-12.col-sm-12.col-lg-12.col-xs-12
-                          input.brd-rd3(type='text', placeholder='Correo Electrónico')
+                          input.brd-rd3(type='email', placeholder='Correo Electrónico' name='correo' value=correo)
                         .col-md-12.col-sm-12.col-lg-12.col-xs-12
-                          input.brd-rd3(type='password', placeholder='Contraseña')
+                          input.brd-rd3(type='password', placeholder='Contraseña' name='password' value=password)
                         .col-md-12.col-sm-12.col-lg-12.col-xs-12
-                          button.red-bg.brd-rd3(type='submit') INGRESA
+                          button.red-bg.brd-rd3(type='submit' value="Inicio Sesion") INGRESA
                         .col-md-12.col-sm-12.col-lg-12.col-xs-12
-                          a.sign-btn(href='Registro.html', title='', itemprop='url') ¿No eres miembro? Regístrate
+                          a.sign-btn(href="/nuevoUsuario", title='', itemprop='url') ¿No eres miembro? Regístrate
+                          br
+                          a.sign-btn(href="/restablecer") ¿Olvidaste tu contraseña?
       // Copyright
       .bottom-bar.dark-bg.text-center
         .container
