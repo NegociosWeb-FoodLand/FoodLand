@@ -1,0 +1,94 @@
+extends ./layoutCliente
+
+block contenido
+  // Hero
+  section
+    .block
+      .fixed-bg(style='background-image: url(/assets/images/topbg.jpg);')
+      .page-title-wrapper.text-center
+        .col-md-12.col-sm-12.col-lg-12
+          .page-title-inner
+            h1(itemprop='headline') Ordena
+            span La comida más deliciosa de la ciudad
+  div
+  section
+    .block.gray-bg.bottom-padd210.top-padd30
+      .container
+        .row
+          .col-md-12
+            .sec-box
+              .sec-wrapper
+                .col-md-8.col-sm-12.col-lg-6
+                  .restaurant-detail-wrapper
+                    .restaurant-detail-info
+                      // SLIDER
+                      .restaurant-detail-thumb
+                        ul.restaurant-detail-img-carousel
+                          li
+                            img.brd-rd3(src='/assets/images/resource/restaurant-detail-big-img1-1.jpg', alt='restaurant-detail-big-img1-1.jpg', itemprop='image')
+                      // PLATILLO
+                      .restaurant-detail-title
+                        h1(itemprop='headline') Nombre Platillo
+                        .info-meta
+                          span
+                            a(href='#', title='', itemprop='url') Restaurante
+                        span.price Precio
+                        .qty-wrap
+                          input.qty(type='text', value='1', min='1')
+                        p(itemprop='description') Descripción
+                        br
+                        a.brd-rd3(href='#', title='', itemprop='url') Ordenar
+                // COMANDA
+                .col-md-4.col-sm-12.col-lg-6
+                  .order-wrapper
+                    .order-inner.gradient-brd
+                      h4(itemprop='headline') Tu orden
+                      .order-list-wrapper
+                        ul.order-list-inner
+                          // Primer platillo
+                          li
+                            .dish-name
+                              i 1.
+                              h6(itemprop='headline')
+                                a(href='#') Nombre
+                              span.price
+                                i.fa.fa-pencil(aria-hidden='true')
+                              span.price
+                                i.fa.fa-trash(aria-hidden='true')
+                            .dish-name
+                              br
+                              h6(itemprop='headline')
+                                a() #{`Cantidad   100   X   $90.00 `}
+                              span.price $9000.00
+                          // Segundo platillo
+                          li
+                            .dish-name
+                              i 1.
+                              h6(itemprop='headline')
+                                a(href='#') Nombre
+                              span.price
+                                i.fa.fa-pencil(aria-hidden='true')
+                              span.price
+                                i.fa.fa-trash(aria-hidden='true')
+                            .dish-name
+                              br
+                              h6(itemprop='headline')
+                                a() #{`Cantidad   100   X   $90.00 `}
+                              span.price $9000.00
+                        // Subtotales
+                        ul.order-total
+                          li
+                            span SubTotal
+                            i $158
+                          li
+                            span Delivery fee
+                            i $70
+                          li
+                            span Tax
+                            i $12
+                        ul.order-method.brd-rd2.red-bg
+                          li
+                            span Total
+                            span.price $340
+                          li
+                            a.brd-rd2(href='#', title='', itemprop='url') Confirmar orden

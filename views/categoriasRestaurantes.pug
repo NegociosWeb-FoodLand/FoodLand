@@ -1,0 +1,42 @@
+extends ./layoutCliente
+
+block contenido
+  // Hero
+  section
+    .block
+      .fixed-bg(style='background-image: url(/assets/images/topbg.jpg);')
+      .page-title-wrapper.text-center
+        .col-md-12.col-sm-12.col-lg-12
+          .page-title-inner
+            h1(itemprop='headline') Restaurantes
+            span ¡Los mejores de la ciudad!
+  section
+    .block.less-spacing.gray-bg.top-padd30
+      .container
+        .row
+          .col-md-12.col-sm-12.col-lg-12
+            .sec-box
+              // Filtros
+              .filters-wrapper
+                ul.filter-buttons.center
+                  if (lasCategorias)
+                    each categoria in lasCategorias
+                      li
+                        a.brd-rd30(data-filter=`${categoria.nombre}`, href='#', itemprop='url') #{categoria.nombre}
+                // RESTAURANTES FILTRADOS
+                .filters-inner.style2
+                  .row
+                    .masonry
+                      ul
+                        if (losRestaurantes)
+                          each restaurante in losRestaurantes
+                            li
+                              .col-md-12.col-sm-12.col-lg-6.filter-item(class=`${categoria.nombre}`)
+                                .featured-restaurant-box.wow.fadeIn(data-wow-delay='0.2s')
+                                  .featured-restaurant-thumb
+                                    a(href='food-detail.html', title='', itemprop='url')
+                                      img.brd-rd50(src='/assets/images/resource/featured-restaurant-img1.jpg', alt='featured-restaurant-img1.jpg', itemprop='image')
+                                  .featured-restaurant-info
+                                    span.red-clr #{restaurante.direccion}
+                                    h4(itemprop='headline')
+                                      a(href='food-detail.html', title='', itemprop='url') #{restaurante.nombre}

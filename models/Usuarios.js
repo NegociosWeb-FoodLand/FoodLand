@@ -10,6 +10,9 @@ const slug = require('slug');
 // Importar shortid
 const shortid = require('shortid');
 
+// Importar bcrypt
+const bcrypt = require('bcrypt-nodejs');
+
 const Usuarios = db.define('usuario',{
     id:{
         type:Sequelize.INTEGER,
@@ -21,16 +24,47 @@ const Usuarios = db.define('usuario',{
         type:Sequelize.STRING
     },
 
+    password : {
+        type : Sequelize.STRING(60),
+        allowNull : false,
+        validate : {
+            notEmpty : {
+                msg : 'La contraseña no puede ser vacía'
+            }
+        }
+    },
+
     correo: {
-        type:Sequelize.STRING
+        type:Sequelize.STRING,
+        allowNull : false,
+        validate : {
+            isEmail : {
+                msg : 'Verifica que tu correo es un correo electrónico válido'
+            },
+            notEmpty : {
+                msg : 'El correo electrónico no puede ser vacío'
+            }
+        },
+        unique : {
+            args : true,
+            msg : 'Ya existe un usuario registrado con ésta dirección de correo electrónico'
+        }
+    },
+
+    imagen: {
+        type: Sequelize.STRING
     },
 
     estado: {
         type:Sequelize.INTEGER
     },
 
-    rol: {
+    token: {
         type:Sequelize.STRING
+    },
+
+    expiracion: {
+        type: Sequelize.DATE
     },
 
     url: {
@@ -38,21 +72,32 @@ const Usuarios = db.define('usuario',{
     }
 }, {
     hooks : {
-        beforeCreate(publicacion) {
+        beforeCreate(usuario) {
             console.log('Antes de insertar en la base de datos');
-            const url = slug(publicacion.titulo).toLowerCase();
+            const url = slug(usuario.usuarioNombre).toLowerCase();
 
-            publicacion.url = `${url}-${shortid.generate()}`;
+            usuario.url = `${url}-${shortid.generate()}`;
+
+            usuario.password = bcrypt.hashSync(usuario.password, bcrypt.genSaltSync(10));
         },
 
-        beforeUpdate(publicacion) {
+        beforeUpdate(usuario) {
             console.log('Antes de actualizar en la base de datos');
-            const url = slug(publicacion.nombre).toLowerCase();
+           
+            const url = slug(usuario.usuarioNombre).toLowerCase();
 
-            publicacion.url = `${url}-${shortid.generate()}`;
+            usuario.url = `${url}-${shortid.generate()}`;
+
+            usuario.password = bcrypt.hashSync(usuario.password, bcrypt.genSaltSync(10));
         }
     }
 });
+
+// Métodos personalizados
+// Verificar si el password enviado es igual al existente
+Usuarios.prototype.verificarPassword = function(password){
+    return bcrypt.compareSync(password, this.password);
+}
 
 // importar los modelos para realizarlos
 module.exports = Usuarios;

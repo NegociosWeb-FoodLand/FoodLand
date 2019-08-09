@@ -31,27 +31,11 @@ const Pedido = db.define( 'pedido',{
     },
 
     total: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(10,2)
     },
 
     url: {
         type:Sequelize.STRING
-    }
-}, {
-    hooks : {
-        beforeCreate(publicacion) {
-            console.log('Antes de insertar en la base de datos');
-            const url = slug(publicacion.titulo).toLowerCase();
-
-            publicacion.url = `${url}-${shortid.generate()}`;
-        },
-
-        beforeUpdate(publicacion) {
-            console.log('Antes de actualizar en la base de datos');
-            const url = slug(publicacion.nombre).toLowerCase();
-
-            publicacion.url = `${url}-${shortid.generate()}`;
-        }
     }
 });
 
