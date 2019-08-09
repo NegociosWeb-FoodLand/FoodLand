@@ -50,11 +50,8 @@ exports.guardarDatos = async (req,res)=>{
 
 
     //definimos la fecha a guardar
-<<<<<<< HEAD
     ultimaModificacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
-=======
     var  ultimaModificacion1 = new Date().toISOString().slice(0, 19).replace('T', ' ');
->>>>>>> a5903baf06bedf1cece415132568f933247337f2
 
     //Verificamos si hay errores 
 

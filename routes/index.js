@@ -89,6 +89,9 @@ module.exports = function(){
     );    
 
     // Usuario
+
+
+
     router.get('/nuevoUsuario', usuariosControllers.formularioLlenarUsuario);
     router.post('/nuevoUsuario', usuariosControllers.guardarDatos);
     router.get('/inicioSesion', usuariosControllers.iniciarSesion);
