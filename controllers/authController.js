@@ -119,8 +119,9 @@ exports.actualizarPassword = async(req, res) => {
     }
 
     // El token del usuario es correcto y aún no vence
-    usuario.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-
+    console.log(req.body.password)
+    //usuario.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    usuario.password = req.body.password
     // Limpiar los valores del token y de la expiración
     usuario.token = null;
     usuario.expiracion = null;
@@ -130,5 +131,5 @@ exports.actualizarPassword = async(req, res) => {
 
     // Redireccionar al inicio de sesión
     req.flash('correcto', 'la contraseña se ha modificado correctamente');
-    req.redirect('/inicioSesion');
+    res.redirect('/inicioSesion');
 }
