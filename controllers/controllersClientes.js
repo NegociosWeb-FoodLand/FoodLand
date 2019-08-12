@@ -234,6 +234,12 @@ exports.CrerPedidoConDetalle = async(req, res,next)=>{
     });
     
 }
+exports.finalizarOrden= async(req,res)=>{
+    // no hay mas detalles para el pedido actul
+    // reiniciamos la variable del id para un nuevo pedido.
+    elPedidoID = null;
+    console.log("tu pedido ha sido procesado");
+};
 
 // renderizamos la pantalla para mostrar informacion sobre nosotros
 exports.mostrarAcerca = async (req, res)=>{

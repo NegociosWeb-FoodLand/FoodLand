@@ -109,6 +109,7 @@ module.exports = function(){
     router.get('/foodLand/nosotros',authControllers.usuarioAutenticado,clienteOperaciones.mostrarAcerca);
     router.get('/foodLand/contacto',authControllers.usuarioAutenticado,clienteOperaciones.mostrarContacto);
     router.get('/foodLand/misPedidos',authControllers.usuarioAutenticado,clienteOperaciones.mostrarPedidos);
+    router.get('/foodland/confirmandoPedido',authControllers.usuarioAutenticado,clienteOperaciones.finalizarOrden);
 
     router.post('/foodLand/platillos/pedidos/:id',authControllers.usuarioAutenticado,
         clienteOperaciones.CrerPedidoConDetalle
