@@ -52,50 +52,31 @@ block contenido
                       h4(itemprop='headline') Tu orden
                       .order-list-wrapper
                         ul.order-list-inner
-                          // Primer platillo
-                          li
-                            .dish-name
-                              i 1.
-                              h6(itemprop='headline')
-                                a(href='#') Nombre
-                              span.price
-                                i.fa.fa-pencil(aria-hidden='true')
-                              span.price
-                                i.fa.fa-trash(aria-hidden='true')
-                            .dish-name
-                              br
-                              h6(itemprop='headline')
-                                a() #{`Cantidad   100   X   $90.00 `}
-                              span.price $9000.00
-                          // Segundo platillo
-                          li
-                            .dish-name
-                              i 1.
-                              h6(itemprop='headline')
-                                a(href='#') Nombre
-                              span.price
-                                i.fa.fa-pencil(aria-hidden='true')
-                              span.price
-                                i.fa.fa-trash(aria-hidden='true')
-                            .dish-name
-                              br
-                              h6(itemprop='headline')
-                                a() #{`Cantidad   100   X   $90.00 `}
-                              span.price $9000.00
+                          if (losdetallesPedidos)
+                            each elDetallePedido in losdetallesPedidos
+                              li
+                                .dish-name
+                                  h6(itemprop='headline')
+                                    a() #{elDetallePedido.nombre}
+                                  span.price
+                                    i.fa.fa-pencil(aria-hidden='true')
+                                  span.price
+                                    i.fa.fa-trash(aria-hidden='true')
+                                .dish-name
+                                  br
+                                  h6(itemprop='headline')
+                                    a() #{`Cantidad   ${elDetallePedido.cantidad}   X ${elDetallePedido.precio}   `}
+                                  span.price #{elDetallePedido.subtotal}
                         // Subtotales
                         ul.order-total
+                          //- li
+                          //-   textarea#sugerencia(name="sugerencia", cols="45", rows="5", placeholder='¿Alguna sugerencia?')
                           li
                             span SubTotal
-                            i $158
-                          li
-                            span Delivery fee
-                            i $70
-                          li
-                            span Tax
-                            i $12
+                              i #{subtotalGeneral}
                         ul.order-method.brd-rd2.red-bg
                           li
                             span Total
-                            span.price $340
+                            span.price #{subtotalGeneral}
                           li
                             a.brd-rd2(href='#', title='', itemprop='url') Confirmar orden

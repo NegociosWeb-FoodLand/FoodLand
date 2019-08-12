@@ -3480,6 +3480,11 @@ h2.title3 span.sudo-bottom:before {bottom: 7px;}
   top: 8px;
   left: 2px;
 }
+
+.order-total #sugerencia {
+  color: #000;
+}
+
 .order-total {
   float: left;
   width: 100%;

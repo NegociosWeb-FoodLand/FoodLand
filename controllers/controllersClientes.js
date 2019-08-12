@@ -1,6 +1,10 @@
 // declaramos una variable global const elPedidoID
 var elPedidoID = null;
 var fecha = null;
+var losdetallesPedidos = null;
+var losPlatillosPedidos = null;
+var subtotalGeneral=null;
+
 // importar los modelos a utilizar
 const Restaurantes = require('../models/Restaurante');
 const Categorias = require('../models/Categorias');
@@ -72,11 +76,15 @@ exports.mostrarInformaciónPlatillo=async(req,res)=>{
 
     // obtenemos el valor por destructuring
     const [elPlatillo, elRestaurante] = await Promise.all([platillo, restaurante]);
+
+
     //renderizamos la vista
     res.render('platilloIndividual',{
         elPlatillo,
         elRestaurante,
-        elPedidoID
+        elPedidoID,
+        losdetallesPedidos,
+        subtotalGeneral
     })
 
 };
@@ -86,7 +94,7 @@ exports.CrerPedidoConDetalle = async(req, res,next)=>{
     console.log("llego al controlador");
     // capturar los datos enviados desde el formulario.
     const{id}= req.params;
-    const{cantidad}=req.body;
+    const{cantidad }=req.body;
 
     if(elPedidoID){
     
@@ -124,16 +132,18 @@ exports.CrerPedidoConDetalle = async(req, res,next)=>{
             console.log(elPlatillo.precio);
             console.log("*******************************************************************");
             await DetallePedido.create({
-            sugerencia,
-            cantidad,
-            subtotal,
-            url:url2,
-            platillo:elPlatillo.id,
-            pedido:pedido.id
+                sugerencia,
+                cantidad,
+                subtotal,
+                url:url2,
+                platillo:elPlatillo.id,
+                pedido:pedido.id
             })
 
+            subtotalGeneral += subtotal;
             console.log("el detalle tambíen se ha guardado correctamente")
-            
+            mostrarDetalle( pedido.id);
+           
     }else{
         // no hay pedidos pendientes, se creará un nuevo pedido.
         // obtenemos el id del usuario
@@ -197,7 +207,15 @@ exports.CrerPedidoConDetalle = async(req, res,next)=>{
         })
 
         console.log("el detalle tambíen se ha guardado correctamente")
- 
+       
+        mostrarDetalle( pedido.id);
+
+        subtotalGeneral += subtotal;
+        subtotalGeneral.toPrecision()
+
+        console.log('////////////////////////////////////////////////////////////////////');
+        console.log(subtotal)
+        console.log('////////////////////////////////////////////////////////////////////');
     }
     // traemos todos los restaurantes disponibles
     const losRestaurantes = await Restaurantes.findAll();
@@ -205,19 +223,14 @@ exports.CrerPedidoConDetalle = async(req, res,next)=>{
     // traemos todas las categorias disponibles
     const lasCategorias = await Categorias.findAll();
 
-    // obtenemos todos los detalles del pedido actual.
-    // const losdetallesPedidos = await DetallePedido.findOne({
-    //     where:{
-    //         pedido=
-    //     }
-    // });
-
     //redireccionamos a la página de los platillos 
 
     res.render('categoriasRestaurantes',{
         elPedidoID,
         losRestaurantes,
-        lasCategorias
+        lasCategorias,
+        losdetallesPedidos
+        
     });
     
 }
@@ -237,3 +250,28 @@ exports.mostrarContacto = async (req, res)=>{
 exports.mostrarPedidos = async (req, res)=>{
     res.render('comprasUsuario',{})
 };
+
+
+function mostrarDetalle( id){
+    // mandamos a llamar la vista creada en mysql para la comanda
+    var mysql = require('mysql2')
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "FoodLand"
+      });
+
+    con.connect(function(err) {
+        if (err) throw err;
+        //Select all customers and return the result object:
+        con.query(`SELECT * FROM vcomanda WHERE pedido = ${id}`, function (err, result, fields) {
+          if (err) throw err;
+          console.log(result);
+          losdetallesPedidos = result;
+          console.log("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/ listo");
+          console.log(losdetallesPedidos);
+          
+        });
+      });
+}
