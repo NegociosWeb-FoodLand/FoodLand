@@ -227,11 +227,115 @@ exports.CrerPedidoConDetalle = async(req, res,next)=>{
     
 }
 
-exports.editarPedidoConDetalle = async(req, res, next)=>{
-    //nada por ahora
+exports.mostrarDetalleP = async(req, res, next)=>{
+    // Obtenemos el detalle a editar
+    const {id} = req.params;
+
+    // buscar los datos del detalle seleccionado
+    const elDetalle = DetallePedido.findOne({
+        where: {
+            id: id
+        }
+    });
+
+    const[detalle] = await  Promise.all([elDetalle]);
+
+    const platillo = Platillos.findOne({
+        where: {
+            id: detalle.platillo
+        }
+    });
+
+    const[elPlatillo] = await  Promise.all([platillo]);
+
+
+    // obtenemos el nombre del restaurante del platillo
+    const elRestaurante = Restaurantes.findOne({
+        where : {
+            id : platillo.idRestaurante
+        }
+    });
+
+    // obtenemos todos los detalles
+    mostrarDetalle(detalle.pedido);
+    console.log(detalle.cantidad);
+
+    // renderizamos la página para editar
+
+    res.render('platilloIndividual', {
+        detalle,
+        elPlatillo,
+        elRestaurante,
+        losdetallesPedidos,
+        elPedidoID
+    })
 }
 
-exports.eliminarPeidoConDetalle = async(req,res,next)=>{
+exports.editarDetalle = async(req, res, next) => {
+    console.log("entra a editar el detalle");
+    // Obtener el id del detalle
+    const {id} = req.params;
+    console.log(id);
+
+    // Obtener la cantidad del detalle
+    const {cantidad} = req.body;
+
+    // buscar los datos del detalle seleccionado
+    const elDetalle = DetallePedido.findOne({
+        where: {
+            id: id
+        }
+    });
+
+    // Obtener los datos por promise
+    const[detalle] = await  Promise.all([elDetalle]);
+
+    const platillo = Platillos.findOne({
+        where: {
+            id: detalle.platillo
+        }
+    });
+
+    const[elPlatillo] = await  Promise.all([platillo]);
+
+    await DetallePedido.update({
+        sugerencia:"ninguna",
+        cantidad:cantidad,
+        subtotal:detalle.subtotal,
+        url:detalle.url2,
+        platillo:detalle.platillo,
+        pedido:detalle.pedido
+
+
+    }, 
+    {
+        where:{
+            id:req.params.id
+        }
+    }
+    );
+
+    
+
+    // obtenemos el nombre del restaurante del platillo
+    const elRestaurante = Restaurantes.findOne({
+        where : {
+            id : platillo.idRestaurante
+        }
+    });
+    
+    // Capturamos todos los detalles del pedido
+    mostrarDetalle(detalle.pedido);
+    // redireccionamos a la misma página
+    res.render('platilloIndividual', {
+        losdetallesPedidos,
+        elPlatillo,
+        elRestaurante
+
+    });
+}
+
+exports.eliminarPedidoConDetalle = async(req,res,next)=>{
     // 
 }
 

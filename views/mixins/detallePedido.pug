@@ -1,0 +1,78 @@
+mixin detallePedido(losdetallesPedidos = {})
+    div
+      section
+        if(elPedidoID)
+          h4 tienes un pedido actualmente
+            input(type="text" name = "ordenActual" value = elPedidoID.id)
+        else
+          h4 aún no ordenas nada.
+        .block.gray-bg.bottom-padd210.top-padd30
+          .container
+            .row
+              .col-md-12
+                .sec-box
+                  .sec-wrapper
+                    .col-md-8.col-sm-12.col-lg-6
+                      .restaurant-detail-wrapper
+                        .restaurant-detail-info
+                          // SLIDER
+                          .restaurant-detail-thumb
+                            ul.restaurant-detail-img-carousel
+                              li
+                                img.brd-rd3(src=`/images/Platillos/${elPlatillo.imagen }`, alt='restaurant-detail-big-img1-1.jpg', itemprop='image')
+                          // PLATILLO
+                        
+                          .restaurant-detail-title
+                            h1(itemprop='headline') #{elPlatillo.nombre}
+                            .info-meta
+                              span
+                                a(title='', itemprop='url') #{elRestaurante.nombre}
+                            span.price Lps. #{elPlatillo.precio}                     
+                            p(itemprop='description') #{elPlatillo.descripcion}
+                            br
+                            if(detalle)
+                              form(action=`/foodland/mostrarDetalle/${detalle.id}`, method="post")
+                                .qty-wrap
+                                  input.qty(type='number', value=`${detalle.cantidad || '1' }`, min='1' name='cantidad')
+                                input.brd-rd3(type ='submit' title='', itemprop='url' value= "Modificar")
+                            else
+                              form(action=`/foodLand/platillos/pedidos/${elPlatillo.id}`, method="post")
+                                .qty-wrap
+                                  input.qty(type='number', value='1' , min='1' name='cantidad' )
+                                input.brd-rd3(type ='submit' title='', itemprop='url' value="Ordenar") 
+                    // COMANDA
+                    .col-md-4.col-sm-12.col-lg-6
+                      .order-wrapper
+                        .order-inner.gradient-brd
+                          h4(itemprop='headline') Tu orden
+                          .order-list-wrapper
+                            ul.order-list-inner
+                              if (losdetallesPedidos)
+                                each elDetallePedido in losdetallesPedidos
+                                  li
+                                    .dish-name
+                                      h6(itemprop='headline')
+                                        a() #{elDetallePedido.nombre}
+                                      span.price
+                                        a.i.fa.fa-pencil(href=`/foodland/mostrarDetalle/${elDetallePedido.idDetalle}`)
+                                      span.price
+                                        i.fa.fa-trash(aria-hidden='true')
+                                    .dish-name
+                                      br
+                                      h6(itemprop='headline')
+                                        a() #{`Cantidad   ${elDetallePedido.cantidad}   X ${elDetallePedido.precio}   `}
+                                      span.price #{elDetallePedido.subtotal}
+                            // Subtotales
+                            ul.order-total
+                              li
+                                span SubTotal
+                                  i #{subtotalGeneral}
+                            ul.order-method.brd-rd2.red-bg
+                              li
+                                span Total
+                                span.price #{subtotalGeneral}
+                              li
+                                a.brd-rd2(href='/foodland/confirmandoPedido', title='', itemprop='url') Confirmar orden
+                            //- li
+                            //-   textarea#sugerencia(name="sugerencia", cols="45", rows="5", placeholder='¿Alguna sugerencia?')
+                            //-
