@@ -79,9 +79,15 @@ module.exports = function(){
     router.post('/nuevo_Platillo', authControllers.usuarioAutenticado,
         platillosControllers.guardarDatos
     );    
-    router.get('/modificarPlatillo/:id',platillosControllers.formularioEditar);
-    router.post('/nuevo_Platillo/:id', platillosControllers.actualizarPlatillo);
-    router.delete('/nuevo_Platillo/:id', platillosControllers.eliminarPlatillo);
+    router.get('/modificarPlatillo/:id', authControllers.usuarioAutenticado,
+        platillosControllers.formularioEditar
+    );
+    router.post('/nuevo_Platillo/:id', authControllers.usuarioAutenticado,
+        platillosControllers.actualizarPlatillo
+    );
+    router.delete('/nuevo_Platillo/:id', authControllers.usuarioAutenticado,
+        platillosControllers.eliminarPlatillo
+    );
 
     //------------------------------------------------------Usuarios---------------------------------//
     router.get('/nuevoUsuario', usuariosControllers.formularioLlenarUsuario);

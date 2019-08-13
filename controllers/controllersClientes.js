@@ -223,11 +223,59 @@ exports.CrerPedidoConDetalle = async(req, res,next)=>{
     
 }
 
-exports.editarPedidoConDetalle = async(req, res, next)=>{
-    //nada por ahora
+exports.mostrarDetalle = async(req, res, next)=>{
+    // Obtenemos el detalle a editar
+    const {id} = req.params;
+
+    // buscar los datos del detalle seleccionado
+    const elDetalle = DetallePedido.findOne({
+        where: {
+            id: id
+        }
+    });
+
+    // renderizamos la página para editar
+    res.render('platilloIndividual', {
+        elDetalle
+    })
 }
 
-exports.eliminarPeidoConDetalle = async(req,res,next)=>{
+exports.editarDetalle = async(req, res, next) => {
+    // Obtener el id del detalle
+    const {id} = req.params;
+
+    // Obtener la cantidad del detalle
+    const {cantidad} = req.body;
+
+    // buscar los datos del detalle seleccionado
+    const elDetalle = DetallePedido.findOne({
+        where: {
+            id: id
+        }
+    });
+
+    // Obtener los datos por promise
+    const[detalle] = await  Promise.all([elDetalle]);
+
+    await DetallePedido.update({
+        sugerencia:"ninguna",
+        cantidad:cantidad,
+        subtotal:detalle.subtotal,
+        url:detalle.url2,
+        platillo:detalle.platillo,
+        pedido:detalle.pedido
+    });
+
+    // Capturamos todos los detalles del pedido
+    mostrarDetalle(detalle.pedido);
+
+    // redireccionamos a la misma página
+    res.render('platilloIndividual', {
+        losdetallesPedidos
+    });
+}
+
+exports.eliminarPedidoConDetalle = async(req,res,next)=>{
     // 
 }
 
