@@ -226,7 +226,6 @@ exports.CrerPedidoConDetalle = async(req, res,next)=>{
 exports.mostrarDetalleP = async(req, res, next)=>{
     // Obtenemos el detalle a editar
     const {id} = req.params;
-    console.log(id);
 
     // buscar los datos del detalle seleccionado
     const elDetalle = DetallePedido.findOne({
@@ -255,11 +254,12 @@ exports.mostrarDetalleP = async(req, res, next)=>{
 
     // obtenemos todos los detalles
     mostrarDetalle(detalle.pedido);
+    console.log(detalle.cantidad);
 
     // renderizamos la página para editar
 
     res.render('platilloIndividual', {
-        elDetalle,
+        detalle,
         elPlatillo,
         elRestaurante,
         losdetallesPedidos,
@@ -268,8 +268,10 @@ exports.mostrarDetalleP = async(req, res, next)=>{
 }
 
 exports.editarDetalle = async(req, res, next) => {
+    console.log("entra a editar el detalle");
     // Obtener el id del detalle
     const {id} = req.params;
+    console.log(id);
 
     // Obtener la cantidad del detalle
     const {cantidad} = req.body;
@@ -284,6 +286,14 @@ exports.editarDetalle = async(req, res, next) => {
     // Obtener los datos por promise
     const[detalle] = await  Promise.all([elDetalle]);
 
+    const platillo = Platillos.findOne({
+        where: {
+            id: detalle.platillo
+        }
+    });
+
+    const[elPlatillo] = await  Promise.all([platillo]);
+
     await DetallePedido.update({
         sugerencia:"ninguna",
         cantidad:cantidad,
@@ -291,14 +301,33 @@ exports.editarDetalle = async(req, res, next) => {
         url:detalle.url2,
         platillo:detalle.platillo,
         pedido:detalle.pedido
-    });
 
+
+    }, 
+    {
+        where:{
+            id:req.params.id
+        }
+    }
+    );
+
+    
+
+    // obtenemos el nombre del restaurante del platillo
+    const elRestaurante = Restaurantes.findOne({
+        where : {
+            id : platillo.idRestaurante
+        }
+    });
+    
     // Capturamos todos los detalles del pedido
     mostrarDetalle(detalle.pedido);
-
     // redireccionamos a la misma página
     res.render('platilloIndividual', {
-        losdetallesPedidos
+        losdetallesPedidos,
+        elPlatillo,
+        elRestaurante
+
     });
 }
 
