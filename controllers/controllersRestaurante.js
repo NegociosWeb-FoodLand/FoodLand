@@ -303,40 +303,27 @@ exports.actualizarRestaurante = async (req, res) => {
 
 //Eliminando restaurante
 exports.eliminarRestaurante = async (req, res, next) => {
-    // Obtener el id mediante query o params
-    const { id } = req.params;
+    const {estado }= req.body;
+    let errores = [];
 
-     // Eliminar imagen del servidor
-     const el_Restaurante = Restaurantes.findOne({
-         where : {
-             id: id
-         }
-     });
-     // obtenenemos los valores por promise
-    const [elRestaurante] = await Promise.all([el_Restaurante]);
+     // Si hay errores
+     if (errores.length > 0) {
+        res.render('dashRestaurante', {
+            nombrePagina : 'Nuevo restaurante',
+            errores
+        });
+    } else {
+        // No existen errores
 
-     console.log(elRestaurante.logo);
-     if(elRestaurante.logo.trim() !='restaurante.png'){
-        fs.unlink(path.join(__dirname, `../public/images/Restaurantes/${elRestaurante.logo.trim()}`) , (err) => {
-            if (err) throw err;
-            console.log('Borrado completo');
-          });
+        // Inserción en la base de datos.
+        await Restaurantes.update({
+            estado:0
+            },
+            { where : {
+                id : req.params.id
+            }}
+        ),
+
+        res.redirect('/nuevo_Restaurante');
     }
-    
-
-    // Eliminar el restaurante
-    const resultado = await Restaurantes.destroy({
-        where : {
-            id : id
-        }
-    });
-
-
-  
-    if(!resultado) {
-        return next();
-         
-    }
-
-    res.send(200).send('El restaurante ha sido eliminado correctamente');
-}
+};

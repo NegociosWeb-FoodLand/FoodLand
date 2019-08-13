@@ -16,8 +16,6 @@ const Usuario = require('../models/Usuarios');
 // Importar el módulo de envío de correos electrónicos
 const enviarEmail = require('../handlers/emailComanda');
 
-
-
 // renderizamos la pantalla principal para el administrador
 exports.principalCliente = async (req, res)=>{
     res.render('index',{})
