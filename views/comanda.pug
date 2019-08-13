@@ -47,8 +47,21 @@ block contenido
                                       h6(itemprop='headline')
                                         a() #{`Cantidad   ${elDetallePedido.cantidad}   X ${elDetallePedido.precio}   `}
                                       span.price #{elDetallePedido.subtotal}
+                            // Subtotales
+                            ul.order-total
+                              li
+                                span SubTotal
+                                  i #{subtotalGeneral}
+                            ul.order-method.brd-rd2.red-bg
+                              li
+                                span Total
+                                span.price #{subtotalGeneral}
+                              li
+                                a.brd-rd2(href='/foodland/confirmandoPedido', title='', itemprop='url') Confirmar orden
                             //- li
                             //-   textarea#sugerencia(name="sugerencia", cols="45", rows="5", placeholder='¿Alguna sugerencia?')
                             //-
+
+
 
               
