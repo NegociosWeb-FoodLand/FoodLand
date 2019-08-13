@@ -10,7 +10,7 @@ if(btnEliminar){
 
         console.log('entra al boton eliminar');
         // Si se presiona el botón de eliminar
-        if(!(e.target.classList.contains('modificar'))){
+        if((e.target.classList.contains('eliminar-categoria'))){
             console.log('eliminar');
             const idCategoria = e.target.dataset.categoriaId;
 
