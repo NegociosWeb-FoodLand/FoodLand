@@ -11,6 +11,12 @@ const Categorias = require('../models/Categorias');
 const Platillos = require('../models/Platillos');
 const Pedidos = require('../models/Pedidos');
 const DetallePedido = require('../models/DetallePedido');
+const Usuario = require('../models/Usuarios');
+
+// Importar el módulo de envío de correos electrónicos
+const enviarEmail = require('../handlers/emailComanda');
+
+
 
 // renderizamos la pantalla principal para el administrador
 exports.principalCliente = async (req, res)=>{
@@ -235,8 +241,28 @@ exports.finalizarOrden= async(req,res)=>{
     // no hay mas detalles para el pedido actul
     // reiniciamos la variable del id para un nuevo pedido.
     elPedidoID = null;
-    console.log("tu pedido ha sido procesado");
-};
+    const elUsarioid = res.locals.usuario.id;
+
+    const usuario = await Usuario.findOne({
+        where: {
+            id: elUsarioid
+        }
+    });
+
+    console.log(usuario);
+
+        // Envía el correo electrónico con el token generado
+        await enviarEmail.enviarCorreoComanda({
+            usuario,
+            subject : 'Solicitud de pedido',
+            vista : 'comandaEmail'
+        });
+    
+        // redireccionar al inicio de sesión
+        req.flash('correcto', 'Se ha enviado la confirmacion del pedido a tu correo electrónico');
+        // res.redirect('/inicioSesion');
+        res.redirect('/');
+    }
 
 // renderizamos la pantalla para mostrar informacion sobre nosotros
 exports.mostrarAcerca = async (req, res)=>{
