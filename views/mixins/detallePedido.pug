@@ -30,10 +30,16 @@ mixin detallePedido(losdetallesPedidos = {})
                             span.price Lps. #{elPlatillo.precio}                     
                             p(itemprop='description') #{elPlatillo.descripcion}
                             br
-                            form(action=`/foodLand/platillos/pedidos/${elPlatillo.id}`, method="post")
-                              .qty-wrap
-                                input.qty(type='number', value='1', min='1' name="cantidad")
-                              input.brd-rd3(type ='submit' title='', itemprop='url' value="Ordenar") 
+                            if(detalle)
+                              form(action=`/foodland/mostrarDetalle/${detalle.id}`, method="post")
+                                .qty-wrap
+                                  input.qty(type='number', value=`${detalle.cantidad || '1' }`, min='1' name='cantidad')
+                                input.brd-rd3(type ='submit' title='', itemprop='url' value= "Modificar")
+                            else
+                              form(action=`/foodLand/platillos/pedidos/${elPlatillo.id}`, method="post")
+                                .qty-wrap
+                                  input.qty(type='number', value='1' , min='1' name='cantidad' )
+                                input.brd-rd3(type ='submit' title='', itemprop='url' value="Ordenar") 
                     // COMANDA
                     .col-md-4.col-sm-12.col-lg-6
                       .order-wrapper
