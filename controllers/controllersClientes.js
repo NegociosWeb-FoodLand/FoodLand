@@ -293,15 +293,14 @@ exports.editarDetalle = async(req, res, next) => {
     });
 
     const[elPlatillo] = await  Promise.all([platillo]);
-
+    const subtotal = elPlatillo.precio *cantidad;
     await DetallePedido.update({
         sugerencia:"ninguna",
         cantidad:cantidad,
-        subtotal:detalle.subtotal,
+        subtotal:subtotal,
         url:detalle.url2,
         platillo:detalle.platillo,
         pedido:detalle.pedido
-
 
     }, 
     {
@@ -311,15 +310,13 @@ exports.editarDetalle = async(req, res, next) => {
     }
     );
 
-    
-
     // obtenemos el nombre del restaurante del platillo
     const elRestaurante = Restaurantes.findOne({
         where : {
             id : platillo.idRestaurante
         }
     });
-    
+
     // Capturamos todos los detalles del pedido
     mostrarDetalle(detalle.pedido);
     // redireccionamos a la misma página
@@ -334,6 +331,15 @@ exports.editarDetalle = async(req, res, next) => {
 exports.eliminarPedidoConDetalle = async(req,res,next)=>{
     // 
 }
+
+// renderizamos la pantalla principal para el administrador
+exports.comanda = async (req, res)=>{
+   
+    res.render('comanda',{
+        losdetallesPedidos,
+        elPedidoID
+    })
+};
 
 exports.finalizarOrden= async(req,res)=>{
     // no hay mas detalles para el pedido actul
@@ -358,7 +364,6 @@ exports.mostrarPedidos = async (req, res)=>{
     res.render('comprasUsuario',{})
 };
 
-
 function mostrarDetalle( id){
     // mandamos a llamar la vista creada en mysql para la comanda
     var mysql = require('mysql2')
@@ -382,3 +387,4 @@ function mostrarDetalle( id){
         });
       });
 }
+

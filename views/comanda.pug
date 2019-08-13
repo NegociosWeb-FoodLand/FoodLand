@@ -1,0 +1,54 @@
+extends ./layoutCliente
+
+block contenido
+  // HERO
+  section
+    .block
+      .fixed-bg(style='background-image: url(/assets/images/topbg.jpg);')
+      .page-title-wrapper.text-center
+        .col-md-12.col-sm-12.col-lg-12
+          .page-title-inner
+            h1(itemprop='headline') Tu pedido
+            //- span Te daremos la información que necesitas
+  // INFO
+  section
+     div
+      section
+        if(elPedidoID)
+          h4 tienes un pedido actualmente
+            input(type="text" name = "ordenActual" value = elPedidoID.id)
+        else
+          h4 aún no ordenas nada.
+        .block.gray-bg.bottom-padd210.top-padd30
+          .container
+            .row
+              .col-md-12
+                .sec-box
+                  .sec-wrapper      
+                    // COMANDA
+                    .col-md-4.col-sm-12.col-lg-12
+                      .order-wrapper
+                        .order-inner.gradient-brd
+                          h4(itemprop='headline') Tu orden
+                          .order-list-wrapper
+                            ul.order-list-inner
+                              if (losdetallesPedidos)
+                                each elDetallePedido in losdetallesPedidos
+                                  li
+                                    .dish-name
+                                      h6(itemprop='headline')
+                                        a() #{elDetallePedido.nombre}
+                                      span.price
+                                        a.i.fa.fa-pencil(href=`/foodland/mostrarDetalle/${elDetallePedido.idDetalle}`)
+                                      span.price
+                                        i.fa.fa-trash(aria-hidden='true')
+                                    .dish-name
+                                      br
+                                      h6(itemprop='headline')
+                                        a() #{`Cantidad   ${elDetallePedido.cantidad}   X ${elDetallePedido.precio}   `}
+                                      span.price #{elDetallePedido.subtotal}
+                            //- li
+                            //-   textarea#sugerencia(name="sugerencia", cols="45", rows="5", placeholder='¿Alguna sugerencia?')
+                            //-
+
+              
