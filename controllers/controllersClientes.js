@@ -2,8 +2,8 @@
 var elPedidoID = null;
 var fecha = null;
 var losdetallesPedidos = null;
-var losPlatillosPedidos = null;
 var subtotalGeneral=null;
+var losPlatillos = null;
 
 // importar los modelos a utilizar
 const Restaurantes = require('../models/Restaurante');
@@ -16,7 +16,6 @@ const DetallePedido = require('../models/DetallePedido');
 exports.principalCliente = async (req, res)=>{
     res.render('index',{})
 };
-
 
 // carga de todos los restaurantes disponibles
 exports.mostrarRestaurantes = async(req,res)=>{
@@ -77,7 +76,6 @@ exports.mostrarInformaciónPlatillo=async(req,res)=>{
     // obtenemos el valor por destructuring
     const [elPlatillo, elRestaurante] = await Promise.all([platillo, restaurante]);
 
-
     //renderizamos la vista
     res.render('platilloIndividual',{
         elPlatillo,
@@ -86,85 +84,19 @@ exports.mostrarInformaciónPlatillo=async(req,res)=>{
         losdetallesPedidos,
         subtotalGeneral
     })
-
 };
 
 // configuramos la fucionalidad de crearPedido y detallePedido
 exports.CrerPedidoConDetalle = async(req, res,next)=>{
-    console.log("llego al controlador");
+
     // capturar los datos enviados desde el formulario.
-    const{id}= req.params;
-    const{cantidad }=req.body;
+        const{id}= req.params;
+        const{cantidad }=req.body;
 
     if(elPedidoID){
-    
+        // hay un pedido en proceso, solo se guarda el detalle.
+        
         const elUsarioid = res.locals.usuario.id;
-            // hay un pedido en proceso, solo se guarda el detalle.
-                // recuperar el id del pedido actual
-            const pedido = await Pedidos.findOne({
-                where:{
-                    idUsuario:elUsarioid,
-                    fecha: fecha
-                }
-            });
-            // obteniendo los valores por promise
-            elPedidoID = await  Promise.all([pedido]);
-
-            //comenzamos a guardar el detalle del pedido
-
-            // obtener las especificaciones del platillo seleccionado.
-            const platillo = await Platillos.findOne({
-                where:{
-                    id:id
-                }
-            });
-
-            // obteniendo los valores por promise
-            const[elPlatillo] = await  Promise.all([platillo]);
-
-            const sugerencia = "ninguna";
-            const subtotal = cantidad * elPlatillo.precio;
-            const url2 = "dfmdflkhjn";
-
-            //guardamos el detalle del pedido
-            console.log("la cantidad es " + cantidad)
-            console.log(pedido.id);
-            console.log(elPlatillo.precio);
-            console.log("*******************************************************************");
-            await DetallePedido.create({
-                sugerencia,
-                cantidad,
-                subtotal,
-                url:url2,
-                platillo:elPlatillo.id,
-                pedido:pedido.id
-            })
-
-            subtotalGeneral += subtotal;
-            console.log("el detalle tambíen se ha guardado correctamente")
-            mostrarDetalle( pedido.id);
-           
-    }else{
-        // no hay pedidos pendientes, se creará un nuevo pedido.
-        // obtenemos el id del usuario
-        const elUsarioid = res.locals.usuario.id;
-        console.log(res.locals.usuario.id);
-
-        // obtenemos la fecha de creación
-         fecha = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
-        // definimos el total
-        const total = 0;
-
-        const url = "userfh32ggf-cm";
-
-        //Guardamos los valores en las base de datos
-        await Pedidos.create({
-        idUsuario:elUsarioid,
-        fecha,
-        total,
-        url
-        })
 
         // recuperar el id del pedido actual
         const pedido = await Pedidos.findOne({
@@ -173,10 +105,9 @@ exports.CrerPedidoConDetalle = async(req, res,next)=>{
                 fecha: fecha
             }
         });
+
         // obteniendo los valores por promise
         elPedidoID = await  Promise.all([pedido]);
-
-        //comenzamos a guardar el detalle del pedido
 
         // obtener las especificaciones del platillo seleccionado.
         const platillo = await Platillos.findOne({
@@ -193,47 +124,113 @@ exports.CrerPedidoConDetalle = async(req, res,next)=>{
         const url2 = "dfmdflkhjn";
 
         //guardamos el detalle del pedido
-        console.log("la cantidad es " + cantidad)
-        console.log(pedido.id);
-        console.log(elPlatillo.precio);
-        console.log("*******************************************************************");
         await DetallePedido.create({
-        sugerencia,
-        cantidad,
-        subtotal,
-        url:url2,
-        platillo:elPlatillo.id,
-        pedido:pedido.id
+            sugerencia,
+            cantidad,
+            subtotal,
+            url:url2,
+            platillo:elPlatillo.id,
+            pedido:pedido.id
         })
 
-        console.log("el detalle tambíen se ha guardado correctamente")
-       
+        subtotalGeneral += subtotal;
+        subtotalGeneral.toPrecision()
+        // traemos todos los platillos del restaurante
+        losPlatillos = await Platillos.findAll({
+            where:{
+                idRestaurante:elPlatillo.idRestaurante
+            }
+        });
+            
+        //listamos los detalles del pedido
+        mostrarDetalle( pedido.id);
+        
+
+    }else{
+
+        // no hay pedidos pendientes, se creará un nuevo pedido.
+        // obtenemos el id del usuario
+
+        const elUsarioid = res.locals.usuario.id;
+
+        // obtenemos la fecha de creación
+         fecha = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+        // definimos el total
+        const total = 0;
+        const url = "userfh32ggf-cm";
+
+        //Guardamos los valores en las base de datos
+        await Pedidos.create({
+            idUsuario:elUsarioid,
+            fecha,
+            total,
+            url
+        })
+
+        // recuperar el id del pedido actual
+        const pedido = await Pedidos.findOne({
+            where:{
+                idUsuario:elUsarioid,
+                fecha: fecha
+            }
+        });
+        // obteniendo los valores por promise
+        elPedidoID = await  Promise.all([pedido]);
+
+        // obtener las especificaciones del platillo seleccionado.
+        const platillo = await Platillos.findOne({
+            where:{
+                id:id
+            }
+        });
+
+        // obteniendo los valores por promise
+        const[elPlatillo] = await  Promise.all([platillo]);
+
+        const sugerencia = "ninguna";
+        const subtotal = cantidad * elPlatillo.precio;
+        const url2 = "dfmdflkhjn";
+
+        await DetallePedido.create({
+            sugerencia,
+            cantidad,
+            subtotal,
+            url:url2,
+            platillo:elPlatillo.id,
+            pedido:pedido.id
+        })
+
         mostrarDetalle( pedido.id);
 
         subtotalGeneral += subtotal;
         subtotalGeneral.toPrecision()
 
-        console.log('////////////////////////////////////////////////////////////////////');
-        console.log(subtotal)
-        console.log('////////////////////////////////////////////////////////////////////');
+        // traemos todos los platillos del restaurante
+        losPlatillos = await Platillos.findAll({
+            where:{
+                idRestaurante:elPlatillo.idRestaurante
+            }
+        });
     }
-    // traemos todos los restaurantes disponibles
-    const losRestaurantes = await Restaurantes.findAll();
-
-    // traemos todas las categorias disponibles
-    const lasCategorias = await Categorias.findAll();
 
     //redireccionamos a la página de los platillos 
 
-    res.render('categoriasRestaurantes',{
+    res.render('platillos',{
         elPedidoID,
-        losRestaurantes,
-        lasCategorias,
-        losdetallesPedidos
-        
+        losPlatillos
     });
     
 }
+
+exports.editarPedidoConDetalle = async(req, res, next)=>{
+    //nada por ahora
+}
+
+exports.eliminarPeidoConDetalle = async(req,res,next)=>{
+    // 
+}
+
 exports.finalizarOrden= async(req,res)=>{
     // no hay mas detalles para el pedido actul
     // reiniciamos la variable del id para un nuevo pedido.

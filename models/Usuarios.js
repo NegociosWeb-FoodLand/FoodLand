@@ -69,7 +69,11 @@ const Usuarios = db.define('usuario',{
 
     url: {
         type:Sequelize.STRING
+    },
+    admin:{
+        type:Sequelize.INTEGER
     }
+
 }, {
     hooks : {
         beforeCreate(usuario) {

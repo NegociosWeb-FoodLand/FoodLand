@@ -1,6 +1,7 @@
 // importar los modelos a utilizar
     const Restaurantes = require('../models/Restaurante');
     const Categorias = require('../models/Categorias');
+    const Usuarios = require('../models/Usuarios');
 
 // Importar los módulos para direcciones (path)
     const path = require('path');
@@ -16,10 +17,28 @@ exports.mostrarPrincipalAdmin = async (req, res)=>{
 
     // cargamos todos los restaurantes que se encuentran registrados en la BD.
     const restaurantes = await Restaurantes.findAll();
-    //renderizamos el dashboard principal del administrador.
-    res.render('dashRestaurante',{
-        restaurantes
-    })
+
+    // verificamos si el usuario autenticado es un administrador o un cliente
+        const elUsarioid = res.locals.usuario.id;
+
+        const elUsuario = Usuarios.findOne({
+            where : {
+                id : elUsarioid
+            }
+        });
+        
+        // obtenemos el valor por promise
+        const [user] = await Promise.all([elUsuario]);
+
+        if(user.admin == 1){
+            //renderizamos el dashboard principal del administrador.
+            res.render('dashRestaurante',{
+                restaurantes
+            });
+        }else{
+            //renderizamos el dashboard principal del administrador.
+            res.render('index',{});
+        }    
 };
 
 // FORMULARIO DE Agregar Restaurantes y editar 
