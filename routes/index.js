@@ -89,6 +89,8 @@ module.exports = function(){
         platillosControllers.eliminarPlatillo
     );
 
+
+
     //------------------------------------------------------Usuarios---------------------------------//
     router.get('/nuevoUsuario', usuariosControllers.formularioLlenarUsuario);
     router.post('/nuevoUsuario', usuariosControllers.guardarDatos);
@@ -117,6 +119,14 @@ module.exports = function(){
 
     router.post('/foodLand/platillos/pedidos/:id',authControllers.usuarioAutenticado,
         clienteOperaciones.CrerPedidoConDetalle
+    );
+
+    router.get('/foodland/mostrarDetalle/:id', authControllers.usuarioAutenticado,
+        clienteOperaciones.mostrarDetalleP
+    );
+
+    router.post('/foodland/mostrarDetalle/:id', authControllers.usuarioAutenticado,
+        clienteOperaciones.editarDetalle
     );
 
     return router;

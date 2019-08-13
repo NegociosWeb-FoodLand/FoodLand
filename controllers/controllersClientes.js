@@ -223,9 +223,10 @@ exports.CrerPedidoConDetalle = async(req, res,next)=>{
     
 }
 
-exports.mostrarDetalle = async(req, res, next)=>{
+exports.mostrarDetalleP = async(req, res, next)=>{
     // Obtenemos el detalle a editar
     const {id} = req.params;
+    console.log(id);
 
     // buscar los datos del detalle seleccionado
     const elDetalle = DetallePedido.findOne({
@@ -234,9 +235,35 @@ exports.mostrarDetalle = async(req, res, next)=>{
         }
     });
 
+    const[detalle] = await  Promise.all([elDetalle]);
+
+    const platillo = Platillos.findOne({
+        where: {
+            id: detalle.platillo
+        }
+    });
+
+    const[elPlatillo] = await  Promise.all([platillo]);
+
+
+    // obtenemos el nombre del restaurante del platillo
+    const elRestaurante = Restaurantes.findOne({
+        where : {
+            id : platillo.idRestaurante
+        }
+    });
+
+    // obtenemos todos los detalles
+    mostrarDetalle(detalle.pedido);
+
     // renderizamos la página para editar
+
     res.render('platilloIndividual', {
-        elDetalle
+        elDetalle,
+        elPlatillo,
+        elRestaurante,
+        losdetallesPedidos,
+        elPedidoID
     })
 }
 
