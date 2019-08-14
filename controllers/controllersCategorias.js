@@ -100,7 +100,7 @@ exports.guardarDatos = async (req,res)=>{
             nombre, 
             descripcion, 
             imagen:nombreImagen, 
-            estado, 
+            estado: 1, 
             ultimaModificacion:ultimaModificacion1,
             url
         }),

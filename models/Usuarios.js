@@ -1,4 +1,4 @@
-//importamos de sequelize
+z//importamos de sequelize
 const Sequelize = require('sequelize');
 
 //importar la configuración de la base de datos (/config/db.js)

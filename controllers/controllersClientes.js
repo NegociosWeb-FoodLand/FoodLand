@@ -349,34 +349,9 @@ exports.finalizarOrden= async(req,res)=>{
     // no hay mas detalles para el pedido actul
     // reiniciamos la variable del id para un nuevo pedido.
     elPedidoID = null;
-<<<<<<< HEAD
-    const elUsarioid = res.locals.usuario.id;
-
-    const usuario = await Usuario.findOne({
-        where: {
-            id: elUsarioid
-        }
-    });
-
-    console.log(usuario);
-
-        // Envía el correo electrónico con el token generado
-        await enviarEmail.enviarCorreoComanda({
-            usuario,
-            subject : 'Solicitud de pedido',
-            vista : 'comandaEmail'
-        });
-    
-        // redireccionar al inicio de sesión
-        req.flash('correcto', 'Se ha enviado la confirmacion del pedido a tu correo electrónico');
-        // res.redirect('/inicioSesion');
-        res.redirect('/');
-    }
-=======
     console.log("tu pedido ha sido procesado");
     res.render('index',{})
 };
->>>>>>> develop
 
 // renderizamos la pantalla para mostrar informacion sobre nosotros
 exports.mostrarAcerca = async (req, res)=>{
@@ -393,9 +368,6 @@ exports.mostrarContacto = async (req, res)=>{
 exports.mostrarPedidos = async (req, res)=>{
     res.render('comprasUsuario',{})
 };
-
-<<<<<<< HEAD
-=======
 exports.eliminarDetalle = async (req, res, next)=>{
     // Obtener el id mediante query o params
     const { id } = req.params;
@@ -437,7 +409,6 @@ exports.eliminarDetalle = async (req, res, next)=>{
     res.send(200).send('El detalle ha sido eliminado correctamente');
 }
 
->>>>>>> develop
 function mostrarDetalle( id){
     // mandamos a llamar la vista creada en mysql para la comanda
     var mysql = require('mysql2')

@@ -31,7 +31,6 @@ block contenido
                         .order-inner.gradient-brd
                           h4(itemprop='headline') Tu orden
                           .order-list-wrapper
-<<<<<<< HEAD
                             ul.order-list-inner
                               if (losdetallesPedidos)
                                 each elDetallePedido in losdetallesPedidos
@@ -48,7 +47,6 @@ block contenido
                                       h6(itemprop='headline')
                                         a() #{`Cantidad   ${elDetallePedido.cantidad}   X ${elDetallePedido.precio}   `}
                                       span.price #{elDetallePedido.subtotal}
-=======
                             .lista-detalles
                               ul.order-list-inner
                                 if (losdetallesPedidos)
@@ -66,14 +64,9 @@ block contenido
                                       .dish-name
                                         br
                                         h6(itemprop='headline')
-<<<<<<< HEAD
-                                          a() #{`Cantidad   ${elDetallePedido.cantidad}   X ${elDetallePedido.precio}   `}
-                                        span.price #{elDetallePedido.subtotal}
->>>>>>> develop
-=======
+
                                           a() #{`Cantidad   ${elDetallePedido.cantidad}   X Lps. ${elDetallePedido.precio}   `}
                                         span.price Lps. #{elDetallePedido.subtotal}
->>>>>>> develop
                             // Subtotales
                             ul.order-total
                               li
