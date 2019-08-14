@@ -346,6 +346,7 @@ exports.finalizarOrden= async(req,res)=>{
     // reiniciamos la variable del id para un nuevo pedido.
     elPedidoID = null;
     console.log("tu pedido ha sido procesado");
+    res.render('index',{})
 };
 
 // renderizamos la pantalla para mostrar informacion sobre nosotros

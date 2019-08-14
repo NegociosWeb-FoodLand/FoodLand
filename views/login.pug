@@ -52,7 +52,7 @@ html(lang='en')
                         each categoria in Object.keys(locals.mensajes)
                           each error in mensajes[categoria]
                             .alerta(class=`${categoria}`)
-                              p #{error}
+                              p#errorLogin #{error}
                     span.popup-seprator.text-center
                       i.brd-rd50
                     form.sign-form(action="/inicioSesion" method="POST" id="formulario")
