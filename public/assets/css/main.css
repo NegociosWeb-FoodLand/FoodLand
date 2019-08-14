@@ -1584,7 +1584,7 @@ h3.marginb-0 {margin-bottom: 0;}
 }
 .featured-restaurant-info > h4 {
     display: inline-block;
-    float: left;
+    /* float: left; */
     font-size: 20px;
     font-weight: 600;
     margin: 10px 0 19px;
@@ -2681,7 +2681,7 @@ footer {
 }
 .contact-info-sec > .row > div:last-child .contact-info-box {border-right: 0;}
 /*===== Contact Form =====*/
-.contact-form-wrapper {}
+/* .contact-form-wrapper {} */
 .contact-form-inner {
   max-width: 960px;
   display: inline-block;
@@ -3387,14 +3387,14 @@ h2.title3 span.sudo-bottom:before {bottom: 7px;}
 .dish-name > h6 {
   display: inline-block;
   margin-left: 15px;
-  font-size: 14px;
+  font-size: 16px;
   font-family: lato;
   font-weight: 700;
   color: #636363;
   margin: 0;
 }
 .dish-name .price {
-  font-size: 15px;
+  font-size: 18px;
   float: right;
 }
 .dish-ingredients {
@@ -3575,7 +3575,7 @@ h2.title3 span.sudo-bottom:before {bottom: 7px;}
 }
 .order-method > li:last-child {
   margin-top: 12px;
-  font-size: 12px;
+  font-size: 18px;
 }
 .order-method > li a {
   width: 100%;
@@ -7138,6 +7138,41 @@ a.thanks-close:focus {color: #333;}
 .featured-restaurant-box.with-bg .post-meta{padding-left: 0;}
 .about-feat.text-center > img{width: 100%;}
 
+
+.filters-inner.style2 > .row > .masonry > ul{
+  list-style: none;
+}
+.remove-ext > .row > ul{
+  list-style: none;
+}
+
+.order-list-wrapper > .lista-detalles > ul{
+  list-style: none;
+}
+
+span.price > .i.fa.fa-pencil {
+  font-size: 22px;
+  padding-left: 20px;
+}
+
+span.price > .i.fa.fa-trash {
+  font-size: 22px;
+}
+#errorLogin{
+  color: red;
+}
+
+.platillos-list > ul > li {
+  padding-bottom: 30px;
+}
+
+.categorias-list > ul > li {
+  padding-bottom: 30px;
+}
+
+.sec-box > #elLogo{
+  text-align: center;
+}
 
 
 

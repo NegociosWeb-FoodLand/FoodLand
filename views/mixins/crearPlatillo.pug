@@ -4,17 +4,17 @@ mixin crearPlatillo(platillo = {})
       h4(itemprop='headline') ADMINISTRACIÓN DE PLATILLOS
       .account-settings-inner
         .row
-          .col-md-8.col-sm-8.col-lg-8
+          .col-md-8.col-sm-8.col-lg-12
             .profile-info-form-wrap
               // Formulario
               form.profile-info-form(action=`/nuevo_Platillo/${platillo.id || ''}`  method="POST" encType="multipart/form-data")
                 .row.mrg20
                   .col-md-12.col-sm-12.col-lg-12
                     label(for='nombre') Nombre
-                      input(type='text', placeholder='Nombre' name="nombre" id="nombre" value=platillo.nombre)
+                      input(type='text', placeholder='Nombre' name="nombre" id="nombre" value=platillo.nombre required)
                   .col-md-12.col-sm-12.col-lg-12
                     label Descripción
-                    input(type='text', placeholder='Descripción' name="descripcion" id="descripcion" value=platillo.descripcion)
+                    input(type='text', placeholder='Descripción' name="descripcion" id="descripcion" value=platillo.descripcion required)
                   // Aquí va la imagen
                   .col-md-6.col-sm-6.col-lg-6
                     .profile-img-upload-btn
@@ -43,7 +43,7 @@ mixin crearPlatillo(platillo = {})
                             option #{restaurante.nombre}
                   .col-md-6.col-sm-6.col-lg-6
                     label Precio
-                    input(type='text', placeholder='Precio' name="precio" id="precio" value= platillo.precio)
+                    input(type='text', placeholder='Precio' name="precio" id="precio" value= platillo.precio required)
                   .col-md-12.col-sm-12.col-lg-12
                     label Estado 
                     .select-wrp
@@ -52,4 +52,4 @@ mixin crearPlatillo(platillo = {})
                         option Inactivo
                   .rite-meta
                     input.view-more(type='submit', value=`${platillo.nombre ? 'Guardar' : 'Agregar'}`)
-                    input.view-more(type='submit', value='Cancelar')
+                    input.view-more(type='button', value='Cancelar')

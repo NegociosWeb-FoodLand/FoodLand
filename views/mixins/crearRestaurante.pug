@@ -12,10 +12,10 @@ mixin crearRestaurante(restaurante = {})
                 .row.mrg20
                   .col-md-12.col-sm-12.col-lg-12
                     label(for='nombre') Nombre
-                    input(type='text', placeholder='Nombre' name="nombre" id="nombre" value =restaurante.nombre )
+                    input(type='text', placeholder='Nombre' name="nombre" id="nombre" value =restaurante.nombre required)
                   .col-md-12.col-sm-12.col-lg-12
                     label Descripción
-                    input(type='text', placeholder='Descripción' id='descripcion' name="descripcion" value=restaurante.descripcion)
+                    input(type='text', placeholder='Descripción' id='descripcion' name="descripcion" value=restaurante.descripcion required)
                   // Aquí va la imagen
                   if(restaurante.logo)
                     .col-md-6.col-sm-6.col-lg-6
@@ -48,10 +48,10 @@ mixin crearRestaurante(restaurante = {})
                             option #{categoria.nombre} 
                   .col-md-6.col-sm-6.col-lg-6
                     label Teléfono 
-                    input.brd-rd3(type='tel', placeholder='Telefono' id= 'telefono' name="telefono" value= restaurante.telefono)
+                    input.brd-rd3(type='tel', placeholder='Telefono' id= 'telefono' name="telefono" value= restaurante.telefono required)
                   .col-md-12.col-sm-12.col-lg-12
                     label Dirección
-                    input.brd-rd3(type='text', placeholder='Dirección' id= 'direccion' name="direccion" value = restaurante.direccion)
+                    input.brd-rd3(type='text', placeholder='Dirección' id= 'direccion' name="direccion" value = restaurante.direccion required)
                   .col-md-12.col-sm-12.col-lg-12
                     label Estado 
                     .select-wrp
@@ -60,4 +60,4 @@ mixin crearRestaurante(restaurante = {})
                         option Inactivo
                   .rite-meta
                     input.view-more(type='submit', value=`${restaurante.nombre ? 'Guardar cambios' : 'Agregar'}`)
-                    input.view-more(type='submit', value='Cancelar')
+                    input.view-more(type='button', value='Cancelar')

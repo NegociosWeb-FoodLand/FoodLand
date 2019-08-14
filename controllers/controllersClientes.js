@@ -349,6 +349,7 @@ exports.finalizarOrden= async(req,res)=>{
     // no hay mas detalles para el pedido actul
     // reiniciamos la variable del id para un nuevo pedido.
     elPedidoID = null;
+<<<<<<< HEAD
     const elUsarioid = res.locals.usuario.id;
 
     const usuario = await Usuario.findOne({
@@ -371,6 +372,11 @@ exports.finalizarOrden= async(req,res)=>{
         // res.redirect('/inicioSesion');
         res.redirect('/');
     }
+=======
+    console.log("tu pedido ha sido procesado");
+    res.render('index',{})
+};
+>>>>>>> develop
 
 // renderizamos la pantalla para mostrar informacion sobre nosotros
 exports.mostrarAcerca = async (req, res)=>{
