@@ -15,13 +15,13 @@ if(btnEliminar){
             const idPlatillo = e.target.dataset.platilloId;
 
             Swal.fire({
-                title: '¿Estás seguro que deseas borrar este platillo?',
-                text: "¡Si eliminas un platillo no se puede recuperar!",
+                title: '¿Estás seguro que deseas inhabilitar este platillo?',
+                text: "¡Si inhabilitas un platillo no se puede recuperar!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Borrar',
+                confirmButtonText: 'Inhabilitar',
                 cancelButtonText: 'Cancelar'
               }).then((result) => {
                 if (result.value) {
@@ -31,11 +31,13 @@ if(btnEliminar){
                     const url = `${location.origin}/nuevo_platillo/${idPlatillo}`;
                     console.log(url);
         
+
                     axios.delete(url, {params : { idPlatillo } })
                         .then(function(respuesta){
+
                             if(respuesta.status === 200){
                                 Swal.fire(
-                                    '¡Eliminado!',
+                                    '¡Inhabilitado!',
                                     respuesta.data,
                                     'success'
                                 )
@@ -43,17 +45,18 @@ if(btnEliminar){
                             
                         })
                         .catch((error) => {
+                            console.log(error.response.data);
                             Swal.fire({
                                 type : 'error',
                                 title : 'Un error ha ocurrido',
-                                text : 'No se pudo eliminar la categoría'
+                                text : 'No se pudo inhabilitar el platillo'
                             });
                         })
                     
                     // Redireccionar al inicio
                     setTimeout(() => {
                         window.location.href = '/nuevo_platillo';
-                    }, 3000);
+                    }, 1000);
                 }
               })
     

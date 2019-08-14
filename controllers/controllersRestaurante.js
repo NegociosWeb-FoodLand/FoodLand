@@ -314,16 +314,21 @@ exports.eliminarRestaurante = async (req, res, next) => {
         });
     } else {
         // No existen errores
-
-        // Inserción en la base de datos.
-        await Restaurantes.update({
-            estado:0
-            },
-            { where : {
+        const elRestaurante = await Restaurantes.findOne({
+            where : {
                 id : req.params.id
-            }}
-        ),
+            }
+        });
 
-        res.redirect('/nuevo_Restaurante');
+        elRestaurante.estado = 0;
+
+            // Actualizar la tarea
+        const resultado = await elRestaurante.save();
+
+        if (!resultado){
+            next();
+        }
+
+        res.status(200).send('Actualizado');
     }
-};
+}

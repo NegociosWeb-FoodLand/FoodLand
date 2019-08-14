@@ -269,37 +269,32 @@ exports.actualizarPlatillo = async (req, res) => {
 
 //Eliminando platillo
 exports.eliminarPlatillo = async (req, res, next) => {
-    // Obtener el id mediante query o params
-    const { id } = req.params;
+    const {estado }= req.body;
+    let errores = [];
 
-    // Eliminar la imagen del servidor
-    const el_Platillo = Platillos.findOne({
-        where : {
-            id: id
-        }
-    });
-
-    // Obtenemos los valores por promise
-    const [elPlatillo] = await Promise.all([el_Platillo]);
-
-    console.log(elPlatillo.imagen);
-    if(elPlatillo.imagen.trim() !='platillo.png'){
-        fs.unlink(path.join(__dirname, `../public/images/Platillos/${elPlatillo.imagen.trim()}`) , (err) => {
-            if (err) throw err;
-            console.log('Borrado completo');
+     // Si hay errores
+     if (errores.length > 0) {
+        res.render('dashPlatillo', {
+            nombrePagina : 'Nuevo platillo',
+            errores
         });
-    }
+    } else {
+        // No existen errores
+        const elPlatillo = await Platillos.findOne({
+            where : {
+                id : req.params.id
+            }
+        });
 
-    // Eliminar el platillo
-    const resultado = await Platillos.destroy({
-        where : {
-            id : id
+        elPlatillo.estado = 0;
+
+            // Actualizar la tarea
+        const resultado = await elPlatillo.save();
+
+        if (!resultado){
+            next();
         }
-    });
 
-    if(!resultado) {
-        return next();
+        res.status(200).send('Actualizado');
     }
-
-    res.send(200).send('El platillo ha sido eliminado correctamente');
 }

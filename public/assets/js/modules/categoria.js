@@ -11,17 +11,17 @@ if(btnEliminar){
         console.log('entra al boton eliminar');
         // Si se presiona el botón de eliminar
         if((e.target.classList.contains('eliminar-categoria'))){
-            console.log('eliminar');
+
             const idCategoria = e.target.dataset.categoriaId;
 
             Swal.fire({
-                title: '¿Estás seguro que deseas borrar esta categoría?',
-                text: "¡Si eliminas una categoría no se puede recuperar!",
+                title: '¿Estás seguro que deseas inhabilitar esta categoría?',
+                text: "¡Si inhabilitas una categoría no se puede recuperar!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Borrar',
+                confirmButtonText: 'Inhabilitar',
                 cancelButtonText: 'Cancelar'
               }).then((result) => {
                 if (result.value) {
@@ -33,9 +33,10 @@ if(btnEliminar){
         
                     axios.delete(url, {params : { idCategoria } })
                         .then(function(respuesta){
+
                             if(respuesta.status === 200){
                                 Swal.fire(
-                                    '¡Eliminado!',
+                                    '¡Inhabilitado!',
                                     respuesta.data,
                                     'success'
                                 )
@@ -46,14 +47,14 @@ if(btnEliminar){
                             Swal.fire({
                                 type : 'error',
                                 title : 'Un error ha ocurrido',
-                                text : 'No se pudo eliminar la categoría'
+                                text : 'No se pudo inhabilitar la categoría'
                             });
                         })
                     
                     // Redireccionar al inicio
                     setTimeout(() => {
                         window.location.href = '/nueva_Categoria';
-                    }, 3000);
+                    }, 1000);
                 }
               })
     

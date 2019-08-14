@@ -10,16 +10,17 @@ if(btnEliminar){
         console.log('entra al boton eliminar-rest');
         // const restauranteHTML = e.target.parentElement.parentElement;
         if((e.target.classList.contains('eliminar-restaurante'))){
+            console.log('eliminar');
             const idRestaurante = e.target.dataset.restauranteId;
 
             Swal.fire({
-                title: '¿Estás seguro que deseas borrar este restaurante?',
-                text: "¡Si eliminas un restaurante no se puede recuperar!",
+                title: '¿Estás seguro que deseas inhabilitar este restaurante?',
+                text: "¡Si inhabilitas un restaurante no se puede recuperar!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Borrar',
+                confirmButtonText: 'Inhabilitar',
                 cancelButtonText: 'Cancelar'
               }).then((result) => {
                 if (result.value) {
@@ -31,9 +32,10 @@ if(btnEliminar){
         
                     axios.delete(idRestaurante)
                         .then(function(respuesta){
+
                             if(respuesta.status === 200){
                                 Swal.fire(
-                                    '¡Eliminado!',
+                                    '¡Inhabilitado!',
                                     respuesta.data,
                                     'success'
                                 )
@@ -45,14 +47,14 @@ if(btnEliminar){
                             Swal.fire({
                                 type : 'error',
                                 title : 'Un error ha ocurrido',
-                                text : 'No se pudo eliminar el restaurante'
+                                text : 'No se pudo inhabilitar el restaurante'
                             });
                         })
                     
                     // Redireccionar al inicio
                     setTimeout(() => {
                         window.location.href = '/';
-                    }, 3000);
+                    }, 1000);
                 }
             })
         }       

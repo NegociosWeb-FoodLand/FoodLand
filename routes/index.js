@@ -68,6 +68,10 @@ module.exports = function(){
         categoriasControllers.actualizarCategoria
     );
 
+    router.delete('/nueva_Categoria/:id', authControllers.usuarioAutenticado,
+        categoriasControllers.eliminarCategoria
+    );
+
 
     //------------------------------------------------------Platillos---------------------------------//
     router.get('/nuevo_Platillo', authControllers.usuarioAutenticado,

@@ -226,36 +226,33 @@ exports.actualizarCategoria = async (req, res) => {
 
 //Eliminando categoría
 exports.eliminarCategoria = async (req, res, next) => {
-    // Obtener el id mediante query o params
-    const { id } = req.params;
+    const {estado }= req.body;
+    let errores = [];
+    console.log('resultado');
+     // Si hay errores
+     if (errores.length > 0) {
+        res.render('dashCategoria', {
+            nombrePagina : 'Nueva categoria',
+            errores
+        });
+    } else {
+        // No existen errores
+        const laCategoria = await Categorias.findOne({
+            where : {
+                id : req.params.id
+            }
+        });
 
-    // Eliminar imagen del servidor
-    const la_Categoria = Categorias.findOne({
-        where : {
-            id: id
+        laCategoria.estado = 0;
+
+            // Actualizar la tarea
+        const resultado = await laCategoria.save();
+        
+
+        if (!resultado){
+            next();
         }
-    });
-    // obtenenemos los valores por promise
-    const [laCategoria] = await Promise.all([la_Categoria]);
 
-    console.log(laCategoria.imagen);
-    if(laCategoria.imagen.trim() !='categoria.png'){
-        fs.unlink(path.join(__dirname, `../public/images/Categorias/${laCategoria.imagen.trim()}`) , (err) => {
-            if (err) throw err;
-            console.log('Borrado completo');
-           });
-     }
-
-    // Eliminar la categoria
-    const resultado = await Categorias.destroy({
-        where : {
-            id : id
-        }
-    });
-
-    if(!resultado) {
-        return next();
+        res.status(200).send('Actualizado');
     }
-
-    res.send(200).send('La categoria ha sido eliminada correctamente');
 }
