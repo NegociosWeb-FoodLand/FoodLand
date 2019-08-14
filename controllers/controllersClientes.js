@@ -349,9 +349,30 @@ exports.finalizarOrden= async(req,res)=>{
     // no hay mas detalles para el pedido actul
     // reiniciamos la variable del id para un nuevo pedido.
     elPedidoID = null;
-    console.log("tu pedido ha sido procesado");
-    res.render('index',{})
-};
+    const elUsarioid = res.locals.usuario.id;
+
+    const usuario = await Usuario.findOne({
+        where: {
+            id: elUsarioid
+        }
+    });
+
+    console.log(usuario);
+
+        // Envía el correo electrónico con el token generado
+        await enviarEmail.enviarCorreoComanda({
+            usuario,
+            subject : 'Solicitud de pedido',
+            vista : 'comandaEmail'
+        });
+    
+        // redireccionar al inicio de sesión
+        req.flash('correcto', 'Se ha enviado la confirmacion del pedido a tu correo electrónico');
+        // res.redirect('/inicioSesion');
+        res.redirect('/');
+    };
+
+
 
 // renderizamos la pantalla para mostrar informacion sobre nosotros
 exports.mostrarAcerca = async (req, res)=>{
