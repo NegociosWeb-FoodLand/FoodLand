@@ -11,10 +11,10 @@ mixin crearCategoria(categoria = {})
                 .row.mrg20
                   .col-md-12.col-sm-12.col-lg-12
                     label Nombre
-                    input(type='text', placeholder='Nombre' name="nombre" id="nombre" value = categoria.nombre)
+                    input(type='text', placeholder='Nombre' name="nombre" id="nombre" value = categoria.nombre required)
                   .col-md-12.col-sm-12.col-lg-12
                     label Descripción
-                    input(type='text', placeholder='Descripción' name="descripcion" id="descripcion" value =categoria.descripcion)
+                    input(type='text', placeholder='Descripción' name="descripcion" id="descripcion" value =categoria.descripcion required)
                   // Aquí va la imagen
                   if(categoria.imagen)
                     .col-md-6.col-sm-6.col-lg-6
@@ -45,4 +45,4 @@ mixin crearCategoria(categoria = {})
                         option Inactivo
                   .rite-meta
                     input.view-more(type='submit', value=`${categoria.nombre ? 'Guardar' : 'Agregar'}`)
-                    input.view-more(type='submit', value='Cancelar')
+                    input.view-more(type='button', value='Cancelar')

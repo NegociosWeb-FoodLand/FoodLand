@@ -7162,7 +7162,17 @@ span.price > .i.fa.fa-trash {
   color: red;
 }
 
+.platillos-list > ul > li {
+  padding-bottom: 30px;
+}
 
+.categorias-list > ul > li {
+  padding-bottom: 30px;
+}
+
+.sec-box > #elLogo{
+  text-align: center;
+}
 
 
 
