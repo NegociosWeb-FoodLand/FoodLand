@@ -31,22 +31,6 @@ block contenido
                         .order-inner.gradient-brd
                           h4(itemprop='headline') Tu orden
                           .order-list-wrapper
-                            ul.order-list-inner
-                              if (losdetallesPedidos)
-                                each elDetallePedido in losdetallesPedidos
-                                  li
-                                    .dish-name
-                                      h6(itemprop='headline')
-                                        a() #{elDetallePedido.nombre}
-                                      span.price
-                                        a.i.fa.fa-pencil(href=`/foodland/mostrarDetalle/${elDetallePedido.idDetalle}`)
-                                      span.price
-                                        i.fa.fa-trash(aria-hidden='true')
-                                    .dish-name
-                                      br
-                                      h6(itemprop='headline')
-                                        a() #{`Cantidad   ${elDetallePedido.cantidad}   X ${elDetallePedido.precio}   `}
-                                      span.price #{elDetallePedido.subtotal}
                             .lista-detalles
                               ul.order-list-inner
                                 if (losdetallesPedidos)
@@ -64,9 +48,8 @@ block contenido
                                       .dish-name
                                         br
                                         h6(itemprop='headline')
-
-                                          a() #{`Cantidad   ${elDetallePedido.cantidad}   X Lps. ${elDetallePedido.precio}   `}
-                                        span.price Lps. #{elDetallePedido.subtotal}
+                                          a() #{`Cantidad   ${elDetallePedido.cantidad}   X ${elDetallePedido.precio}   `}
+                                        span.price #{elDetallePedido.subtotal}
                             // Subtotales
                             ul.order-total
                               li
