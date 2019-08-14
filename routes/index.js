@@ -132,5 +132,9 @@ module.exports = function(){
     router.get('/foodland/compraActual', authControllers.usuarioAutenticado,
         clienteOperaciones.comanda
     );
+
+    router.get('/foodland/compraActual/:id', authControllers.usuarioAutenticado,
+        clienteOperaciones.eliminarDetalle
+    );
     return router;
 }
