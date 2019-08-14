@@ -24,10 +24,18 @@ exports.principalCliente = async (req, res)=>{
 // carga de todos los restaurantes disponibles
 exports.mostrarRestaurantes = async(req,res)=>{
     // traemos todos los restaurantes disponibles
-    const losRestaurantes = await Restaurantes.findAll();
+    const losRestaurantes = await Restaurantes.findAll({
+        where : {
+            estado : 1
+        }
+    });
 
     // traemos todas las categorias disponibles
-    const lasCategorias = await Categorias.findAll();
+    const lasCategorias = await Categorias.findAll({
+        where : {
+            estado : 1
+        }
+    });
 
     //mostramos la vista de los restaurantes
     res.render('categoriasRestaurantes',{
@@ -45,7 +53,8 @@ exports.mostrarPlatillosporRestaurante =async(req,res)=>{
     // obtenemos todos los platillos del restaurante seleccionado
     const losPlatos = await Platillos.findAll({
         where:{
-            idRestaurante:id
+            idRestaurante:id,
+            estado : 1
         }
     })
 
