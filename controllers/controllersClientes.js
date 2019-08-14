@@ -388,6 +388,50 @@ exports.mostrarPedidos = async (req, res)=>{
     res.render('comprasUsuario',{})
 };
 
+<<<<<<< HEAD
+=======
+exports.eliminarDetalle = async (req, res, next)=>{
+    // Obtener el id mediante query o params
+    const { id } = req.params;
+
+    // buscar los datos del detalle seleccionado
+    const elDetalle = DetallePedido.findOne({
+        where: {
+            id: id
+        }
+    });
+
+    // Obtener los datos por promise
+    const[detalle] = await  Promise.all([elDetalle]);
+
+    // Obtener el pedido del detalle actual
+    const elPedido = await Pedidos.findOne({
+        where:{
+            id: detalle.pedido
+        }
+    })
+
+    // Obtener los datos por promise
+    const[pedido] = await  Promise.all([elPedido]);
+
+    // Eliminar el detalle
+    const resultado = await DetallePedido.destroy({
+        where : {
+            id  : id
+        }
+    });
+
+    if(!resultado) {
+        return next();
+    }
+
+    mostrarDetalle(pedido.id)
+
+    res.redirect('/foodland/compraActual');
+    res.send(200).send('El detalle ha sido eliminado correctamente');
+}
+
+>>>>>>> develop
 function mostrarDetalle( id){
     // mandamos a llamar la vista creada en mysql para la comanda
     var mysql = require('mysql2')
