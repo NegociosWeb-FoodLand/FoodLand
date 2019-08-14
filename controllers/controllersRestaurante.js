@@ -320,7 +320,11 @@ exports.eliminarRestaurante = async (req, res, next) => {
             }
         });
 
-        elRestaurante.estado = 0;
+        if(elRestaurante.estado)
+            elRestaurante.estado = 0;
+        else
+            elRestaurante.estado = 1;
+        
 
             // Actualizar la tarea
         const resultado = await elRestaurante.save();

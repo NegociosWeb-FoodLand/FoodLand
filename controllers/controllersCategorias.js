@@ -243,7 +243,11 @@ exports.eliminarCategoria = async (req, res, next) => {
             }
         });
 
-        laCategoria.estado = 0;
+        if(laCategoria.estado)
+            laCategoria.estado = 0;
+        else
+            laCategoria.estado = 1;
+        
 
             // Actualizar la tarea
         const resultado = await laCategoria.save();

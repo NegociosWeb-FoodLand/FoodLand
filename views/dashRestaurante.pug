@@ -37,5 +37,9 @@ block contenido
                     br
                     br
                     br
-                    a.eliminar-restaurante(class='brd-rd3' type='button' data-restaurante-id=restaurante.id) Inhabilitar 
+                    if(restaurante.estado)
+                      a.eliminar-restaurante(class='brd-rd3', type='button', itemprop='url', data-restaurante-id=restaurante.id) Inhabilitar 
+                    else
+                      a.eliminar-restaurante(class='brd-rd3', type='button', itemprop='url', data-restaurante-id=restaurante.id) Habilitar 
+                      
       // Lista de Restaurantes   

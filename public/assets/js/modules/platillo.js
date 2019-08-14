@@ -7,21 +7,21 @@ const btnEliminar = document.querySelector('.platillos-list');
 
 if(btnEliminar){
     btnEliminar.addEventListener('click', e => {
-
+        
         console.log('entra al boton eliminar platillo');
         // Si se presiona el botón de eliminar
         if((e.target.classList.contains('eliminar-platillo'))){
             console.log('eliminar');
             const idPlatillo = e.target.dataset.platilloId;
-
+            console.log(btnEliminar.textContent)
             Swal.fire({
-                title: '¿Estás seguro que deseas inhabilitar este platillo?',
-                text: "¡Si inhabilitas un platillo no se puede recuperar!",
+                title: '¿Estás seguro que deseas realizar los cambios?',
+                text: "Se actualizará el estado",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Inhabilitar',
+                confirmButtonText: 'Aceptar',
                 cancelButtonText: 'Cancelar'
               }).then((result) => {
                 if (result.value) {
@@ -37,7 +37,7 @@ if(btnEliminar){
 
                             if(respuesta.status === 200){
                                 Swal.fire(
-                                    '¡Inhabilitado!',
+                                    '¡Cambios Realizados!',
                                     respuesta.data,
                                     'success'
                                 )
@@ -49,7 +49,7 @@ if(btnEliminar){
                             Swal.fire({
                                 type : 'error',
                                 title : 'Un error ha ocurrido',
-                                text : 'No se pudo inhabilitar el platillo'
+                                text : 'No se pudo realizar el cambio'
                             });
                         })
                     

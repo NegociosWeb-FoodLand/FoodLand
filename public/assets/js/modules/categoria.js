@@ -15,13 +15,13 @@ if(btnEliminar){
             const idCategoria = e.target.dataset.categoriaId;
 
             Swal.fire({
-                title: '¿Estás seguro que deseas inhabilitar esta categoría?',
-                text: "¡Si inhabilitas una categoría no se puede recuperar!",
+                title: '¿Estás seguro que deseas realizar los cambios?',
+                text: "Se actualizará el estado",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Inhabilitar',
+                confirmButtonText: 'Aceptar',
                 cancelButtonText: 'Cancelar'
               }).then((result) => {
                 if (result.value) {
@@ -36,7 +36,7 @@ if(btnEliminar){
 
                             if(respuesta.status === 200){
                                 Swal.fire(
-                                    '¡Inhabilitado!',
+                                    '¡Cambios Realizados!',
                                     respuesta.data,
                                     'success'
                                 )
@@ -47,7 +47,7 @@ if(btnEliminar){
                             Swal.fire({
                                 type : 'error',
                                 title : 'Un error ha ocurrido',
-                                text : 'No se pudo inhabilitar la categoría'
+                                text : 'No se pudo realizar el cambio'
                             });
                         })
                     

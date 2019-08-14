@@ -37,5 +37,7 @@ block contenido
                     br
                     br
                     br
-                    a.eliminar-categoria(class='brd-rd3', type='button', itemprop='url', data-categoria-id=categoria.id) Inhabilitar 
-      // LISTA DE CATEGORÍAS  
+                    if(categoria.estado)
+                      a.eliminar-categoria(class='brd-rd3', type='button', title='', itemprop='url', data-categoria-id=categoria.id) Inhabilitar 
+                    else
+                      a.eliminar-categoria(class='brd-rd3', type='button', title='', itemprop='url', data-categoria-id=categoria.id) Habilitar               

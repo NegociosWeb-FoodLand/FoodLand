@@ -36,4 +36,7 @@ block contenido
                     br
                     br
                     br
-                    a.eliminar-platillo(class='brd-rd3', type='button', title='', itemprop='url', data-platillo-id=platillo.id) Inhabilitar
+                    if(platillo.estado)
+                      a.eliminar-platillo(class='brd-rd3', type='button', title='', itemprop='url', data-platillo-id=platillo.id) Inhabilitar
+                    else
+                      a.eliminar-platillo(class='brd-rd3', type='button', title='', itemprop='url', data-platillo-id=platillo.id) Habilitar

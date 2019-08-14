@@ -14,13 +14,13 @@ if(btnEliminar){
             const idRestaurante = e.target.dataset.restauranteId;
 
             Swal.fire({
-                title: '¿Estás seguro que deseas inhabilitar este restaurante?',
-                text: "¡Si inhabilitas un restaurante no se puede recuperar!",
+                title: '¿Estás seguro que deseas realizar los cambios?',
+                text: "Se actualizará el estado",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Inhabilitar',
+                confirmButtonText: 'Aceptar',
                 cancelButtonText: 'Cancelar'
               }).then((result) => {
                 if (result.value) {
@@ -35,7 +35,7 @@ if(btnEliminar){
 
                             if(respuesta.status === 200){
                                 Swal.fire(
-                                    '¡Inhabilitado!',
+                                    '¡Cambios Realizados!',
                                     respuesta.data,
                                     'success'
                                 )
@@ -47,7 +47,7 @@ if(btnEliminar){
                             Swal.fire({
                                 type : 'error',
                                 title : 'Un error ha ocurrido',
-                                text : 'No se pudo inhabilitar el restaurante'
+                                text : 'No se pudo realizar el cambio'
                             });
                         })
                     

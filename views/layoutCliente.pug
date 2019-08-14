@@ -55,7 +55,9 @@ html(lang='en')
                     a(href='/foodLand/contacto', title='CONTACTO', itemprop='url')
                       span.red-clr COMUNÍCATE
                       | CONTÁCTANOS
-                a.red-bg.brd-rd4(href='/foodLand/misPedidos', title='Orden', itemprop='url') Compra
+                  li
+                    a.i.fa.fa-shopping-cart(href='/foodland/compraActual')
+                a.red-bg.brd-rd4(href='/foodLand/misPedidos', title='Orden', itemprop='url') Historial
       // Header
       // Header Responsive
       .responsive-header
@@ -105,6 +107,7 @@ html(lang='en')
           // Carrito
           .register-btn
             a.yellow-bg.brd-rd4(href='/foodLand/misPedidos', title='Register', itemprop='url') Compra
+            a.i.fa.fa-shopping-cart(href='/foodland/compraActual')
           // Carrito
           // Menu Responsive
           // Header Responsive

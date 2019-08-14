@@ -285,8 +285,11 @@ exports.eliminarPlatillo = async (req, res, next) => {
                 id : req.params.id
             }
         });
-
-        elPlatillo.estado = 0;
+        if(elPlatillo.estado)
+            elPlatillo.estado = 0;
+        else
+            elPlatillo.estado = 1;
+        
 
             // Actualizar la tarea
         const resultado = await elPlatillo.save();
