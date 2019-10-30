@@ -36,7 +36,7 @@
     "passport-local": "^1.0.0",
     "passport-strategy": "^1.0.0",
     "pug": "^2.0.4",
-    "sequelize": "^5.10.2",
+    "sequelize": "^5.15.1",
     "shortid": "^2.2.14",
     "slug": "^1.1.0",
     "sweetalert2": "^8.14.0"
