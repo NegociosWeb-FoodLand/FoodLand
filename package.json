@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/NegociosWeb-FoodLand/FoodLand#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bcrypt-nodejs": "0.0.3",
     "concurrently": "^4.1.1",
     "connect-flash": "^0.1.1",
